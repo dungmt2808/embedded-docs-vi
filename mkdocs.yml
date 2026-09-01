@@ -1,9 +1,9 @@
 site_name: Ghi chép Embedded Linux
 site_description: Ghi chép quá trình học Embedded Linux, kernel driver, Yocto và RTOS bằng tiếng Việt
 site_author: <tên cậu>
-site_url: https://<username>.github.io/<repo>/
-repo_url: https://github.com/<username>/<repo>
-repo_name: <username>/<repo>
+site_url: https://dungmt2808.github.io/embedded-docs-vi/
+repo_url: https://github.com/dungmt2808/embedded-docs-vi
+repo_name: dungmt2808/embedded-docs-vi
 edit_uri: edit/main/docs/
 
 copyright: >
@@ -99,7 +99,7 @@ extra:
   # Giscus — lấy các giá trị dưới tại https://giscus.app
   # Yêu cầu: repo public + bật Discussions + cài giscus app
   giscus:
-    repo: <username>/<repo>
+    repo: dungmt2808/embedded-docs-vi
     repo_id: R_kgDOUKtXsA
     category: Comments
     category_id: DIC_kwDOUKtXsM4DEpGd
