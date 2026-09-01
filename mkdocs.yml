@@ -1,0 +1,164 @@
+site_name: Ghi chép Embedded Linux
+site_description: Ghi chép quá trình học Embedded Linux, kernel driver, Yocto và RTOS bằng tiếng Việt
+site_author: <tên cậu>
+site_url: https://<username>.github.io/<repo>/
+repo_url: https://github.com/<username>/<repo>
+repo_name: <username>/<repo>
+edit_uri: edit/main/docs/
+
+copyright: >
+  Nội dung theo giấy phép
+  <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> —
+  một số phần dịch và phóng tác từ tài liệu đào tạo của
+  <a href="https://bootlin.com/docs/">Bootlin</a> (CC BY-SA 3.0).
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: vi
+  font:
+    text: Be Vietnam Pro
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Chuyển sang nền tối
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Chuyển sang nền sáng
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.arithmatex:
+      generic: true
+
+plugins:
+  - search:
+      lang:
+        - vi
+        - en
+  - tags
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/<username>
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/<username>
+  # Giscus — lấy các giá trị dưới tại https://giscus.app
+  # Yêu cầu: repo public + bật Discussions + cài giscus app
+  giscus:
+    repo: <username>/<repo>
+    repo_id: <repo_id>
+    category: Comments
+    category_id: <category_id>
+
+nav:
+  - Trang chủ: index.md
+  - Bắt đầu:
+      - 00-bat-dau/moi-truong.md
+      - 00-bat-dau/phan-cung.md
+  - Linux nền tảng:
+      - 01-linux-nen-tang/toolchain.md
+      - 01-linux-nen-tang/boot-flow.md
+      - 01-linux-nen-tang/u-boot.md
+      - 01-linux-nen-tang/build-kernel.md
+      - 01-linux-nen-tang/device-tree.md
+      - 01-linux-nen-tang/rootfs.md
+      - 01-linux-nen-tang/userspace-hardware.md
+  - Kernel driver:
+      - 02-kernel-driver/kernel-module.md
+      - 02-kernel-driver/char-driver.md
+      - 02-kernel-driver/device-model.md
+      - 02-kernel-driver/platform-driver.md
+      - 02-kernel-driver/interrupt.md
+      - 02-kernel-driver/dong-bo.md
+      - 02-kernel-driver/i2c-driver.md
+      - 02-kernel-driver/debug.md
+  - Yocto & BSP:
+      - 03-yocto-bsp/khai-niem.md
+      - 03-yocto-bsp/build-image.md
+      - 03-yocto-bsp/layer-rieng.md
+      - 03-yocto-bsp/recipe-kernel-module.md
+      - 03-yocto-bsp/buildroot-so-sanh.md
+  - C & Bare-metal:
+      - 04-c-va-bare-metal/c-nang-cao.md
+      - 04-c-va-bare-metal/memory-layout.md
+      - 04-c-va-bare-metal/startup-linker.md
+      - 04-c-va-bare-metal/thanh-ghi.md
+      - 04-c-va-bare-metal/ngoai-vi.md
+      - 04-c-va-bare-metal/debug-gdb-jtag.md
+      - 04-c-va-bare-metal/cmake-build.md
+  - RTOS internals:
+      - 05-rtos-internals/freertos-kien-truc.md
+      - 05-rtos-internals/context-switch.md
+      - 05-rtos-internals/dong-bo-rtos.md
+      - 05-rtos-internals/mini-rtos.md
+  - Real-time & Project:
+      - 06-realtime-project/preempt-rt.md
+      - 06-realtime-project/do-latency.md
+      - 06-realtime-project/project-hybrid.md
+  - Phần cứng:
+      - 07-phan-cung/linh-kien.md
+      - 07-phan-cung/doc-schematic.md
+      - 07-phan-cung/debug-phan-cung.md
+  - AI nhúng:
+      - 08-ai-nhung/ai-de-hoc.md
+      - 08-ai-nhung/tinyml.md
+  - Phụ lục:
+      - phu-luc/28-cau-tu-kiem-tra.md
+      - phu-luc/thuat-ngu.md
+      - phu-luc/c-gaps.md
+      - phu-luc/nguon-va-giay-phep.md
+      - phu-luc/nhat-ky.md

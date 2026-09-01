@@ -1,0 +1,62 @@
+{#
+  overrides/main.html
+  Đặt file này tại: <repo>/overrides/main.html
+  (cùng cấp với mkdocs.yml, khớp với theme.custom_dir: overrides)
+
+  Chèn 2 thứ:
+  - Hypothesis: highlight + ghi chú trực tiếp trên trang
+  - Giscus: comment theo từng trang, lưu vào GitHub Discussions
+#}
+{% extends "base.html" %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="https://hypothes.is/embed.js" async></script>
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+
+  {% if page.meta and page.meta.comments != false %}
+    <h2 id="__comments">Ghi chú & thảo luận</h2>
+
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ config.extra.giscus.repo }}"
+            data-repo-id="{{ config.extra.giscus.repo_id }}"
+            data-category="{{ config.extra.giscus.category }}"
+            data-category-id="{{ config.extra.giscus.category_id }}"
+            data-mapping="pathname"
+            data-strict="1"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="vi"
+            crossorigin="anonymous"
+            async>
+    </script>
+
+    {#
+      Đồng bộ theme Giscus khi người đọc bật/tắt dark mode.
+      Không có đoạn này thì comment box giữ nguyên màu cũ cho tới khi reload.
+    #}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var ref = document.querySelector("[data-md-component=palette]");
+        if (!ref) return;
+        ref.addEventListener("change", function () {
+          var pal = __md_get("__palette");
+          if (!pal) return;
+          var theme = pal.color.scheme === "slate" ? "dark" : "light";
+          var frame = document.querySelector(".giscus-frame");
+          if (frame) {
+            frame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme: theme } } },
+              "https://giscus.app"
+            );
+          }
+        });
+      });
+    </script>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+Nội dung trong repo này (thư mục docs/) được cấp phép theo:
+
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Tóm tắt (không thay thế văn bản pháp lý đầy đủ tại link trên):
+- Được chia sẻ, sao chép, phân phối lại dưới mọi hình thức
+- Được chỉnh sửa, phóng tác, xây dựng nội dung phái sinh
+- Với điều kiện: ghi công tác giả gốc, và nếu phân phối lại bản chỉnh sửa
+  thì phải giữ cùng giấy phép này (ShareAlike)
+
+Site này chứa nội dung dịch/phóng tác từ tài liệu đào tạo của Bootlin
+(bootlin.com/docs/, CC BY-SA 3.0) và từ "Linux Device Drivers, 3rd Edition"
+(Corbet, Rubini, Kroah-Hartman — lwn.net/Kernel/LDD3/, CC BY-SA 2.0).
+Ghi công chi tiết theo từng trang xem tại docs/phu-luc/nguon-va-giay-phep.md.
+
+Code mẫu trích từ FreeRTOS-Kernel (MIT), TFLite Micro và CMSIS-NN
+(Apache 2.0) giữ nguyên giấy phép gốc của từng dự án khi trích dẫn.
