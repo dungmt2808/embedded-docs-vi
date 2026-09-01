@@ -100,9 +100,9 @@ extra:
   # Yêu cầu: repo public + bật Discussions + cài giscus app
   giscus:
     repo: <username>/<repo>
-    repo_id: <repo_id>
+    repo_id: R_kgDOUKtXsA
     category: Comments
-    category_id: <category_id>
+    category_id: DIC_kwDOUKtXsM4DEpGd
 
 nav:
   - Trang chủ: index.md
