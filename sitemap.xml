@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo&gt;/04-c-va-bare-metal/c-nang-cao/</loc>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/c-nang-cao/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo&gt;/04-c-va-bare-metal/memory-layout/</loc>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/memory-layout/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo&gt;/05-rtos-internals/dong-bo-rtos/</loc>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/05-rtos-internals/dong-bo-rtos/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo&gt;/07-phan-cung/linh-kien/</loc>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/07-phan-cung/linh-kien/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo&gt;/phu-luc/nguon-va-giay-phep/</loc>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/phu-luc/nguon-va-giay-phep/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
     <url>
-         <loc>https://&lt;username&gt;.github.io/&lt;repo&gt;/phu-luc/thuat-ngu/</loc>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/phu-luc/thuat-ngu/</loc>
          <lastmod>2026-09-01</lastmod>
     </url>
 </urlset>
