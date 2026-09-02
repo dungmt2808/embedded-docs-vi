@@ -44,11 +44,11 @@ Flash (LMA)                          RAM (VMA)
 │   .text     │ ← chạy tại chỗ     │             │
 ├─────────────┤                    ├─────────────┤
 │ .data (bản  │ ─── copy lúc ───→  │   .data     │ ← CPU đọc/ghi ở đây
-│  gốc, chỉ    │     startup        │             │
-│  đọc)        │                    ├─────────────┤
+│  gốc, chỉ   │     startup        │             │
+│  đọc)       │                    ├─────────────┤
 └─────────────┘                    │   .bss      │ ← chỉ cần zero-init,
-                                     │             │   không cần copy từ flash
-                                     └─────────────┘
+                                   │             │   không cần copy từ flash
+                                   └─────────────┘
 ```
 
 `.bss` không cần bước copy này — startup code chỉ cần zero-init cả vùng đó (`memset` về 0), vì
