@@ -60,6 +60,25 @@ nhắc lại: giải thích từ kiến thức nền, không mở file sách.
 - **Biểu đồ (Mermaid)**: đã bật ở `mkdocs.yml`, nhưng phải chủ động thêm vào từng trang khi phù hợp —
   xem mục "Biểu đồ" trong hai khung mẫu bên dưới.
 
+## Hình ảnh — ưu tiên vẽ lại, hạn chế cắt ảnh
+
+Ba loại, ba cách xử lý:
+
+1. **Sơ đồ khái niệm (boot flow, cây device tree, chuyển trạng thái task, luồng probe...)**:
+   **luôn vẽ lại bằng Mermaid**, không cắt ảnh từ slide. Sơ đồ do Claude Code tạo từ hiểu biết
+   là nội dung gốc, không vướng bản quyền, nét trên mọi màn hình, khớp theme sáng/tối. Đây là
+   cách mặc định.
+2. **Ảnh thật của người dùng (screenshot menuconfig, output dmesg, waveform logic analyzer,
+   ảnh board đấu dây)**: người dùng tự chụp, đặt vào `docs/<mục>/img/`, chèn bằng
+   `![mô tả](img/ten.png)`. Đây là nội dung gốc giá trị nhất — khuyến khích dùng nhiều.
+   Claude Code KHÔNG tạo được loại này, chỉ nhắc người dùng chèn vào chỗ phù hợp.
+3. **Ảnh cắt trực tiếp từ slide Bootlin**: hợp pháp (CC BY-SA) nhưng **hạn chế** — chỉ khi sơ đồ
+   quá phức tạp để vẽ lại. Claude Code KHÔNG cắt được ảnh trong PDF (chỉ đọc được chữ);
+   người dùng tự cắt bằng `pdfimages`/`pdftoppm`. Nếu dùng, bắt buộc ghi công ngay dưới ảnh.
+
+Ranh giới bản quyền: vẽ lại sơ đồ kỹ thuật từ hiểu biết = an toàn (ý tưởng không thuộc bản quyền);
+sao chép y hệt hình minh họa có tính sáng tạo riêng = cần cân nhắc, ưu tiên vẽ lại.
+
 ## Cấu trúc trang
 
 Mỗi trang thuộc một trong hai loại — xác định loại trước khi viết:

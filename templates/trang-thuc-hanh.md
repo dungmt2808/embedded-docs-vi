@@ -58,6 +58,11 @@ $ dmesg | tail
 [output mẫu]
 ```
 
+!!! tip "Chèn ảnh thật của mình"
+    Screenshot `menuconfig`, output `dmesg`, waveform logic analyzer, ảnh board đấu dây... là
+    nội dung gốc giá trị nhất — chứng minh mình làm thật. Đặt vào `img/` cùng thư mục trang,
+    chèn `![mô tả](img/ten.png)`. Ưu tiên hơn ảnh cắt từ slide.
+
 ## Debug khi lỗi (tùy chọn)
 
 Lỗi hay gặp nhất ở bài này và cách sửa. Chỉ ghi lỗi đã thật sự gặp, không đoán trước.

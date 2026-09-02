@@ -35,6 +35,8 @@ dịch không gây khó hiểu:
 | link *(động từ)* | liên kết |
 | synchronization | đồng bộ hóa |
 | variable scope | phạm vi biến |
+| library | thư viện |
+| floating point | dấu phẩy động |
 
 **Lưu ý riêng cho "ngắt" vs "ISR"**: dịch "interrupt" thành "ngắt" khi nói về khái niệm/cơ chế
 chung ("xử lý ngắt", "ưu tiên ngắt"). Giữ nguyên "ISR" (Interrupt Service Routine) khi nói tên
@@ -53,7 +55,9 @@ không có bản dịch tiếng Việt nào được dùng phổ biến hơn b�
 `driver` · `kernel` · `firmware` · `bootloader` · `toolchain` · `struct` · `task` · `mutex` ·
 `semaphore` · `spinlock` · `scheduler` · `stack` · `heap` · `flash` · `cache` · `padding` ·
 `alignment` · `callback` · `watchdog` · `backtrace` · `breakpoint` · `watchpoint` ·
-`cross-compile` · `linker` *(danh từ — công cụ)* · `compiler` *(danh từ — công cụ)*
+`cross-compile` · `linker` *(danh từ — công cụ)* · `compiler` *(danh từ — công cụ)* ·
+`debugger` *(danh từ — công cụ)* · `sysroot` · `header` · `tuple` *(kiến trúc tuple)* ·
+`binary` *(danh từ — file đã biên dịch)* · `hard float` · `soft float`
 
 ## Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
 
