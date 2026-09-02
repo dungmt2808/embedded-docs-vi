@@ -13,13 +13,13 @@
         <meta name="author" content="<tên cậu>">
       
       
-        <link rel="canonical" href="https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/memory-layout/">
+        <link rel="canonical" href="https://dungmt2808.github.io/embedded-docs-vi/00-bat-dau/moi-truong/">
       
       
-        <link rel="prev" href="../c-nang-cao/">
+        <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../../05-rtos-internals/dong-bo-rtos/">
+        <link rel="next" href="../phan-cung/">
       
       
         
@@ -30,7 +30,7 @@
     
     
       
-        <title>Memory layout: .text, .data, .bss - Ghi chép Embedded Linux</title>
+        <title>Setup môi trường làm việc - Ghi chép Embedded Linux</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#memory-layout-text-data-bss" class="md-skip">
+        <a href="#setup-moi-truong-lam-viec" class="md-skip">
           Bỏ qua
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Memory layout: .text, .data, .bss
+              Setup môi trường làm việc
             
           </span>
         </div>
@@ -245,11 +245,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../00-bat-dau/moi-truong/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -333,13 +335,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../c-nang-cao/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../04-c-va-bare-metal/c-nang-cao/" class="md-tabs__link">
           
   
   
@@ -539,8 +539,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -552,19 +554,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -582,7 +587,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -597,10 +602,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../00-bat-dau/moi-truong/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup môi trường làm việc
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -616,6 +648,153 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chuan-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuẩn bị
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ luồng thao tác
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cac-buoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cai-raspberry-pi-os-lite-64-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Cài Raspberry Pi OS Lite 64-bit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-bat-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Bật SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-noi-uart-serial-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Nối UART serial console
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-cai-toolchain-cross-compile-tren-may-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cài toolchain cross-compile trên máy dev
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-tao-repo-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Tạo repo GitHub
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mo-rong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mở rộng
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -628,7 +807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../00-bat-dau/phan-cung/" class="md-nav__link">
+      <a href="../phan-cung/" class="md-nav__link">
         
   
   
@@ -1443,10 +1622,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -1468,22 +1645,19 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -1501,7 +1675,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1519,7 +1693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../c-nang-cao/" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/c-nang-cao/" class="md-nav__link">
         
   
   
@@ -1544,37 +1718,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Memory layout: .text, .data, .bss
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../04-c-va-bare-metal/memory-layout/" class="md-nav__link">
         
   
   
@@ -1590,81 +1737,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Mục lục
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#vi-sao-can-biet-cai-nay" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vì sao cần biết cái này
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ba-vung-bo-nho-chinh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ba vùng bộ nhớ chính
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lma-va-vma-cho-hay-gay-nham-nhat" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LMA và VMA — chỗ hay gây nhầm nhất
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oc-file-map" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Đọc file .map
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lien-quan" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Liên quan
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1677,7 +1749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../startup-linker.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/startup-linker.md" class="md-nav__link">
         
   
   
@@ -1705,7 +1777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../thanh-ghi.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/thanh-ghi.md" class="md-nav__link">
         
   
   
@@ -1733,7 +1805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ngoai-vi.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/ngoai-vi.md" class="md-nav__link">
         
   
   
@@ -1761,7 +1833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../debug-gdb-jtag.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/debug-gdb-jtag.md" class="md-nav__link">
         
   
   
@@ -1789,7 +1861,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cmake-build.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/cmake-build.md" class="md-nav__link">
         
   
   
@@ -2659,10 +2731,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#vi-sao-can-biet-cai-nay" class="md-nav__link">
+  <a href="#chuan-bi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Vì sao cần biết cái này
+        Chuẩn bị
       
     </span>
   </a>
@@ -2670,10 +2742,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ba-vung-bo-nho-chinh" class="md-nav__link">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ba vùng bộ nhớ chính
+        Sơ đồ luồng thao tác
       
     </span>
   </a>
@@ -2681,10 +2753,82 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lma-va-vma-cho-hay-gay-nham-nhat" class="md-nav__link">
+  <a href="#cac-buoc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        LMA và VMA — chỗ hay gây nhầm nhất
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cai-raspberry-pi-os-lite-64-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Cài Raspberry Pi OS Lite 64-bit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-bat-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Bật SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-noi-uart-serial-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Nối UART serial console
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-cai-toolchain-cross-compile-tren-may-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cài toolchain cross-compile trên máy dev
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-tao-repo-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Tạo repo GitHub
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
       
     </span>
   </a>
@@ -2692,10 +2836,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oc-file-map" class="md-nav__link">
+  <a href="#mo-rong" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Đọc file .map
+        Mở rộng
       
     </span>
   </a>
@@ -2731,7 +2875,7 @@
 
 
   
-    <a href="https://github.com/dungmt2808/embedded-docs-vi/edit/main/docs/04-c-va-bare-metal/memory-layout.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dungmt2808/embedded-docs-vi/edit/main/docs/00-bat-dau/moi-truong.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2739,75 +2883,140 @@
   
 
 
-<h1 id="memory-layout-text-data-bss">Memory layout: .text, .data, .bss<a class="headerlink" href="#memory-layout-text-data-bss" title="Permanent link">&para;</a></h1>
+<h1 id="setup-moi-truong-lam-viec">Setup môi trường làm việc<a class="headerlink" href="#setup-moi-truong-lam-viec" title="Permanent link">&para;</a></h1>
 <div class="admonition note">
-<p class="admonition-title">Tóm tắt</p>
-<p>Vì sao firmware chạy được từ flash, và vì sao biến global có giá trị khởi tạo cần một bước
-"copy" đặc biệt trước khi <code>main()</code> chạy.</p>
+<p class="admonition-title">Mục tiêu</p>
+<p>Sau bài này: board Raspberry Pi chạy Raspberry Pi OS Lite 64-bit, SSH vào được từ máy dev,
+có đường UART dự phòng khi SSH không lên được, máy dev có sẵn hai toolchain cross-compile
+(bare-metal và Linux ARM64), và một repo GitHub sẵn sàng để bắt đầu commit ghi chép.</p>
 </div>
-<h2 id="vi-sao-can-biet-cai-nay">Vì sao cần biết cái này<a class="headerlink" href="#vi-sao-can-biet-cai-nay" title="Permanent link">&para;</a></h2>
-<p>Đây là kiến thức đứng sau file linker script và file <code>startup.s</code> mà cậu sẽ tự viết — không hiểu
-memory layout thì linker script chỉ là những dòng chép lại không hiểu vì sao đúng. Nó cũng là thứ
-đầu tiên cần tra khi build ra lỗi kiểu "region FLASH overflowed" hoặc firmware chạy sai chỉ vì
-biến global đọc ra giá trị rác.</p>
-<h2 id="ba-vung-bo-nho-chinh">Ba vùng bộ nhớ chính<a class="headerlink" href="#ba-vung-bo-nho-chinh" title="Permanent link">&para;</a></h2>
-<p>Trình biên dịch/linker chia code và dữ liệu thành các "section", ba section quan trọng nhất:</p>
+<h2 id="chuan-bi">Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>.text</code></strong> — code đã biên dịch (mã máy) và các hằng số <code>const</code>. Không đổi khi chạy, nằm hẳn
-  trong flash (bộ nhớ không mất khi cúp điện).</li>
-<li><strong><code>.data</code></strong> — biến global/static <strong>có</strong> giá trị khởi tạo khác 0 (<code>int count = 5;</code>). Cần đọc/ghi
-  được lúc chạy nên phải nằm trong RAM — nhưng giá trị khởi tạo ban đầu (5) phải được lưu ở đâu đó
-  không mất điện, tức flash.</li>
-<li><strong><code>.bss</code></strong> — biến global/static <strong>không</strong> khởi tạo hoặc khởi tạo bằng 0 (<code>int count;</code> hoặc
-  <code>int count = 0;</code>). Cũng nằm trong RAM lúc chạy, nhưng không cần lưu giá trị ban đầu trong flash
-  vì "giá trị ban đầu" luôn là 0 — tiết kiệm dung lượng flash đáng kể so với <code>.data</code>.</li>
+<li>Phần cứng: Raspberry Pi — <code>{ĐIỀN: model, vd Pi 4B/Pi 3B+/Pi Zero 2W}</code>, thẻ SD, cáp USB-to-serial
+  (<code>{ĐIỀN: model adapter, vd CP2102/FTDI FT232}</code>), 3 dây jumper cái-cái</li>
+<li>Máy dev: <code>{ĐIỀN: hệ điều hành máy dev — Linux/WSL/macOS, bản gì}</code></li>
+<li>Đã cài/build trước đó: không có — đây là trang đầu tiên trong site</li>
+<li>Khái niệm nên đọc trước: không bắt buộc, nhưng bước cài toolchain bên dưới chỉ liệt kê lệnh cài
+  đặt — muốn hiểu vì sao toolchain lại có tên dài <code>aarch64-linux-gnu-gcc</code> và bên trong gồm những
+  gì thì đọc <a href="../../01-linux-nen-tang/toolchain/">Toolchain cross-compilation</a></li>
 </ul>
-<h2 id="lma-va-vma-cho-hay-gay-nham-nhat">LMA và VMA — chỗ hay gây nhầm nhất<a class="headerlink" href="#lma-va-vma-cho-hay-gay-nham-nhat" title="Permanent link">&para;</a></h2>
-<p>Mỗi section trong file <code>.elf</code> có hai địa chỉ:</p>
-<ul>
-<li><strong>LMA (Load Memory Address)</strong> — địa chỉ nơi dữ liệu <strong>được lưu trữ</strong> khi chưa chạy (trong flash)</li>
-<li><strong>VMA (Virtual/run-time Memory Address)</strong> — địa chỉ nơi CPU <strong>truy cập</strong> dữ liệu đó lúc chạy</li>
-</ul>
-<p>Với <code>.text</code>, hai địa chỉ này giống nhau — code chạy thẳng tại chỗ nó nằm trong flash (execute-in-place).</p>
-<p>Với <code>.data</code>, hai địa chỉ <strong>khác nhau</strong>: LMA nằm trong flash (chỗ lưu giá trị khởi tạo), VMA nằm
-trong RAM (chỗ CPU sẽ đọc/ghi lúc chạy). Đây là lý do đoạn code đầu tiên trong <code>startup.s</code>, trước
-khi gọi <code>main()</code>, luôn có một vòng lặp copy: đọc dữ liệu từ LMA (flash), ghi sang VMA (RAM) —
-thường thấy dưới tên biến linker <code>_sidata</code>, <code>_sdata</code>, <code>_edata</code> trong linker script.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Flash (LMA)                          RAM (VMA)
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>┌─────────────┐                    ┌─────────────┐
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   .text     │ ← chạy tại chỗ     │             │
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├─────────────┤                    ├─────────────┤
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ .data (bản  │ ─── copy lúc ───→  │   .data     │ ← CPU đọc/ghi ở đây
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│  gốc, chỉ    │     startup        │             │
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│  đọc)        │                    ├─────────────┤
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>└─────────────┘                    │   .bss      │ ← chỉ cần zero-init,
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                                     │             │   không cần copy từ flash
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                                     └─────────────┘
+<h2 id="so-o-luong-thao-tac">Sơ đồ luồng thao tác<a class="headerlink" href="#so-o-luong-thao-tac" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A[Flash Raspberry Pi OS Lite 64-bit vào thẻ SD] --&gt; B[Bật SSH lúc flash]
+    B --&gt; C[Cắm thẻ vào board, cấp nguồn]
+    C --&gt; D{SSH vào được không?}
+    D --&gt;|Được| E[Làm việc qua SSH]
+    D --&gt;|Không| F[Nối UART, đọc log boot qua serial console]
+    F --&gt; G[Debug lý do SSH không lên theo log]
+    G --&gt; D
+    E --&gt; H[Cài toolchain cross-compile trên máy dev]
+    H --&gt; I[Tạo repo GitHub, đẩy code/ghi chép lên]</code></pre>
+<h2 id="cac-buoc">Các bước<a class="headerlink" href="#cac-buoc" title="Permanent link">&para;</a></h2>
+<h3 id="1-cai-raspberry-pi-os-lite-64-bit">1. Cài Raspberry Pi OS Lite 64-bit<a class="headerlink" href="#1-cai-raspberry-pi-os-lite-64-bit" title="Permanent link">&para;</a></h3>
+<p>Dùng Raspberry Pi Imager (<code>rpi-imager</code>), không cần bản Desktop vì chỉ làm việc qua SSH/UART.</p>
+<ol>
+<li>Chọn OS: <strong>Raspberry Pi OS Lite (64-bit)</strong> — bản cụ thể: <code>{ĐIỀN: phiên bản/ngày phát hành image
+   đang dùng}</code></li>
+<li>Chọn thẻ SD đích, bấm biểu tượng bánh răng (Advanced options) <strong>trước khi</strong> ghi — chỗ này cấu
+   hình luôn hostname, user/password, SSH, WiFi để khỏi phải làm lại thủ công ở bước 2</li>
+<li>Ghi image vào thẻ</li>
+</ol>
+<h3 id="2-bat-ssh">2. Bật SSH<a class="headerlink" href="#2-bat-ssh" title="Permanent link">&para;</a></h3>
+<p>Nếu đã bật SSH ở Advanced options lúc flash thì bỏ qua bước này. Nếu chưa, cách headless (không
+cắm màn hình/bàn phím): sau khi flash xong, mount lại partition boot của thẻ SD, tạo một file rỗng
+tên <code>ssh</code> (không đuôi) ở thư mục gốc partition đó — Raspberry Pi OS thấy file này lúc boot đầu tiên
+thì tự bật SSH daemon.</p>
+<p>Cắm thẻ vào board, cấp nguồn, đợi boot xong rồi SSH vào:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ssh<span class="w"> </span><span class="o">{</span>ĐIỀN:<span class="w"> </span>username<span class="o">}</span>@<span class="o">{</span>ĐIỀN:<span class="w"> </span>hostname.local<span class="w"> </span>hoặc<span class="w"> </span>IP<span class="o">}</span>
 </span></code></pre></div>
-<p><code>.bss</code> không cần bước copy này — startup code chỉ cần zero-init cả vùng đó (<code>memset</code> về 0), vì
-giá trị ban đầu luôn là 0, không cần lưu bản gốc trong flash.</p>
-<h2 id="oc-file-map">Đọc file <code>.map</code><a class="headerlink" href="#oc-file-map" title="Permanent link">&para;</a></h2>
-<p>Sau khi build, linker xuất ra file <code>.map</code> liệt kê chính xác từng symbol (hàm, biến) nằm ở địa chỉ
-nào, section nào, chiếm bao nhiêu byte. Đây là công cụ tra cứu thực tế khi:</p>
+<h3 id="3-noi-uart-serial-console">3. Nối UART serial console<a class="headerlink" href="#3-noi-uart-serial-console" title="Permanent link">&para;</a></h3>
+<p>Dùng khi bước 2 không SSH vào được (đổi mạng, sai cấu hình WiFi, lỗi boot...) — UART cho log boot
+trực tiếp, không phụ thuộc mạng.</p>
+<p>Đấu USB-to-serial adapter với header GPIO 40 chân của Pi, <strong>chéo TX-RX, không nối chân 5V</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Adapter</th>
+<th>Pi (pin)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RX</td>
+<td>GPIO14 / TXD (pin 8)</td>
+</tr>
+<tr>
+<td>TX</td>
+<td>GPIO15 / RXD (pin 10)</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND (pin 6)</td>
+</tr>
+</tbody>
+</table>
+<p>Mặc định Raspberry Pi OS đã bật login shell qua serial console (<code>enable_uart=1</code> trong
+<code>config.txt</code>, tham số <code>console=serial0,115200</code> trong <code>cmdline.txt</code>) — không cần chỉnh gì thêm nếu
+chỉ muốn xem log/đăng nhập qua UART.</p>
+<p>Từ máy dev, mở serial console ở baud rate 115200:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>screen<span class="w"> </span><span class="o">{</span>ĐIỀN:<span class="w"> </span>cổng<span class="w"> </span>serial<span class="w"> </span>trên<span class="w"> </span>máy<span class="w"> </span>dev,<span class="w"> </span>vd<span class="w"> </span>/dev/ttyUSB0<span class="w"> </span>hoặc<span class="w"> </span>COM3<span class="o">}</span><span class="w"> </span><span class="m">115200</span>
+</span></code></pre></div>
+<h3 id="4-cai-toolchain-cross-compile-tren-may-dev">4. Cài toolchain cross-compile trên máy dev<a class="headerlink" href="#4-cai-toolchain-cross-compile-tren-may-dev" title="Permanent link">&para;</a></h3>
+<p>Hai toolchain, hai mục đích khác nhau:</p>
 <ul>
-<li>Biết chương trình đang dùng bao nhiêu % flash/RAM — tổng kích thước <code>.text + .data</code> so với dung
-  lượng flash, <code>.data + .bss</code> so với dung lượng RAM</li>
-<li>Tìm biến/hàm nào đang "ăn" nhiều bộ nhớ nhất khi cần tối ưu</li>
-<li>Xác nhận một biến thật sự nằm đúng section mong đợi (vd: kiểm tra một mảng lớn có bị đưa nhầm
-  vào <code>.data</code> thay vì <code>.bss</code> do lỡ khởi tạo giá trị khác 0)</li>
+<li><code>gcc-arm-none-eabi</code> — bare-metal, target <code>none</code> (không hệ điều hành), dùng khi viết firmware
+  chạy thẳng trên MCU (Cortex-M) chứ không phải trên chính con Pi</li>
+<li><code>gcc-aarch64-linux-gnu</code> — cross-compile app/kernel module chạy trên Raspberry Pi OS 64-bit
+  (kiến trúc <code>aarch64</code>, target <code>linux</code>)</li>
 </ul>
-<p>Format khác nhau tùy toolchain, nhưng luôn có một bảng liệt kê symbol kèm địa chỉ và kích thước —
-tìm đúng tên biến/hàm cần tra là đọc được ngay.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gcc-arm-none-eabi<span class="w"> </span>gcc-aarch64-linux-gnu
+</span></code></pre></div>
+<p>Nếu dùng bản tải riêng từ trang chủ ARM thay vì bản apt (thường mới hơn), ghi lại đường dẫn cài
+đặt và dòng thêm vào PATH:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{ĐIỀN: đường dẫn toolchain trên máy, vd /opt/arm-toolchain/bin, và dòng export PATH đã thêm vào .bashrc/.zshrc}
+</span></code></pre></div>
+<h3 id="5-tao-repo-github">5. Tạo repo GitHub<a class="headerlink" href="#5-tao-repo-github" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>init
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>git<span class="w"> </span>add<span class="w"> </span>docs/<span class="w"> </span>mkdocs.yml
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"khung site ban đầu"</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span><span class="o">{</span>ĐIỀN:<span class="w"> </span>URL<span class="w"> </span>repo<span class="w"> </span>GitHub,<span class="w"> </span>vd<span class="w"> </span>git@github.com:&lt;user&gt;/&lt;repo&gt;.git<span class="o">}</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</span></code></pre></div>
+<h2 id="kiem-tra-ket-qua">Kiểm tra kết quả<a class="headerlink" href="#kiem-tra-ket-qua" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ ssh {ĐIỀN: user}@{ĐIỀN: host} whoami
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>{ĐIỀN: output thật}
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>$ aarch64-linux-gnu-gcc --version
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>aarch64-linux-gnu-gcc (...) {ĐIỀN: version thật}
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>$ arm-none-eabi-gcc --version
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>arm-none-eabi-gcc (...) {ĐIỀN: version thật}
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>$ git remote -v
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>origin  {ĐIỀN: URL repo}  (fetch)
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>origin  {ĐIỀN: URL repo}  (push)
+</span></code></pre></div>
+<p>Qua UART, thấy được log boot đầy đủ và prompt đăng nhập — đây là dấu hiệu console hoạt động kể cả
+khi mạng có vấn đề, nên xem là bước kiểm tra dự phòng chứ không chỉ làm khi SSH hỏng.</p>
+<div class="admonition tip">
+<p class="admonition-title">Chèn ảnh thật của mình</p>
+<p>Screenshot Raspberry Pi Imager lúc cấu hình Advanced options, hoặc log UART lúc board boot lần
+đầu, là bằng chứng setup thật — chèn vào <code>img/</code> cùng thư mục trang này.</p>
+</div>
+<h2 id="mo-rong">Mở rộng<a class="headerlink" href="#mo-rong" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Chuyển SSH sang xác thực bằng key thay vì password, tắt hẳn <code>PasswordAuthentication</code> trong
+   <code>sshd_config</code> — an toàn hơn khi board để mở lâu dài trên mạng</li>
+<li>Đặt DHCP reservation hoặc IP tĩnh cho Pi trên router, để hostname/IP không đổi giữa các lần boot</li>
+</ol>
 <h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Đọc trước:</strong> <a href="../c-nang-cao/">C nâng cao</a> — struct padding cũng ảnh hưởng trực tiếp kích thước
-  các section này</li>
-<li><strong>Đọc tiếp:</strong> <code>startup-linker.md</code> — áp dụng trực tiếp kiến thức này để tự viết linker script</li>
-<li><strong>Tự kiểm tra:</strong> câu 3–4 trong <a href="../phu-luc/28-cau-tu-kiem-tra.md">28 câu tự kiểm tra</a></li>
+<li><strong>Bước tiếp theo:</strong> <a href="../phan-cung/">Chọn phần cứng</a></li>
+<li><strong>Đào sâu về toolchain:</strong> <a href="../../01-linux-nen-tang/toolchain/">Toolchain cross-compilation</a></li>
 </ul>
 <hr />
-<p><em>Khái niệm phổ biến trong tài liệu embedded/lập trình hệ thống nói chung — tham khảo thêm:
-tài liệu GNU linker (<code>ld</code>), reference manual của chip đang dùng.</em></p>
+<p><em>Nội dung gốc, ghi lại từ quá trình tự setup môi trường làm việc của mình — không dịch/tham khảo
+từ nguồn nào.</em></p>
 
 
 

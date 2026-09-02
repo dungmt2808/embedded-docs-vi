@@ -13,13 +13,13 @@
         <meta name="author" content="<tên cậu>">
       
       
-        <link rel="canonical" href="https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/memory-layout/">
+        <link rel="canonical" href="https://dungmt2808.github.io/embedded-docs-vi/00-bat-dau/phan-cung/">
       
       
-        <link rel="prev" href="../c-nang-cao/">
+        <link rel="prev" href="../moi-truong/">
       
       
-        <link rel="next" href="../../05-rtos-internals/dong-bo-rtos/">
+        <link rel="next" href="../../01-linux-nen-tang/toolchain/">
       
       
         
@@ -30,7 +30,7 @@
     
     
       
-        <title>Memory layout: .text, .data, .bss - Ghi chép Embedded Linux</title>
+        <title>Chọn phần cứng - Ghi chép Embedded Linux</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#memory-layout-text-data-bss" class="md-skip">
+        <a href="#chon-phan-cung" class="md-skip">
           Bỏ qua
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Memory layout: .text, .data, .bss
+              Chọn phần cứng
             
           </span>
         </div>
@@ -245,11 +245,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../00-bat-dau/moi-truong/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../moi-truong/" class="md-tabs__link">
           
   
   
@@ -333,13 +335,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../c-nang-cao/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../04-c-va-bare-metal/c-nang-cao/" class="md-tabs__link">
           
   
   
@@ -539,8 +539,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -552,19 +554,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -582,7 +587,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -600,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../00-bat-dau/moi-truong/" class="md-nav__link">
+      <a href="../moi-truong/" class="md-nav__link">
         
   
   
@@ -625,10 +630,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../00-bat-dau/phan-cung/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chọn phần cứng
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -644,6 +676,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vi-sao-can-biet-cai-nay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vì sao cần biết cái này
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#board-chinh-stm32h7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board chính: STM32H7
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#board-linux-raspberry-pi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board Linux: Raspberry Pi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-ket-noi-bench-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ kết nối bench debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#danh-sach-linh-kien-nen-mua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Danh sách linh kiện nên mua
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1443,10 +1561,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -1468,22 +1584,19 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -1501,7 +1614,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1519,7 +1632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../c-nang-cao/" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/c-nang-cao/" class="md-nav__link">
         
   
   
@@ -1544,37 +1657,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Memory layout: .text, .data, .bss
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../04-c-va-bare-metal/memory-layout/" class="md-nav__link">
         
   
   
@@ -1590,81 +1676,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Mục lục
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#vi-sao-can-biet-cai-nay" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vì sao cần biết cái này
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ba-vung-bo-nho-chinh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ba vùng bộ nhớ chính
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lma-va-vma-cho-hay-gay-nham-nhat" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LMA và VMA — chỗ hay gây nhầm nhất
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#oc-file-map" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Đọc file .map
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lien-quan" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Liên quan
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1677,7 +1688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../startup-linker.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/startup-linker.md" class="md-nav__link">
         
   
   
@@ -1705,7 +1716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../thanh-ghi.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/thanh-ghi.md" class="md-nav__link">
         
   
   
@@ -1733,7 +1744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ngoai-vi.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/ngoai-vi.md" class="md-nav__link">
         
   
   
@@ -1761,7 +1772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../debug-gdb-jtag.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/debug-gdb-jtag.md" class="md-nav__link">
         
   
   
@@ -1789,7 +1800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cmake-build.md" class="md-nav__link">
+      <a href="../../04-c-va-bare-metal/cmake-build.md" class="md-nav__link">
         
   
   
@@ -2670,10 +2681,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ba-vung-bo-nho-chinh" class="md-nav__link">
+  <a href="#board-chinh-stm32h7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ba vùng bộ nhớ chính
+        Board chính: STM32H7
       
     </span>
   </a>
@@ -2681,10 +2692,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lma-va-vma-cho-hay-gay-nham-nhat" class="md-nav__link">
+  <a href="#board-linux-raspberry-pi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        LMA và VMA — chỗ hay gây nhầm nhất
+        Board Linux: Raspberry Pi
       
     </span>
   </a>
@@ -2692,10 +2703,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oc-file-map" class="md-nav__link">
+  <a href="#so-o-ket-noi-bench-debug" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Đọc file .map
+        Sơ đồ kết nối bench debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#danh-sach-linh-kien-nen-mua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Danh sách linh kiện nên mua
       
     </span>
   </a>
@@ -2731,7 +2753,7 @@
 
 
   
-    <a href="https://github.com/dungmt2808/embedded-docs-vi/edit/main/docs/04-c-va-bare-metal/memory-layout.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dungmt2808/embedded-docs-vi/edit/main/docs/00-bat-dau/phan-cung.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2739,75 +2761,73 @@
   
 
 
-<h1 id="memory-layout-text-data-bss">Memory layout: .text, .data, .bss<a class="headerlink" href="#memory-layout-text-data-bss" title="Permanent link">&para;</a></h1>
+<h1 id="chon-phan-cung">Chọn phần cứng<a class="headerlink" href="#chon-phan-cung" title="Permanent link">&para;</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Tóm tắt</p>
-<p>Vì sao firmware chạy được từ flash, và vì sao biến global có giá trị khởi tạo cần một bước
-"copy" đặc biệt trước khi <code>main()</code> chạy.</p>
+<p>Bộ phần cứng chạy xuyên suốt site: một board STM32H7 cho mảng bare-metal/RTOS, một
+Raspberry Pi cho mảng Embedded Linux, và vài món đồ nghề debug nên sắm trước khi bắt đầu.</p>
 </div>
 <h2 id="vi-sao-can-biet-cai-nay">Vì sao cần biết cái này<a class="headerlink" href="#vi-sao-can-biet-cai-nay" title="Permanent link">&para;</a></h2>
-<p>Đây là kiến thức đứng sau file linker script và file <code>startup.s</code> mà cậu sẽ tự viết — không hiểu
-memory layout thì linker script chỉ là những dòng chép lại không hiểu vì sao đúng. Nó cũng là thứ
-đầu tiên cần tra khi build ra lỗi kiểu "region FLASH overflowed" hoặc firmware chạy sai chỉ vì
-biến global đọc ra giá trị rác.</p>
-<h2 id="ba-vung-bo-nho-chinh">Ba vùng bộ nhớ chính<a class="headerlink" href="#ba-vung-bo-nho-chinh" title="Permanent link">&para;</a></h2>
-<p>Trình biên dịch/linker chia code và dữ liệu thành các "section", ba section quan trọng nhất:</p>
+<p>Mỗi lệnh, mỗi output dmesg, mỗi con số đo timing trong site này chạy trên một bộ phần cứng cụ
+thể — không phải "một board ARM chung chung nào đó". Làm theo mà kết quả không khớp, biết ngay
+là do khác revision/RAM hay do bug thật trong hướng dẫn. Một số bài thực hành sau này (đọc log
+UART, bắt tín hiệu I2C) cũng cần sẵn đồ nghề debug tối thiểu — thiếu thì đến giữa bài phải dừng
+lại đi mua, mất nhịp làm việc.</p>
+<h2 id="board-chinh-stm32h7">Board chính: STM32H7<a class="headerlink" href="#board-chinh-stm32h7" title="Permanent link">&para;</a></h2>
+<p><code>{ĐIỀN: variant cụ thể, vd STM32H743ZI trên Nucleo-H743ZI2}</code></p>
+<p>Lõi Cortex-M7, không có MMU — không chạy được Linux kernel. Board này dùng cho mục <strong>C &amp;
+Bare-metal</strong> và <strong>RTOS internals</strong>: lập trình thanh ghi trực tiếp, viết linker script/startup
+code, chạy FreeRTOS, đo context switch bằng logic analyzer. Có sẵn mạch nạp ST-Link trên board
+nên không cần mua debugger rời để flash/debug qua GDB.</p>
+<h2 id="board-linux-raspberry-pi">Board Linux: Raspberry Pi<a class="headerlink" href="#board-linux-raspberry-pi" title="Permanent link">&para;</a></h2>
+<p><code>{ĐIỀN: model cụ thể, vd Raspberry Pi 4 Model B 4GB}</code> — đã setup ở <a href="../moi-truong/">bài trước</a>.</p>
+<p>Lõi Cortex-A có MMU nên chạy được Linux kernel đầy đủ. Dùng cho mục <strong>Linux nền tảng</strong>,
+<strong>Kernel driver</strong>, và <strong>Yocto &amp; BSP</strong>: build kernel, viết platform driver, build image bằng
+Yocto/Buildroot rồi flash chạy thật thay vì chỉ chạy trên QEMU.</p>
+<h2 id="so-o-ket-noi-bench-debug">Sơ đồ kết nối bench debug<a class="headerlink" href="#so-o-ket-noi-bench-debug" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    PC[Máy dev] --&gt;|USB| USBTTL[USB-TTL]
+    PC --&gt;|USB| LA[Logic analyzer 8 kênh]
+    PC --&gt;|SSH qua Ethernet/WiFi| RPI[Raspberry Pi]
+    USBTTL --&gt;|UART: TX/RX chéo, GND| STM32[STM32H7]
+    LA -.theo dõi bus I2C/SPI/UART.-&gt; STM32
+    LA -.theo dõi bus I2C/SPI/UART.-&gt; RPI
+    STM32 --&gt;|I2C, qua breadboard + jumper| SENSOR[BME280 / MPU6050]
+    RPI --&gt;|I2C, qua breadboard + jumper| SENSOR</code></pre>
+<p>Logic analyzer không đấu nối tiếp vào mạch — chỉ kẹp que đo song song vào đường tín hiệu đã có
+sẵn giữa hai đầu (board và cảm biến/adapter), nên không ảnh hưởng hoạt động của bus khi đo.</p>
+<div class="admonition tip">
+<p class="admonition-title">Chèn ảnh bench setup thật</p>
+<p>Ảnh chụp toàn bộ bench (board, logic analyzer, dây đấu breadboard) là nội dung gốc giá trị
+nhất — đặt vào <code>img/</code> cùng thư mục trang này, chèn bằng <code>![mô tả](img/ten.png)</code>.</p>
+</div>
+<h2 id="danh-sach-linh-kien-nen-mua">Danh sách linh kiện nên mua<a class="headerlink" href="#danh-sach-linh-kien-nen-mua" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>.text</code></strong> — code đã biên dịch (mã máy) và các hằng số <code>const</code>. Không đổi khi chạy, nằm hẳn
-  trong flash (bộ nhớ không mất khi cúp điện).</li>
-<li><strong><code>.data</code></strong> — biến global/static <strong>có</strong> giá trị khởi tạo khác 0 (<code>int count = 5;</code>). Cần đọc/ghi
-  được lúc chạy nên phải nằm trong RAM — nhưng giá trị khởi tạo ban đầu (5) phải được lưu ở đâu đó
-  không mất điện, tức flash.</li>
-<li><strong><code>.bss</code></strong> — biến global/static <strong>không</strong> khởi tạo hoặc khởi tạo bằng 0 (<code>int count;</code> hoặc
-  <code>int count = 0;</code>). Cũng nằm trong RAM lúc chạy, nhưng không cần lưu giá trị ban đầu trong flash
-  vì "giá trị ban đầu" luôn là 0 — tiết kiệm dung lượng flash đáng kể so với <code>.data</code>.</li>
+<li><strong>Logic analyzer 8 kênh</strong> — bắt tín hiệu I2C/SPI/UART thật để xem timing, phân biệt lỗi do
+  driver hay do phần cứng. Loại clone giá rẻ (chip Cypress FX2) dùng được với sigrok/PulseView,
+  không dùng được phần mềm Saleae chính hãng — biết trước để khỏi mua nhầm kỳ vọng.</li>
+<li><strong>USB-TTL</strong> (<code>{ĐIỀN: model, vd CP2102/FT232RL/CH340}</code>) — đọc log UART console, cách debug
+  bootloader/kernel phổ biến nhất khi chưa có mạng. Đã dùng ở <a href="../moi-truong/">bài setup môi trường</a>.</li>
+<li><strong>Cảm biến I2C</strong>: BME280 (nhiệt độ/áp suất/độ ẩm), MPU6050 (accelerometer/gyro) — mục tiêu thực
+  hành viết I2C driver ở mục <strong>Kernel driver</strong>.</li>
+<li><strong>Breadboard, dây jumper</strong> (đực-đực, đực-cái) — đấu nối nhanh không cần hàn, tháo lắp lại được
+  khi đổi mạch thử nghiệm.</li>
 </ul>
-<h2 id="lma-va-vma-cho-hay-gay-nham-nhat">LMA và VMA — chỗ hay gây nhầm nhất<a class="headerlink" href="#lma-va-vma-cho-hay-gay-nham-nhat" title="Permanent link">&para;</a></h2>
-<p>Mỗi section trong file <code>.elf</code> có hai địa chỉ:</p>
-<ul>
-<li><strong>LMA (Load Memory Address)</strong> — địa chỉ nơi dữ liệu <strong>được lưu trữ</strong> khi chưa chạy (trong flash)</li>
-<li><strong>VMA (Virtual/run-time Memory Address)</strong> — địa chỉ nơi CPU <strong>truy cập</strong> dữ liệu đó lúc chạy</li>
-</ul>
-<p>Với <code>.text</code>, hai địa chỉ này giống nhau — code chạy thẳng tại chỗ nó nằm trong flash (execute-in-place).</p>
-<p>Với <code>.data</code>, hai địa chỉ <strong>khác nhau</strong>: LMA nằm trong flash (chỗ lưu giá trị khởi tạo), VMA nằm
-trong RAM (chỗ CPU sẽ đọc/ghi lúc chạy). Đây là lý do đoạn code đầu tiên trong <code>startup.s</code>, trước
-khi gọi <code>main()</code>, luôn có một vòng lặp copy: đọc dữ liệu từ LMA (flash), ghi sang VMA (RAM) —
-thường thấy dưới tên biến linker <code>_sidata</code>, <code>_sdata</code>, <code>_edata</code> trong linker script.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Flash (LMA)                          RAM (VMA)
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>┌─────────────┐                    ┌─────────────┐
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   .text     │ ← chạy tại chỗ     │             │
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├─────────────┤                    ├─────────────┤
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ .data (bản  │ ─── copy lúc ───→  │   .data     │ ← CPU đọc/ghi ở đây
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│  gốc, chỉ    │     startup        │             │
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│  đọc)        │                    ├─────────────┤
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>└─────────────┘                    │   .bss      │ ← chỉ cần zero-init,
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                                     │             │   không cần copy từ flash
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                                     └─────────────┘
-</span></code></pre></div>
-<p><code>.bss</code> không cần bước copy này — startup code chỉ cần zero-init cả vùng đó (<code>memset</code> về 0), vì
-giá trị ban đầu luôn là 0, không cần lưu bản gốc trong flash.</p>
-<h2 id="oc-file-map">Đọc file <code>.map</code><a class="headerlink" href="#oc-file-map" title="Permanent link">&para;</a></h2>
-<p>Sau khi build, linker xuất ra file <code>.map</code> liệt kê chính xác từng symbol (hàm, biến) nằm ở địa chỉ
-nào, section nào, chiếm bao nhiêu byte. Đây là công cụ tra cứu thực tế khi:</p>
-<ul>
-<li>Biết chương trình đang dùng bao nhiêu % flash/RAM — tổng kích thước <code>.text + .data</code> so với dung
-  lượng flash, <code>.data + .bss</code> so với dung lượng RAM</li>
-<li>Tìm biến/hàm nào đang "ăn" nhiều bộ nhớ nhất khi cần tối ưu</li>
-<li>Xác nhận một biến thật sự nằm đúng section mong đợi (vd: kiểm tra một mảng lớn có bị đưa nhầm
-  vào <code>.data</code> thay vì <code>.bss</code> do lỡ khởi tạo giá trị khác 0)</li>
-</ul>
-<p>Format khác nhau tùy toolchain, nhưng luôn có một bảng liệt kê symbol kèm địa chỉ và kích thước —
-tìm đúng tên biến/hàm cần tra là đọc được ngay.</p>
+<div class="admonition warning">
+<p class="admonition-title">Mức điện áp logic</p>
+<p>STM32H7 chỉ chịu mức 3.3V trên GPIO. Một số module USB-TTL/cảm biến mặc định ra 5V — kiểm tra
+jumper chọn mức điện áp (hoặc datasheet module) trước khi cắm, tránh cắm nhầm cháy chân GPIO.</p>
+</div>
 <h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Đọc trước:</strong> <a href="../c-nang-cao/">C nâng cao</a> — struct padding cũng ảnh hưởng trực tiếp kích thước
-  các section này</li>
-<li><strong>Đọc tiếp:</strong> <code>startup-linker.md</code> — áp dụng trực tiếp kiến thức này để tự viết linker script</li>
-<li><strong>Tự kiểm tra:</strong> câu 3–4 trong <a href="../phu-luc/28-cau-tu-kiem-tra.md">28 câu tự kiểm tra</a></li>
+<li><strong>Đọc trước:</strong> <a href="../moi-truong/">Setup môi trường</a></li>
+<li><strong>Đọc tiếp:</strong> <a href="../../07-phan-cung/linh-kien/">Linh kiện điện tử cơ bản</a> — vai trò từng linh kiện
+  khi đọc schematic</li>
+<li><strong>Đọc tiếp:</strong> <a href="../../01-linux-nen-tang/toolchain/">Toolchain cross-compilation</a></li>
 </ul>
 <hr />
-<p><em>Khái niệm phổ biến trong tài liệu embedded/lập trình hệ thống nói chung — tham khảo thêm:
-tài liệu GNU linker (<code>ld</code>), reference manual của chip đang dùng.</em></p>
+<p><em>Nội dung gốc, mô tả phần cứng thật mình dùng khi viết site này — không dịch/phóng tác từ nguồn
+nào.</em></p>
 
 
 
