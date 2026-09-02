@@ -37,6 +37,7 @@ dịch không gây khó hiểu:
 | variable scope | phạm vi biến |
 | library | thư viện |
 | floating point | dấu phẩy động |
+| sensor | cảm biến |
 
 **Lưu ý riêng cho "ngắt" vs "ISR"**: dịch "interrupt" thành "ngắt" khi nói về khái niệm/cơ chế
 chung ("xử lý ngắt", "ưu tiên ngắt"). Giữ nguyên "ISR" (Interrupt Service Routine) khi nói tên
@@ -57,7 +58,10 @@ không có bản dịch tiếng Việt nào được dùng phổ biến hơn b�
 `alignment` · `callback` · `watchdog` · `backtrace` · `breakpoint` · `watchpoint` ·
 `cross-compile` · `linker` *(danh từ — công cụ)* · `compiler` *(danh từ — công cụ)* ·
 `debugger` *(danh từ — công cụ)* · `sysroot` · `header` · `tuple` *(kiến trúc tuple)* ·
-`binary` *(danh từ — file đã biên dịch)* · `hard float` · `soft float`
+`binary` *(danh từ — file đã biên dịch)* · `hard float` · `soft float` · `headless`
+*(setup không cắm màn hình/bàn phím)* · `serial console` · `baud rate` · `image`
+*(danh từ — bản OS để flash vào thẻ nhớ)* · `board` · `logic analyzer` · `breadboard` ·
+`jumper` *(dây jumper)*
 
 ## Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
 
@@ -67,7 +71,7 @@ Không dịch dưới bất kỳ hình thức nào — đây là tên riêng, kh
 - **Tên section/file**: `.text`, `.data`, `.bss`, `.map`, `.dts`, `.dtsi`
 - **Tên công cụ/lệnh**: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake
 - **Tên linh kiện**: MOSFET, LDO, TVS, Schottky
-- **Viết tắt**: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI
+- **Viết tắt**: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI, MMU
 
 ## Khi gặp từ chưa có trong 3 nhóm trên
 
