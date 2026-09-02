@@ -13,31 +13,29 @@
         <meta name="author" content="<tên cậu>">
       
       
-        <link rel="canonical" href="https://dungmt2808.github.io/embedded-docs-vi/phu-luc/thuat-ngu/">
+        <link rel="canonical" href="https://dungmt2808.github.io/embedded-docs-vi/">
       
       
-        <link rel="prev" href="../../07-phan-cung/linh-kien/">
       
-      
-        <link rel="next" href="../nguon-va-giay-phep/">
+        <link rel="next" href="01-linux-nen-tang/toolchain/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Quy ước thuật ngữ: khi nào dịch, khi nào giữ tiếng Anh - Ghi chép Embedded Linux</title>
+        <title>Ghi chép Embedded Linux</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -56,7 +54,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -81,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#quy-uoc-thuat-ngu-khi-nao-dich-khi-nao-giu-tieng-anh" class="md-skip">
+        <a href="#ghi-chep-embedded-linux" class="md-skip">
           Bỏ qua
         </a>
       
@@ -95,7 +93,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Đầu trang">
-    <a href="../.." title="Ghi chép Embedded Linux" class="md-header__button md-logo" aria-label="Ghi chép Embedded Linux" data-md-component="logo">
+    <a href="." title="Ghi chép Embedded Linux" class="md-header__button md-logo" aria-label="Ghi chép Embedded Linux" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -115,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Quy ước thuật ngữ: khi nào dịch, khi nào giữ tiếng Anh
+              Trang chủ
             
           </span>
         </div>
@@ -226,9 +224,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="." class="md-tabs__link">
         
   
   
@@ -249,7 +249,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../00-bat-dau/moi-truong.md" class="md-tabs__link">
+        <a href="00-bat-dau/moi-truong.md" class="md-tabs__link">
           
   
   
@@ -271,7 +271,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../01-linux-nen-tang/toolchain/" class="md-tabs__link">
+        <a href="01-linux-nen-tang/toolchain/" class="md-tabs__link">
           
   
   
@@ -293,7 +293,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../02-kernel-driver/kernel-module.md" class="md-tabs__link">
+        <a href="02-kernel-driver/kernel-module.md" class="md-tabs__link">
           
   
   
@@ -315,7 +315,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../03-yocto-bsp/khai-niem.md" class="md-tabs__link">
+        <a href="03-yocto-bsp/khai-niem.md" class="md-tabs__link">
           
   
   
@@ -337,7 +337,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../04-c-va-bare-metal/c-nang-cao/" class="md-tabs__link">
+        <a href="04-c-va-bare-metal/c-nang-cao/" class="md-tabs__link">
           
   
   
@@ -359,7 +359,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../05-rtos-internals/freertos-kien-truc.md" class="md-tabs__link">
+        <a href="05-rtos-internals/freertos-kien-truc.md" class="md-tabs__link">
           
   
   
@@ -381,7 +381,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../06-realtime-project/preempt-rt.md" class="md-tabs__link">
+        <a href="06-realtime-project/preempt-rt.md" class="md-tabs__link">
           
   
   
@@ -403,7 +403,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../07-phan-cung/linh-kien/" class="md-tabs__link">
+        <a href="07-phan-cung/linh-kien/" class="md-tabs__link">
           
   
   
@@ -425,7 +425,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../08-ai-nhung/ai-de-hoc.md" class="md-tabs__link">
+        <a href="08-ai-nhung/ai-de-hoc.md" class="md-tabs__link">
           
   
   
@@ -443,13 +443,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../28-cau-tu-kiem-tra.md" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="phu-luc/28-cau-tu-kiem-tra.md" class="md-tabs__link">
           
   
   
@@ -485,7 +483,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Thanh điều hướng" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Ghi chép Embedded Linux" class="md-nav__button md-logo" aria-label="Ghi chép Embedded Linux" data-md-component="logo">
+    <a href="." title="Ghi chép Embedded Linux" class="md-nav__button md-logo" aria-label="Ghi chép Embedded Linux" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -512,10 +510,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trang chủ
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
         
   
   
@@ -531,6 +556,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cac-muc-chinh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các mục chính
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#giay-phep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Giấy phép
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -600,7 +667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../00-bat-dau/moi-truong.md" class="md-nav__link">
+      <a href="00-bat-dau/moi-truong.md" class="md-nav__link">
         
   
   
@@ -628,7 +695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../00-bat-dau/phan-cung.md" class="md-nav__link">
+      <a href="00-bat-dau/phan-cung.md" class="md-nav__link">
         
   
   
@@ -731,7 +798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-linux-nen-tang/toolchain/" class="md-nav__link">
+      <a href="01-linux-nen-tang/toolchain/" class="md-nav__link">
         
   
   
@@ -759,7 +826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-linux-nen-tang/boot-flow.md" class="md-nav__link">
+      <a href="01-linux-nen-tang/boot-flow.md" class="md-nav__link">
         
   
   
@@ -787,7 +854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-linux-nen-tang/u-boot.md" class="md-nav__link">
+      <a href="01-linux-nen-tang/u-boot.md" class="md-nav__link">
         
   
   
@@ -815,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-linux-nen-tang/build-kernel.md" class="md-nav__link">
+      <a href="01-linux-nen-tang/build-kernel.md" class="md-nav__link">
         
   
   
@@ -843,7 +910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-linux-nen-tang/device-tree.md" class="md-nav__link">
+      <a href="01-linux-nen-tang/device-tree.md" class="md-nav__link">
         
   
   
@@ -871,7 +938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-linux-nen-tang/rootfs.md" class="md-nav__link">
+      <a href="01-linux-nen-tang/rootfs.md" class="md-nav__link">
         
   
   
@@ -899,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-linux-nen-tang/userspace-hardware.md" class="md-nav__link">
+      <a href="01-linux-nen-tang/userspace-hardware.md" class="md-nav__link">
         
   
   
@@ -1004,7 +1071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/kernel-module.md" class="md-nav__link">
+      <a href="02-kernel-driver/kernel-module.md" class="md-nav__link">
         
   
   
@@ -1032,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/char-driver.md" class="md-nav__link">
+      <a href="02-kernel-driver/char-driver.md" class="md-nav__link">
         
   
   
@@ -1060,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/device-model.md" class="md-nav__link">
+      <a href="02-kernel-driver/device-model.md" class="md-nav__link">
         
   
   
@@ -1088,7 +1155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/platform-driver.md" class="md-nav__link">
+      <a href="02-kernel-driver/platform-driver.md" class="md-nav__link">
         
   
   
@@ -1116,7 +1183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/interrupt.md" class="md-nav__link">
+      <a href="02-kernel-driver/interrupt.md" class="md-nav__link">
         
   
   
@@ -1144,7 +1211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/dong-bo.md" class="md-nav__link">
+      <a href="02-kernel-driver/dong-bo.md" class="md-nav__link">
         
   
   
@@ -1172,7 +1239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/i2c-driver.md" class="md-nav__link">
+      <a href="02-kernel-driver/i2c-driver.md" class="md-nav__link">
         
   
   
@@ -1200,7 +1267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-kernel-driver/debug.md" class="md-nav__link">
+      <a href="02-kernel-driver/debug.md" class="md-nav__link">
         
   
   
@@ -1299,7 +1366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-yocto-bsp/khai-niem.md" class="md-nav__link">
+      <a href="03-yocto-bsp/khai-niem.md" class="md-nav__link">
         
   
   
@@ -1327,7 +1394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-yocto-bsp/build-image.md" class="md-nav__link">
+      <a href="03-yocto-bsp/build-image.md" class="md-nav__link">
         
   
   
@@ -1355,7 +1422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-yocto-bsp/layer-rieng.md" class="md-nav__link">
+      <a href="03-yocto-bsp/layer-rieng.md" class="md-nav__link">
         
   
   
@@ -1383,7 +1450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-yocto-bsp/recipe-kernel-module.md" class="md-nav__link">
+      <a href="03-yocto-bsp/recipe-kernel-module.md" class="md-nav__link">
         
   
   
@@ -1411,7 +1478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-yocto-bsp/buildroot-so-sanh.md" class="md-nav__link">
+      <a href="03-yocto-bsp/buildroot-so-sanh.md" class="md-nav__link">
         
   
   
@@ -1514,7 +1581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-c-va-bare-metal/c-nang-cao/" class="md-nav__link">
+      <a href="04-c-va-bare-metal/c-nang-cao/" class="md-nav__link">
         
   
   
@@ -1542,7 +1609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-c-va-bare-metal/memory-layout/" class="md-nav__link">
+      <a href="04-c-va-bare-metal/memory-layout/" class="md-nav__link">
         
   
   
@@ -1570,7 +1637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-c-va-bare-metal/startup-linker.md" class="md-nav__link">
+      <a href="04-c-va-bare-metal/startup-linker.md" class="md-nav__link">
         
   
   
@@ -1598,7 +1665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-c-va-bare-metal/thanh-ghi.md" class="md-nav__link">
+      <a href="04-c-va-bare-metal/thanh-ghi.md" class="md-nav__link">
         
   
   
@@ -1626,7 +1693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-c-va-bare-metal/ngoai-vi.md" class="md-nav__link">
+      <a href="04-c-va-bare-metal/ngoai-vi.md" class="md-nav__link">
         
   
   
@@ -1654,7 +1721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-c-va-bare-metal/debug-gdb-jtag.md" class="md-nav__link">
+      <a href="04-c-va-bare-metal/debug-gdb-jtag.md" class="md-nav__link">
         
   
   
@@ -1682,7 +1749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-c-va-bare-metal/cmake-build.md" class="md-nav__link">
+      <a href="04-c-va-bare-metal/cmake-build.md" class="md-nav__link">
         
   
   
@@ -1779,7 +1846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-rtos-internals/freertos-kien-truc.md" class="md-nav__link">
+      <a href="05-rtos-internals/freertos-kien-truc.md" class="md-nav__link">
         
   
   
@@ -1807,7 +1874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-rtos-internals/context-switch.md" class="md-nav__link">
+      <a href="05-rtos-internals/context-switch.md" class="md-nav__link">
         
   
   
@@ -1835,7 +1902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-rtos-internals/dong-bo-rtos/" class="md-nav__link">
+      <a href="05-rtos-internals/dong-bo-rtos/" class="md-nav__link">
         
   
   
@@ -1863,7 +1930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-rtos-internals/mini-rtos.md" class="md-nav__link">
+      <a href="05-rtos-internals/mini-rtos.md" class="md-nav__link">
         
   
   
@@ -1958,7 +2025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-realtime-project/preempt-rt.md" class="md-nav__link">
+      <a href="06-realtime-project/preempt-rt.md" class="md-nav__link">
         
   
   
@@ -1986,7 +2053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-realtime-project/do-latency.md" class="md-nav__link">
+      <a href="06-realtime-project/do-latency.md" class="md-nav__link">
         
   
   
@@ -2014,7 +2081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-realtime-project/project-hybrid.md" class="md-nav__link">
+      <a href="06-realtime-project/project-hybrid.md" class="md-nav__link">
         
   
   
@@ -2109,7 +2176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../07-phan-cung/linh-kien/" class="md-nav__link">
+      <a href="07-phan-cung/linh-kien/" class="md-nav__link">
         
   
   
@@ -2137,7 +2204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../07-phan-cung/doc-schematic.md" class="md-nav__link">
+      <a href="07-phan-cung/doc-schematic.md" class="md-nav__link">
         
   
   
@@ -2165,7 +2232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../07-phan-cung/debug-phan-cung.md" class="md-nav__link">
+      <a href="07-phan-cung/debug-phan-cung.md" class="md-nav__link">
         
   
   
@@ -2258,7 +2325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../08-ai-nhung/ai-de-hoc.md" class="md-nav__link">
+      <a href="08-ai-nhung/ai-de-hoc.md" class="md-nav__link">
         
   
   
@@ -2286,7 +2353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../08-ai-nhung/tinyml.md" class="md-nav__link">
+      <a href="08-ai-nhung/tinyml.md" class="md-nav__link">
         
   
   
@@ -2318,10 +2385,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -2339,22 +2404,19 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
             
   
   
@@ -2372,7 +2434,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2390,165 +2452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../28-cau-tu-kiem-tra.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    None
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Quy ước thuật ngữ: khi nào dịch, khi nào giữ tiếng Anh
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Quy ước thuật ngữ: khi nào dịch, khi nào giữ tiếng Anh
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Mục lục
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#vi-sao-can-mot-quy-uoc-ro-rang" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vì sao cần một quy ước rõ ràng
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nhom-1-luon-dich-sang-tieng-viet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nhóm 1 — Luôn dịch sang tiếng Việt
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nhom-2-luon-giu-tieng-anh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nhóm 2 — Luôn giữ tiếng Anh
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#khi-gap-tu-chua-co-trong-3-nhom-tren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Khi gặp từ chưa có trong 3 nhóm trên
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../c-gaps.md" class="md-nav__link">
+      <a href="phu-luc/28-cau-tu-kiem-tra.md" class="md-nav__link">
         
   
   
@@ -2576,7 +2480,63 @@
   
   
     <li class="md-nav__item">
-      <a href="../nguon-va-giay-phep/" class="md-nav__link">
+      <a href="phu-luc/thuat-ngu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quy ước thuật ngữ: khi nào dịch, khi nào giữ tiếng Anh
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="phu-luc/c-gaps.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    None
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="phu-luc/nguon-va-giay-phep/" class="md-nav__link">
         
   
   
@@ -2604,7 +2564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../nhat-ky.md" class="md-nav__link">
+      <a href="phu-luc/nhat-ky.md" class="md-nav__link">
         
   
   
@@ -2659,10 +2619,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#vi-sao-can-mot-quy-uoc-ro-rang" class="md-nav__link">
+  <a href="#cac-muc-chinh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Vì sao cần một quy ước rõ ràng
+        Các mục chính
       
     </span>
   </a>
@@ -2670,43 +2630,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nhom-1-luon-dich-sang-tieng-viet" class="md-nav__link">
+  <a href="#giay-phep" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Nhóm 1 — Luôn dịch sang tiếng Việt
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nhom-2-luon-giu-tieng-anh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nhóm 2 — Luôn giữ tiếng Anh
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#khi-gap-tu-chua-co-trong-3-nhom-tren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Khi gặp từ chưa có trong 3 nhóm trên
+        Giấy phép
       
     </span>
   </a>
@@ -2731,7 +2658,7 @@
 
 
   
-    <a href="https://github.com/dungmt2808/embedded-docs-vi/edit/main/docs/phu-luc/thuat-ngu.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/dungmt2808/embedded-docs-vi/edit/main/docs/index.md" title="Chỉnh sửa" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2739,136 +2666,27 @@
   
 
 
-<h1 id="quy-uoc-thuat-ngu-khi-nao-dich-khi-nao-giu-tieng-anh">Quy ước thuật ngữ: khi nào dịch, khi nào giữ tiếng Anh<a class="headerlink" href="#quy-uoc-thuat-ngu-khi-nao-dich-khi-nao-giu-tieng-anh" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Tóm tắt</p>
-<p>Ba nhóm từ, ba cách xử lý khác nhau. Danh sách này sống — thêm dần khi gặp từ mới,
-không cần dịch đúng ngay từ đầu.</p>
-</div>
-<h2 id="vi-sao-can-mot-quy-uoc-ro-rang">Vì sao cần một quy ước rõ ràng<a class="headerlink" href="#vi-sao-can-mot-quy-uoc-ro-rang" title="Permanent link">&para;</a></h2>
-<p>Không có quy tắc thì mỗi trang dịch một kiểu — trang này gọi "ngắt", trang khác gọi "interrupt",
-người đọc không biết có phải cùng một khái niệm không. Ba nhóm dưới đây dựa trên cách tiếng Việt
-kỹ thuật thật sự được dùng: giáo trình đại học Việt Nam đã có vocab chuẩn cho các khái niệm nền
-tảng từ lâu, nhưng ngành embedded/kernel/RTOS thì kỹ sư Việt Nam dùng thẳng tiếng Anh trong công
-việc hàng ngày — dịch cưỡng ép nhóm này ra tiếng Việt tạo cảm giác xa lạ hơn là dễ hiểu.</p>
-<h2 id="nhom-1-luon-dich-sang-tieng-viet">Nhóm 1 — Luôn dịch sang tiếng Việt<a class="headerlink" href="#nhom-1-luon-dich-sang-tieng-viet" title="Permanent link">&para;</a></h2>
-<p>Khái niệm nền tảng CS/kiến trúc máy tính, đã có vocab chuẩn từ giáo trình đại học Việt Nam,
-dịch không gây khó hiểu:</p>
-<table>
-<thead>
-<tr>
-<th>Tiếng Anh</th>
-<th>Tiếng Việt</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>function</td>
-<td>hàm</td>
-</tr>
-<tr>
-<td>variable</td>
-<td>biến</td>
-</tr>
-<tr>
-<td>pointer</td>
-<td>con trỏ</td>
-</tr>
-<tr>
-<td>array</td>
-<td>mảng</td>
-</tr>
-<tr>
-<td>data type</td>
-<td>kiểu dữ liệu</td>
-</tr>
-<tr>
-<td>loop</td>
-<td>vòng lặp</td>
-</tr>
-<tr>
-<td>statement</td>
-<td>câu lệnh</td>
-</tr>
-<tr>
-<td>memory</td>
-<td>bộ nhớ</td>
-</tr>
-<tr>
-<td>register</td>
-<td>thanh ghi</td>
-</tr>
-<tr>
-<td>interrupt <em>(khái niệm chung)</em></td>
-<td>ngắt</td>
-</tr>
-<tr>
-<td>thread</td>
-<td>luồng</td>
-</tr>
-<tr>
-<td>process</td>
-<td>tiến trình</td>
-</tr>
-<tr>
-<td>compile <em>(động từ)</em></td>
-<td>biên dịch</td>
-</tr>
-<tr>
-<td>link <em>(động từ)</em></td>
-<td>liên kết</td>
-</tr>
-<tr>
-<td>synchronization</td>
-<td>đồng bộ hóa</td>
-</tr>
-<tr>
-<td>variable scope</td>
-<td>phạm vi biến</td>
-</tr>
-<tr>
-<td>library</td>
-<td>thư viện</td>
-</tr>
-<tr>
-<td>floating point</td>
-<td>dấu phẩy động</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Lưu ý riêng cho "ngắt" vs "ISR"</strong>: dịch "interrupt" thành "ngắt" khi nói về khái niệm/cơ chế
-chung ("xử lý ngắt", "ưu tiên ngắt"). Giữ nguyên "ISR" (Interrupt Service Routine) khi nói tên
-riêng của hàm xử lý — đây là quy ước, không phải mâu thuẫn.</p>
-<p><strong>Lưu ý riêng cho "luồng" vs "task"</strong>: dịch "thread" thành "luồng" khi nói khái niệm chung của hệ
-điều hành (vd: "nhiều luồng tranh chấp một biến"). Giữ nguyên "task" khi nói cụ thể đơn vị thực thi
-trong RTOS (FreeRTOS gọi thẳng là Task, API <code>xTaskCreate</code>...) — hai từ gần nghĩa nhưng chỉ vật khác
-nhau trong ngữ cảnh RTOS, không thay thế cho nhau được.</p>
-<h2 id="nhom-2-luon-giu-tieng-anh">Nhóm 2 — Luôn giữ tiếng Anh<a class="headerlink" href="#nhom-2-luon-giu-tieng-anh" title="Permanent link">&para;</a></h2>
-<p>Thuật ngữ chuyên ngành embedded/kernel/RTOS — kỹ sư Việt Nam dùng thẳng tiếng Anh trong công việc,
-không có bản dịch tiếng Việt nào được dùng phổ biến hơn bản gốc:</p>
-<p><code>driver</code> · <code>kernel</code> · <code>firmware</code> · <code>bootloader</code> · <code>toolchain</code> · <code>struct</code> · <code>task</code> · <code>mutex</code> ·
-<code>semaphore</code> · <code>spinlock</code> · <code>scheduler</code> · <code>stack</code> · <code>heap</code> · <code>flash</code> · <code>cache</code> · <code>padding</code> ·
-<code>alignment</code> · <code>callback</code> · <code>watchdog</code> · <code>backtrace</code> · <code>breakpoint</code> · <code>watchpoint</code> ·
-<code>cross-compile</code> · <code>linker</code> <em>(danh từ — công cụ)</em> · <code>compiler</code> <em>(danh từ — công cụ)</em> ·
-<code>debugger</code> <em>(danh từ — công cụ)</em> · <code>sysroot</code> · <code>header</code> · <code>tuple</code> <em>(kiến trúc tuple)</em> ·
-<code>binary</code> <em>(danh từ — file đã biên dịch)</em> · <code>hard float</code> · <code>soft float</code></p>
-<h2 id="nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection">Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)<a class="headerlink" href="#nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection" title="Permanent link">&para;</a></h2>
-<p>Không dịch dưới bất kỳ hình thức nào — đây là tên riêng, không phải khái niệm:</p>
+<h1 id="ghi-chep-embedded-linux">Ghi chép Embedded Linux<a class="headerlink" href="#ghi-chep-embedded-linux" title="Permanent link">&para;</a></h1>
+<p>Đây là nhật ký học Embedded Linux của mình — kernel driver, Yocto, RTOS, bare-metal — viết lại
+bằng tiếng Việt vì lúc học phải ghép nhặt từ nhiều nguồn tiếng Anh rời rạc, viết ra để tự mình
+đọc lại cho có hệ thống. Nếu cậu cũng đang tự học embedded ở trình độ tương tự thì chắc dùng
+được, nhưng đây không phải giáo trình đầy đủ — chỗ nào mình chưa đụng tới thì trang đó chưa có.</p>
+<h2 id="cac-muc-chinh">Các mục chính<a class="headerlink" href="#cac-muc-chinh" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Giao thức/chuẩn</strong>: I2C, SPI, UART, USB, CAN, GPIO, DMA, ARM, RISC-V</li>
-<li><strong>Tên section/file</strong>: <code>.text</code>, <code>.data</code>, <code>.bss</code>, <code>.map</code>, <code>.dts</code>, <code>.dtsi</code></li>
-<li><strong>Tên công cụ/lệnh</strong>: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake</li>
-<li><strong>Tên linh kiện</strong>: MOSFET, LDO, TVS, Schottky</li>
-<li><strong>Viết tắt</strong>: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI</li>
+<li><strong><a href="01-linux-nen-tang/toolchain/">Linux nền tảng</a></strong> — toolchain, boot flow, U-Boot, build kernel, device tree, rootfs</li>
+<li><strong><a href="02-kernel-driver/kernel-module.md">Kernel driver</a></strong> — viết char driver, platform driver, xử lý ngắt, đồng bộ hóa, driver I2C</li>
+<li><strong><a href="03-yocto-bsp/khai-niem.md">Yocto &amp; BSP</a></strong> — build image, viết layer riêng, recipe cho kernel module, so sánh với Buildroot</li>
+<li><strong><a href="04-c-va-bare-metal/c-nang-cao/">C &amp; Bare-metal</a></strong> — memory layout, startup code, linker script, lập trình thanh ghi trực tiếp</li>
+<li><strong><a href="05-rtos-internals/freertos-kien-truc.md">RTOS internals</a></strong> — kiến trúc FreeRTOS, context switch, cơ chế đồng bộ trong RTOS</li>
+<li><strong><a href="06-realtime-project/preempt-rt.md">Real-time &amp; Project</a></strong> — PREEMPT_RT, đo latency, một project hybrid Linux + RTOS thực tế</li>
+<li><strong><a href="07-phan-cung/linh-kien/">Phần cứng</a></strong> — linh kiện cơ bản, đọc schematic, debug phần cứng</li>
+<li><strong><a href="08-ai-nhung/ai-de-hoc.md">AI nhúng</a></strong> — chạy model AI trên thiết bị nhúng, TinyML</li>
 </ul>
-<h2 id="khi-gap-tu-chua-co-trong-3-nhom-tren">Khi gặp từ chưa có trong 3 nhóm trên<a class="headerlink" href="#khi-gap-tu-chua-co-trong-3-nhom-tren" title="Permanent link">&para;</a></h2>
-<p>Ưu tiên theo trực giác: từ đó là <strong>khái niệm CS phổ thông</strong> cấp đại học → dịch (Nhóm 1). Từ đó là
-<strong>danh từ kỹ thuật chuyên ngành</strong> embedded/kernel → giữ tiếng Anh (Nhóm 2). Không chắc → giữ tiếng
-Anh, an toàn hơn dịch sai hoặc dịch ra một từ không ai dùng. Thêm từ mới vào đúng bảng ở trên khi
-quyết định xong, để trang sau không phải quyết định lại từ đầu.</p>
-<hr />
-<p><em>Danh sách tự biên, đúc kết từ cách dùng thật trong các trang đã viết — không phải dịch từ nguồn
-nào, cập nhật liên tục khi gặp từ mới.</em></p>
+<p>Ngoài ra còn mục <strong>Bắt đầu</strong> (cài môi trường, chọn phần cứng) và <strong>Phụ lục</strong> (thuật ngữ, câu tự
+kiểm tra, nguồn tham khảo) hỗ trợ cho các mục trên.</p>
+<h2 id="giay-phep">Giấy phép<a class="headerlink" href="#giay-phep" title="Permanent link">&para;</a></h2>
+<p>Toàn bộ nội dung trong site này theo <strong>CC BY-SA 4.0</strong>. Phần nào dịch/phóng tác từ nguồn nào,
+giấy phép gốc ra sao — xem chi tiết ở <a href="phu-luc/nguon-va-giay-phep/">Nguồn và giấy phép</a>.</p>
 
 
 
@@ -2959,11 +2777,11 @@ nào, cập nhật liên tục khi gặp từ mới.</em></p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0110\u00e3 sao ch\u00e9p", "clipboard.copy": "Sao ch\u00e9p v\u00e0o b\u1ed9 nh\u1edb t\u1ea1m", "search.result.more.one": "1 t\u1eeb kh\u00e1c trong trang", "search.result.more.other": "# t\u1eeb kh\u00e1c trong trang", "search.result.none": "Kh\u00f4ng t\u00ecm th\u1ea5y t\u00e0i li\u1ec7u li\u00ean quan", "search.result.one": "1 t\u00e0i li\u1ec7u li\u00ean quan", "search.result.other": "# t\u00e0i li\u1ec7u li\u00ean quan", "search.result.placeholder": "Nh\u1eadp \u0111\u1ec3 b\u1eaft \u0111\u1ea7u t\u00ecm ki\u1ebfm", "search.result.term.missing": "Kh\u00f4ng", "select.version": "Ch\u1ecdn phi\u00ean b\u1ea3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.action.edit"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u0110\u00e3 sao ch\u00e9p", "clipboard.copy": "Sao ch\u00e9p v\u00e0o b\u1ed9 nh\u1edb t\u1ea1m", "search.result.more.one": "1 t\u1eeb kh\u00e1c trong trang", "search.result.more.other": "# t\u1eeb kh\u00e1c trong trang", "search.result.none": "Kh\u00f4ng t\u00ecm th\u1ea5y t\u00e0i li\u1ec7u li\u00ean quan", "search.result.one": "1 t\u00e0i li\u1ec7u li\u00ean quan", "search.result.other": "# t\u00e0i li\u1ec7u li\u00ean quan", "search.result.placeholder": "Nh\u1eadp \u0111\u1ec3 b\u1eaft \u0111\u1ea7u t\u00ecm ki\u1ebfm", "search.result.term.missing": "Kh\u00f4ng", "select.version": "Ch\u1ecdn phi\u00ean b\u1ea3n"}, "version": null}</script>
     
     
   
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   <script src="https://hypothes.is/embed.js" async></script>
