@@ -10,13 +10,17 @@
 Board cắm điện, UART không in ra gì cả — lỗi ở đâu? Không nắm chuỗi boot thì debug là mò mẫm.
 Nắm rõ thứ tự các chặng thì khoanh vùng được ngay: ROM code có tìm thấy bootloader không? U-Boot
 có in banner không? Có dòng "Starting kernel..." không? Kernel có panic vì không mount được root
-filesystem không? Mỗi câu trả lời "không" chỉ thẳng vào chặng cần xem lại.
+filesystem không? Mỗi câu trả lời "không" chỉ thẳng vào chặng cần xem lại. Có một trường hợp
+"vô hình" không nằm gọn trong các câu hỏi trên: mọi chặng đều chạy đúng nhưng quên tham số
+`console=` nên board vẫn boot bình thường, chỉ là không có gì hiện ra ở cổng UART đang cắm.
 
 ## Chặng 1 — ROM code
 
 Hầu hết SoC có sẵn **ROM code** ghi cứng trong chip lúc sản xuất, không sửa được, hành vi mô tả
 trong datasheet. Nó đọc các chân boot (ví dụ `BOOT[2:0]` trên STM32MP1) để biết tìm bootloader ở
-đâu: SD card, eMMC, NAND/NOR flash, USB...
+đâu: SD card, eMMC, NAND/NOR flash, USB... Không thấy bootloader hợp lệ ở thiết bị đầu tiên, ROM
+code tự chuyển sang thiết bị kế tiếp trong danh sách thay vì dừng hẳn — đây là lý do đôi khi chỉ
+cần đổi vị trí cắm SD card/USB là board tự boot lại được, dù chưa đụng gì tới chân boot pin.
 
 RAM ngoài (DRAM) lúc này **chưa được khởi tạo** — việc đó cần chính bootloader làm — nên ROM code
 chỉ load được bootloader vào một vùng SRAM nội bộ nhỏ trên chip. Dung lượng SRAM giới hạn đó là
@@ -31,8 +35,19 @@ từ SRAM. Việc chính: khởi tạo DRAM controller, rồi load giai đoạn 
 **Giai đoạn 2** (U-Boot đầy đủ, hoặc GRUB trên x86) chạy từ DRAM nên hết giới hạn dung lượng,
 có driver phong phú hơn: đọc filesystem FAT/ext4, tải qua mạng (TFTP), có shell tương tác. Việc
 cuối cùng: load kernel image và Device Tree (kèm initramfs nếu có) vào RAM, đặt kernel command
-line (`bootargs`, trong đó `root=` chỉ định root filesystem), rồi nhảy vào kernel bằng lệnh boot
-tương ứng (`bootz` cho ARM32, `booti` cho ARM64/RISC-V).
+line (`bootargs`, gồm `root=` chỉ định root filesystem và `console=` chỉ định cổng in log —
+thiếu `console=` thì kernel vẫn chạy bình thường nhưng không in gì ra UART), rồi nhảy vào kernel
+bằng lệnh boot tương ứng: `bootz kernel_addr initrd_addr fdt_addr` cho ARM32, `booti` cho
+ARM64/RISC-V — không có initramfs thì thay `initrd_addr` bằng dấu `-`.
+
+Kernel image thường dùng chung cho nhiều board khác nhau, tự nó không biết đang chạy trên phần
+cứng nào — đây là lý do bắt buộc phải có Device Tree (DTB) đi kèm: nó mô tả những thứ kernel
+không tự nhận diện được (bus I2C/SPI, chân GPIO, địa chỉ thanh ghi ngoại vi...) để kernel probe
+đúng driver cho đúng board. U-Boot ghi `bootargs` vào node `chosen` của DTB ngay trước khi nhảy
+vào kernel; ba tùy chọn kernel `CONFIG_CMDLINE_FROM_BOOTLOADER`/`CONFIG_CMDLINE_FORCE`/
+`CONFIG_CMDLINE_EXTEND` quyết định dùng command line từ bootloader, từ lúc build kernel, hay nối
+cả hai. Trên x86, vai trò tương đương của Device Tree là bảng **ACPI**, do BIOS/UEFI cung cấp
+thay vì U-Boot.
 
 Trên SoC ARMv8/RISC-V hiện đại còn có thêm một lớp **trusted firmware** (TF-A, OpenSBI) chạy
 trước U-Boot ở mức đặc quyền cao nhất, khởi tạo secure world — một mảng riêng nằm ngoài phạm vi
@@ -47,6 +62,10 @@ root filesystem theo `root=` nhận từ bootargs. Không tìm thấy thì panic
 Please append a correct "root=" boot option
 Kernel panic - not syncing: VFS: Unable to mount root fs on unknown block(0,0)
 ```
+
+Toàn bộ log của kernel (kể cả log boot) nằm trong một circular buffer ở RAM, xem lại bất cứ lúc
+nào bằng lệnh `dmesg`; những dòng nào lọt ra console lúc boot phụ thuộc đúng `console=` và ngưỡng
+`loglevel=`. Từ user space cũng ghi thêm được vào log này qua `/dev/kmsg`.
 
 ## Chặng 4 — initramfs (tùy chọn)
 
@@ -66,9 +85,10 @@ Có root filesystem rồi, kernel chạy chương trình đầu tiên ở user s
 trình này — **init**, luôn mang PID 1 — khởi động mọi dịch vụ còn lại và làm "cha nuôi" cho tiến
 trình mồ côi. Không tìm được chương trình nào, kernel panic.
 
-Hệ thống nhỏ thường dùng BusyBox init, đọc cấu hình từ `/etc/inittab` đơn giản, tốn ít RAM. Hệ
-thống lớn hơn (Yocto/Buildroot với glibc) thường dùng **systemd** — quản lý dependency giữa các
-service, khởi động song song, có logging tích hợp (`journald`).
+Hệ thống nhỏ thường dùng BusyBox init, đọc cấu hình từ `/etc/inittab` đơn giản — mỗi dòng dạng
+`<id>::<action>:<process>` — tốn ít RAM. Hệ thống lớn hơn (Yocto/Buildroot với glibc) thường
+dùng **systemd** — quản lý dependency giữa các service, khởi động song song, có logging tích hợp
+(`journald`).
 
 ## Biểu đồ
 
@@ -114,6 +134,11 @@ các chặng sau (initramfs, init) vẫn còn "sống" tới khi hệ thống t�
 !!! warning "Nhầm initrd với initramfs"
     `initrd` là định dạng cũ, initramfs là cpio archive hiện đại — nạp và xử lý khác nhau. Đưa
     nhầm file vào tham số lệnh boot của U-Boot khiến kernel không tìm thấy `/init`.
+
+!!! warning "Quên `console=`"
+    Bootloader, kernel, rootfs đều đúng, board vẫn boot bình thường, nhưng UART không in ra gì
+    cả vì thiếu (hoặc sai) tham số `console=` trong `bootargs` — dễ nhầm tưởng lỗi nằm ở một
+    chặng nào đó trong chuỗi boot, trong khi thực ra mọi chặng đều chạy hoàn toàn bình thường.
 
 ## Liên quan
 

@@ -16,21 +16,39 @@ thuộc của máy mình mà từ một thư mục lạ gọi là sysroot. Khôn
 ## Toolchain gốc và toolchain cross-compilation
 
 Toolchain "gốc" (native) là bộ compiler/linker cài sẵn trên máy Linux dev: chạy trên x86, sinh
-binary cho chính x86. Với embedded, target thường không đủ RAM/storage để tự biên dịch, lại chạy
-kiến trúc CPU khác hẳn máy dev. Vì vậy cần **toolchain cross-compilation**: chạy trên host (x86)
-nhưng sinh binary cho một kiến trúc target khác.
+binary cho chính x86. Với embedded, native toolchain thường không dùng được cho target vì ba lý
+do: target hạn chế RAM/storage nên khó tự biên dịch tại chỗ, target chậm hơn máy dev rất nhiều nên
+build trực tiếp trên target mất thời gian, và nhiều khi không muốn cài cả bộ dev tool cồng kềnh lên
+target. Vì vậy cần **toolchain cross-compilation**: chạy trên host (x86) nhưng sinh binary cho một
+kiến trúc target khác.
 
 Lệnh compiler của toolchain cross có tiền tố dài, ví dụ `arm-linux-gnueabihf-gcc`. Đây là một
 **tuple kiến trúc**, gồm 3-4 phần cách nhau bằng dấu `-`:
 
 1. Kiến trúc CPU: `arm`, `riscv`, `mips64el`...
 2. *(tùy chọn)* Tên vendor — chuỗi tự do
-3. Hệ điều hành target: `linux`, hoặc `none` nếu không nhắm hệ điều hành nào (toolchain
-   bare-metal, dùng cho firmware/bootloader thay vì app Linux)
+3. Hệ điều hành target: `linux`, hoặc `none` nếu không nhắm hệ điều hành nào — xem khác biệt giữa
+   hai loại này ở mục dưới
 4. ABI/thư viện C, ví dụ `gnueabihf` (EABI, hard float)
 
 Tiền tố này vừa để build system chọn đúng toolchain, vừa phân biệt lệnh cross với lệnh native
 (`gcc` thường).
+
+## Toolchain Linux vs. bare-metal
+
+Phần hệ điều hành trong tuple (`linux` hay `none`) quyết định toolchain build được gì:
+
+- **Toolchain Linux** (tuple có `linux`, vd `arm-linux-gnueabihf`) — có thư viện C sẵn sàng dùng
+  syscall Linux nên build được app userspace. Nhưng compiler bên trong vẫn là GCC bình thường,
+  không bắt buộc phải link libc, nên toolchain này build được **cả** code bare-metal (firmware,
+  bootloader, cả kernel Linux) nếu không link thư viện C vào.
+- **Toolchain bare-metal** (tuple có `none`, vd `arm-none-eabi`) — không có thư viện C đầy đủ, hoặc
+  chỉ có bản rất tối giản không gắn với OS nào. Chỉ build được code bare-metal, **không** build
+  được app Linux vì thiếu libc thật.
+
+Nói cách khác, toolchain Linux là tập lớn hơn, bao trùm cả hai việc — đây là lý do một dự án có thể
+dùng cùng một toolchain `arm-linux-gnueabihf` để vừa build app, vừa build U-Boot hay kernel, thay vì
+phải có riêng một toolchain bare-metal.
 
 ## Các thành phần bên trong toolchain
 
@@ -45,18 +63,55 @@ flowchart TD
 
 - **Binutils** — bộ công cụ thao tác binary ELF: `as` (assembler), `ld` (linker), `ar`/`ranlib`
   (đóng gói static library `.a`), `objdump`/`readelf`/`nm`/`size` (soi binary), `objcopy`, `strip`.
-- **GCC** — compiler chính, biên dịch C/C++ ra mã máy cho kiến trúc target.
+- **GCC** — compiler chính, biên dịch C/C++ (và nhiều ngôn ngữ khác: Fortran, Ada, Go...) ra mã
+  máy. GCC hỗ trợ rất nhiều kiến trúc CPU (x86, ARM, RISC-V...) nhưng mỗi lần build, GCC chỉ nhắm
+  một kiến trúc cố định — đây là lý do phải có toolchain riêng cho từng kiến trúc target.
 - **Kernel header** — struct, hằng số, số hiệu system call mà kernel expose ra user space (ví dụ
-  `__NR_read` trong `<asm/unistd.h>`). Thư viện C cần các header này lúc build, app cũng cần khi
-  gọi thẳng syscall. Header được trích từ chính source kernel bằng target `headers_install`, nên
+  `__NR_read` trong `<asm/unistd.h>`). Nằm trong `<linux/...>` và `<asm/...>` của toolchain, tương
+  ứng đúng với `include/uapi/` và `arch/<arch>/include/uapi/` trong source kernel — cần tra header
+  gốc thì vào đúng hai thư mục này. Thư viện C cần các header này lúc build, app cũng cần khi gọi
+  thẳng syscall. Header được trích từ chính source kernel bằng target `headers_install`, nên
   toolchain build bằng header cũ hơn kernel đang chạy trên target vẫn hoạt động bình thường —
   kernel giữ tương thích ngược, chỉ là không dùng được API/syscall mới thêm sau đó.
-- **Thư viện C chuẩn** — chọn ngay lúc build toolchain, vì GCC được biên dịch link cứng với một
-  thư viện cụ thể, không đổi được sau. `glibc` đầy đủ tính năng nhất, hợp để dev/debug ban đầu.
-  `uClibc-ng`/`musl` nhỏ gọn hơn cho hệ giới hạn dung lượng; `musl` license MIT nên dễ build
-  binary tĩnh hơn `glibc` (LGPL). Các thư viện C rất nhỏ như `newlib`/`klibc` không implement đủ
-  POSIX, chỉ hợp chương trình rất đơn giản.
+- **Thư viện C chuẩn** — lớp API giữa app và kernel: chương trình gọi hàm chuẩn như `printf`,
+  `malloc`, thư viện C bên dưới mới gọi thẳng syscall Linux. Chọn thư viện nào ngay lúc build
+  toolchain, vì GCC được biên dịch link cứng với một thư viện cụ thể, không đổi được sau. `glibc`
+  đầy đủ tính năng nhất, hợp để dev/debug ban đầu. `uClibc-ng`/`musl` nhỏ gọn hơn cho hệ giới hạn
+  dung lượng — `uClibc-ng` còn là thư viện C duy nhất hỗ trợ ARM không có MMU (Cortex-M...), còn
+  `musl` license MIT nên dễ build binary tĩnh hơn `glibc` (LGPL). Lợi thế "nhỏ gọn" của
+  `uClibc-ng`/`musl` với dung lượng lưu trữ hiện nay không còn quan trọng như trước, chủ yếu còn ý
+  nghĩa khi tối ưu boot time hoặc giảm kích thước rootfs/container image. Các thư viện C rất nhỏ
+  như `newlib`/`klibc` không implement đủ POSIX, chỉ hợp chương trình rất đơn giản.
 - **GDB** — debugger, thường đi kèm nhưng không bắt buộc.
+
+Phần lớn dự án Embedded Linux dùng bộ GNU như trên (GCC + Binutils + GDB). Có một hệ thay thế là
+**LLVM** (Clang compiler, LLD linker, LLDB debugger) — license MIT/BSD, chưa phổ biến bằng GNU
+trong embedded Linux nhưng đáng biết vì một số dự án lớn đã chuyển sang dùng.
+
+## ABI, floating point và cờ tối ưu CPU
+
+Ba lựa chọn này cố định ngay lúc build toolchain, ảnh hưởng trực tiếp tới việc binary có chạy được
+trên target hay không.
+
+**ABI** (Application Binary Interface) quy định cách các binary trong hệ thống "nói chuyện" với
+nhau ở mức nhị phân: cách truyền tham số hàm, cách trả về giá trị, cách gọi system call, cách xếp
+field trong struct (alignment...). Toàn bộ binary chạy chung trên một hệ thống — app, thư viện,
+cả kernel — phải cùng một ABI, nếu không sẽ đọc sai dữ liệu của nhau dù không có lỗi biên dịch nào.
+Trên ARM 32-bit có hai ABI chính: EABI và EABIhf (chữ `hf` trong `gnueabihf` chính là từ đây).
+
+**Floating point** — với CPU không có FPU (floating point unit) trong phần cứng, có hai cách xử lý
+phép tính dấu phẩy động:
+
+- **hard float** — vẫn sinh mã dùng lệnh FPU, để kernel tự emulate lúc chạy. Rất chậm.
+- **soft float** — sinh mã gọi hàm thư viện phần mềm thay vì lệnh FPU.
+
+Đây là ý nghĩa thật của "hard float"/"soft float" trong tên toolchain. CPU có sẵn FPU thì gần như
+luôn chọn hard float vì nhanh hơn nhiều.
+
+**Cờ tối ưu CPU** — GCC chỉ build cho một kiến trúc cố định, nhưng bên trong kiến trúc đó vẫn có
+tùy chọn tinh hơn: `-march` chọn tập lệnh cụ thể, `-mtune` tối ưu lịch lệnh cho đúng CPU, `-mcpu`
+gộp cả hai (vd `-mcpu=cortex-a8` ngầm định `-march=armv7 -mtune=cortex-a8`). Giá trị này chọn sẵn
+lúc build toolchain, trở thành mặc định khi không truyền flag nào khác.
 
 ## sysroot — "hệ thống file" thu nhỏ của target
 
@@ -73,15 +128,48 @@ root filesystem của target.
 ```
 
 Khi cross-compile, GCC tự trỏ include-path/lib-path vào sysroot này thay vì thư mục hệ thống của
-máy dev — đây là lý do `#include <stdio.h>` lấy đúng header của target dù build trên x86.
+máy dev — đây là lý do `#include <stdio.h>` lấy đúng header của target dù build trên x86. Đôi khi
+`bin/` còn có thêm symlink tên ngắn, vd `arm-linux-gcc` trỏ tới tên đầy đủ
+`arm-cortexa7-linux-uclibcgnueabihf-gcc`, cho gõ lệnh đỡ dài.
+
+## Ví dụ
+
+Tải một toolchain prebuilt của ARM, biên dịch thử một file `.c` rồi soi binary sinh ra:
+
+```bash
+$ wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf.tar.xz
+$ tar xf gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf.tar.xz
+$ cd gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/
+
+$ ./bin/arm-none-linux-gnueabihf-gcc -o hello hello.c
+
+$ file hello
+hello: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked,
+interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 3.2.0, with debug_info, not stripped
+```
+
+`file` xác nhận đúng những gì mong đợi: kiến trúc ARM, EABI5 (hard-float), và `interpreter` — bản
+dynamic linker chạy lúc runtime — là bản dành cho ARM, không phải bản x86 của máy dev.
 
 ## Lấy toolchain ở đâu
 
 - **Tải sẵn (prebuilt)** — nhanh nhất, không tùy chỉnh được: gói của distro (vd Ubuntu
   `gcc-arm-linux-gnueabihf`, thường chỉ có glibc), toolchain chính thức của ARM, hoặc kho toolchain
-  nhiều kiến trúc/libc của Bootlin tại `toolchains.bootlin.com`.
-- **Build bằng công cụ tự động** — linh hoạt hơn, tự chọn libc/ABI/version: `Crosstool-NG` (cấu
-  hình kiểu `menuconfig`), hoặc build system rootfs như Buildroot (`make sdk`), Yocto.
+  nhiều kiến trúc/libc của Bootlin tại `toolchains.bootlin.com`. Trước khi tải, kiểm tra kỹ: kiến
+  trúc CPU, endianness, thư viện C, version kernel header, ABI, hard hay soft float — sai một
+  trong các mục này là toolchain không dùng được cho target.
+- **Build bằng công cụ tự động** — linh hoạt hơn, tự chọn libc/ABI/version, còn build lại được nếu
+  cần vá lỗi hoặc lỗ hổng bảo mật. `Crosstool-NG` cấu hình kiểu `menuconfig`:
+
+  ```bash
+  $ git clone https://github.com/crosstool-ng/crosstool-ng.git && cd crosstool-ng
+  $ ./bootstrap && ./configure --enable-local && make
+  $ ./ct-ng menuconfig   # chọn kiến trúc, libc, ABI...
+  $ ./ct-ng build        # kết quả nằm ở $HOME/x-tools/
+  ```
+
+  Ngoài ra, các build system dựng rootfs cũng build được toolchain riêng: Buildroot (`make sdk`,
+  hỗ trợ glibc/uClibc/musl), Yocto (hỗ trợ glibc/musl), PTXdist (hỗ trợ glibc/uClibc).
 - **Build tay hoàn toàn** — khả thi nhưng phức tạp (binutils → GCC stage 1 bare-metal → kernel
   header → libc → GCC stage 2 final), ít khi cần tự làm trừ khi muốn hiểu sâu.
 

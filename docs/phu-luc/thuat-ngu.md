@@ -37,6 +37,7 @@ dịch không gây khó hiểu:
 | variable scope | phạm vi biến |
 | library | thư viện |
 | floating point | dấu phẩy động |
+| instruction set | tập lệnh |
 | sensor | cảm biến |
 | environment variable | biến môi trường |
 
@@ -54,18 +55,26 @@ nhau trong ngữ cảnh RTOS, không thay thế cho nhau được.
 Thuật ngữ chuyên ngành embedded/kernel/RTOS — kỹ sư Việt Nam dùng thẳng tiếng Anh trong công việc,
 không có bản dịch tiếng Việt nào được dùng phổ biến hơn bản gốc:
 
-`driver` · `kernel` · `firmware` · `bootloader` · `toolchain` · `struct` · `task` · `mutex` ·
+`driver` · `kernel` · `firmware` · `bootloader` · `toolchain` · `struct` · `task` · `module`
+*(kernel module)* · `mutex` ·
 `semaphore` · `spinlock` · `scheduler` · `stack` · `heap` · `flash` · `cache` · `padding` ·
 `alignment` · `callback` · `watchdog` · `backtrace` · `breakpoint` · `watchpoint` ·
 `cross-compile` · `linker` *(danh từ — công cụ)* · `compiler` *(danh từ — công cụ)* ·
 `debugger` *(danh từ — công cụ)* · `sysroot` · `header` · `tuple` *(kiến trúc tuple)* ·
-`binary` *(danh từ — file đã biên dịch)* · `hard float` · `soft float` · `headless`
+`binary` *(danh từ — file đã biên dịch)* · `hard float` · `soft float` · `endianness` · `headless`
 *(setup không cắm màn hình/bàn phím)* · `serial console` · `baud rate` · `image`
 *(danh từ — bản OS để flash vào thẻ nhớ)* · `board` · `logic analyzer` · `breadboard` ·
 `jumper` *(dây jumper)* · `boot` *(danh từ/động từ — quá trình khởi động hệ thống)* ·
 `filesystem` · `mount` *(động từ)* · `init` *(tiến trình đầu tiên ở user space, PID 1)* ·
 `initramfs` · `initrd` · `panic` *(kernel panic)* · `prompt` · `partition` ·
-`build` *(động từ — biên dịch/dựng ra từ source)* · `script` · `command line`
+`build` *(động từ — biên dịch/dựng ra từ source)* · `script` · `command line` ·
+`user space` · `kernel space` · `character device` · `block device` ·
+`major`/`minor` *(số hiệu thiết bị)* · `sysfs` · `debugfs` · `configfs` · `devtmpfs` ·
+`pseudo filesystem` · `applet` *(đơn vị lệnh trong BusyBox)* · `symlink` · `device file` · `shell` ·
+`node` *(Device Tree)* · `property` *(Device Tree)* · `cell` *(đơn vị giá trị 32-bit trong
+property)* · `overlay` *(Device Tree overlay)* · `binding` *(Device Tree binding)* ·
+`label` *(nhãn đặt trước node để tham chiếu, vd `i2c1:`)* · `buffer` · `recovery`
+*(cơ chế khôi phục/reflash khi thiết bị hỏng hoặc chưa có bootloader)*
 
 ## Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
 
@@ -73,9 +82,15 @@ Không dịch dưới bất kỳ hình thức nào — đây là tên riêng, kh
 
 - **Giao thức/chuẩn**: I2C, SPI, UART, USB, CAN, GPIO, DMA, ARM, RISC-V
 - **Tên section/file**: `.text`, `.data`, `.bss`, `.map`, `.dts`, `.dtsi`
-- **Tên công cụ/lệnh**: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake
+- **Tên công cụ/lệnh**: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake, Kconfig,
+  defconfig, menuconfig, `libgpiod`, `i2c-tools`, `i2c-dev`, `spidev`, `UIO`, `libusb`, `udev`,
+  `mdev`
 - **Tên linh kiện**: MOSFET, LDO, TVS, Schottky
-- **Viết tắt**: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI, MMU
+- **Viết tắt**: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI, MMU, FPU, FDT (flattened
+  device tree), phandle, BIOS, UEFI, ACPI
+- **Tên property chuẩn trong Device Tree**: `compatible`, `reg`, `status`, `interrupts`,
+  `interrupt-parent`, `interrupts-extended`, `#address-cells`, `#size-cells`,
+  `#interrupt-cells`, `clocks`, `resets`, `pinctrl-0`/`pinctrl-1`/`pinctrl-names`, `dmas`
 
 ## Khi gặp từ chưa có trong 3 nhóm trên
 
