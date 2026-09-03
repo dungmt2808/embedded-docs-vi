@@ -30,7 +30,7 @@
     
     
       
-        <title>Device Tree - Ghi chép Embedded Linux</title>
+        <title>Device Tree: node, property và overlay - Ghi chép Embedded Linux</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#device-tree" class="md-skip">
+        <a href="#device-tree-node-property-va-overlay" class="md-skip">
           Bỏ qua
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Device Tree
+              Device Tree: node, property và overlay
             
           </span>
         </div>
@@ -827,7 +827,7 @@
   <span class="md-ellipsis">
     
   
-    Build kernel
+    Build kernel: cross-compile và deploy lên Raspberry Pi
   
 
     
@@ -857,6 +857,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Device Tree: node, property và overlay
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -864,7 +882,7 @@
   <span class="md-ellipsis">
     
   
-    Device Tree
+    Device Tree: node, property và overlay
   
 
     
@@ -873,6 +891,185 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chuan-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuẩn bị
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ luồng thao tác
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cac-buoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-bien-dich-thu-mot-file-dts-toi-gian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Biên dịch thử một file .dts tối giản
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-oc-cau-truc-mot-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Đọc cấu trúc một node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-compatible-cau-noi-toi-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. compatible — cầu nối tới driver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-reg-vung-tai-nguyen-cua-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. reg — vùng tài nguyên của node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-interrupts-day-ngat-tro-toi-interrupt-controller-nao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. interrupts — dây ngắt trỏ tới interrupt controller nào
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-dtsi-vs-dts-ke-thua-va-ghi-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. .dtsi vs .dts — kế thừa và ghi đè
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-viet-mot-device-tree-overlay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Viết một Device Tree overlay
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-khi-loi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug khi lỗi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mo-rong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mở rộng
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -921,7 +1118,7 @@
   <span class="md-ellipsis">
     
   
-    Truy cập phần cứng từ userspace
+    Truy cập phần cứng từ user space
   
 
     
@@ -2560,6 +2757,174 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chuan-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuẩn bị
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ luồng thao tác
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cac-buoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-bien-dich-thu-mot-file-dts-toi-gian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Biên dịch thử một file .dts tối giản
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-oc-cau-truc-mot-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Đọc cấu trúc một node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-compatible-cau-noi-toi-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. compatible — cầu nối tới driver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-reg-vung-tai-nguyen-cua-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. reg — vùng tài nguyên của node
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-interrupts-day-ngat-tro-toi-interrupt-controller-nao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. interrupts — dây ngắt trỏ tới interrupt controller nào
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-dtsi-vs-dts-ke-thua-va-ghi-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. .dtsi vs .dts — kế thừa và ghi đè
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-viet-mot-device-tree-overlay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Viết một Device Tree overlay
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-khi-loi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug khi lỗi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mo-rong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mở rộng
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2584,10 +2949,231 @@
   
 
 
-<h1 id="device-tree">Device Tree<a class="headerlink" href="#device-tree" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>Chưa viết. Dự kiến: Cú pháp <code>.dts</code>/<code>.dtsi</code>/overlay, node/compatible/reg/interrupts, tự viết 1 overlay</p>
-</blockquote>
+<h1 id="device-tree-node-property-va-overlay">Device Tree: node, property và overlay<a class="headerlink" href="#device-tree-node-property-va-overlay" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Mục tiêu</p>
+<p>Sau bài này, cậu đọc hiểu được một node bất kỳ trong file <code>.dts</code> thật của kernel, biết node
+nào bind vào driver nào qua <code>compatible</code>, và tự viết + biên dịch được một Device Tree overlay
+để bật một thiết bị I2C trên Raspberry Pi mà không cần build lại kernel.</p>
+</div>
+<h2 id="chuan-bi">Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Phần cứng: Raspberry Pi (đã setup ở <a href="../../00-bat-dau/moi-truong/">Setup môi trường</a>)</li>
+<li>Đã cài: gói <code>device-tree-compiler</code> (lệnh <code>dtc</code>); kernel source đã clone — xem
+  <a href="../build-kernel/">Build kernel</a></li>
+<li>Khái niệm nên đọc trước: <a href="../boot-flow/">Boot flow</a> — biết DTB được bootloader nạp vào RAM cùng
+  kernel ở chặng nào; <a href="../u-boot/">U-Boot</a></li>
+</ul>
+<h2 id="so-o-luong-thao-tac">Sơ đồ luồng thao tác<a class="headerlink" href="#so-o-luong-thao-tac" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A[".dts / .dtsi viết tay"] --&gt; B["dtc biên dịch"]
+    B --&gt; C[".dtb — Device Tree Blob"]
+    C --&gt; D["Bootloader nạp .dtb vào RAM cùng kernel"]
+    D --&gt; E["Kernel duyệt cây node"]
+    E --&gt; F{"Node có compatible&lt;br/&gt;khớp driver nào không?"}
+    F --&gt;|Có| G["Driver probe(), đọc reg/interrupts&lt;br/&gt;để lấy tài nguyên"]
+    F --&gt;|Không| H["Bỏ qua, không có device"]</code></pre>
+<h2 id="cac-buoc">Các bước<a class="headerlink" href="#cac-buoc" title="Permanent link">&para;</a></h2>
+<h3 id="1-bien-dich-thu-mot-file-dts-toi-gian">1. Biên dịch thử một file .dts tối giản<a class="headerlink" href="#1-bien-dich-thu-mot-file-dts-toi-gian" title="Permanent link">&para;</a></h3>
+<p>Cài <code>dtc</code> rồi thử vòng dts → dtb → dts để thấy công cụ này chấp nhận cú pháp gì:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>device-tree-compiler
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ cat foo.dts
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>/dts-v1/;
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>/ {
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    welcome = &lt;0xBADCAFE&gt;;
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    bootlin {
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        webinar = "great";
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        demo = &lt;1&gt;, &lt;2&gt;, &lt;3&gt;;
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    };
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>};
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>$ dtc -I dts -O dtb -o foo.dtb foo.dts
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>$ dtc -I dtb -O dts foo.dtb          # xem lại dạng text sau khi nén thành blob
+</span></code></pre></div>
+<p><code>dtc</code> chỉ kiểm tra <strong>cú pháp</strong> — property sai số cell hay thiếu tài nguyên vẫn biên dịch qua bình
+thường, lỗi chỉ lộ ra khi kernel thật sự chạy và cố đọc property đó.</p>
+<h3 id="2-oc-cau-truc-mot-node">2. Đọc cấu trúc một node<a class="headerlink" href="#2-oc-cau-truc-mot-node" title="Permanent link">&para;</a></h3>
+<p>Một node bất kỳ trong <code>.dts</code> trông như sau (rút gọn từ device tree STM32MP1):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>i2c1: i2c@40012000 {
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    compatible = "st,stm32mp15-i2c";
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    reg = &lt;0x40012000 0x400&gt;;
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    interrupts = &lt;GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH&gt;;
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    status = "okay";
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    cs42l51: cs42l51@4a {
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        compatible = "cirrus,cs42l51";
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        reg = &lt;0x4a&gt;;
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    };
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>};
+</span></code></pre></div>
+<ul>
+<li><strong>Node name</strong> (<code>i2c</code>) + <strong>unit address</strong> (<code>@40012000</code>) — địa chỉ này phải trùng giá trị đầu
+  tiên trong <code>reg</code> của chính node.</li>
+<li><strong><code>i2c1:</code></strong> đứng trước tên node là <strong>label</strong>, dùng để node khác tham chiếu tới — không xuất
+  hiện trong <code>.dtb</code> cuối cùng, chỉ tồn tại lúc biên dịch.</li>
+<li><strong>property</strong> là các cặp <code>tên = giá trị;</code> bên trong node. Giá trị có thể là chuỗi, số 32-bit
+  trong <code>&lt;&gt;</code> (mỗi số gọi là một <strong>cell</strong>), mảng byte trong <code>[]</code>, hoặc <strong>phandle</strong>.</li>
+<li><strong>phandle</strong> là một kiểu tham chiếu tới node khác, viết <code>&lt;&amp;label&gt;</code>. <code>dtc</code> tự sinh property
+  <code>phandle</code> (một số nguyên duy nhất) cho node được trỏ tới, rồi thay <code>&amp;label</code> bằng số đó khi biên
+  dịch ra <code>.dtb</code> — trong <code>.dts</code> cậu chỉ thấy dạng <code>&amp;label</code> dễ đọc, không thấy con số thật.</li>
+</ul>
+<h3 id="3-compatible-cau-noi-toi-driver">3. <code>compatible</code> — cầu nối tới driver<a class="headerlink" href="#3-compatible-cau-noi-toi-driver" title="Permanent link">&para;</a></h3>
+<p><code>compatible</code> là danh sách chuỗi, xếp từ cụ thể đến chung, theo mẫu <code>vendor,model</code>. Kernel dùng
+đúng chuỗi này để tìm driver phù hợp — mỗi driver có sẵn bảng <code>of_device_id[]</code> liệt kê các
+<code>compatible</code> nó hỗ trợ:</p>
+<div class="language-c highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">of_device_id</span><span class="w"> </span><span class="n">stm32_match</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">compatible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"st,stm32h7-uart"</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">stm32h7_info</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="p">{},</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">};</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">MODULE_DEVICE_TABLE</span><span class="p">(</span><span class="n">of</span><span class="p">,</span><span class="w"> </span><span class="n">stm32_match</span><span class="p">);</span>
+</span></code></pre></div>
+<p>Node nào có <code>compatible</code> khớp bảng này thì driver được <strong>bind</strong>, hàm <code>probe()</code> chạy. Giá trị
+<code>compatible = "simple-bus"</code> là trường hợp đặc biệt: các node con của nó cũng được kernel duyệt và
+bind như platform device riêng lẻ, không cần driver cho chính node <code>simple-bus</code>.</p>
+<h3 id="4-reg-vung-tai-nguyen-cua-node">4. <code>reg</code> — vùng tài nguyên của node<a class="headerlink" href="#4-reg-vung-tai-nguyen-cua-node" title="Permanent link">&para;</a></h3>
+<p>Ý nghĩa của <code>reg</code> phụ thuộc bus mà node đang nằm trong:</p>
+<table>
+<thead>
+<tr>
+<th>Ngữ cảnh</th>
+<th>Ý nghĩa <code>reg</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node memory-mapped (dưới <code>soc</code>)</td>
+<td>Địa chỉ vật lý + kích thước vùng thanh ghi: <code>reg = &lt;base size&gt;</code></td>
+</tr>
+<tr>
+<td>Node con của I2C controller</td>
+<td>Địa chỉ 7-bit của thiết bị trên bus I2C</td>
+</tr>
+<tr>
+<td>Node con của SPI controller</td>
+<td>Số chip-select</td>
+</tr>
+</tbody>
+</table>
+<p>Số cell trong <code>reg</code> (có tách base/size hay chỉ một giá trị) do node cha khai báo qua
+<code>#address-cells</code>/<code>#size-cells</code> — vì vậy node bus luôn phải khai hai property này trước khi có node
+con dùng <code>reg</code>.</p>
+<h3 id="5-interrupts-day-ngat-tro-toi-interrupt-controller-nao">5. <code>interrupts</code> — dây ngắt trỏ tới interrupt controller nào<a class="headerlink" href="#5-interrupts-day-ngat-tro-toi-interrupt-controller-nao" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>intc: interrupt-controller@a0021000 {
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    compatible = "arm,cortex-a7-gic";
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    #interrupt-cells = &lt;3&gt;;
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    interrupt-controller;
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    reg = &lt;0xa0021000 0x1000&gt;, &lt;0xa0022000 0x2000&gt;;
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>};
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>soc {
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    interrupt-parent = &lt;&amp;intc&gt;;   /* mọi node con dùng chung interrupt controller này */
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    usart1: serial@5c000000 {
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        interrupts = &lt;GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH&gt;;
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    };
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>};
+</span></code></pre></div>
+<p><code>interrupt-parent</code> là một <strong>phandle</strong> trỏ tới node interrupt controller sẽ xử lý ngắt của node
+này — khai ở node cha (<code>soc</code>) thì mọi node con thừa hưởng, khỏi lặp lại. Số cell trong <code>interrupts</code>
+do chính <code>#interrupt-cells</code> của interrupt controller quyết định; GIC dùng 3 cell: loại ngắt
+(SPI/PPI), số hiệu, cờ trigger. Node nào cần một interrupt controller khác node cha thì dùng
+<code>interrupts-extended = &lt;&amp;controller-khác ...&gt;</code> thay vì tách riêng <code>interrupt-parent</code>.</p>
+<h3 id="6-dtsi-vs-dts-ke-thua-va-ghi-e">6. <code>.dtsi</code> vs <code>.dts</code> — kế thừa và ghi đè<a class="headerlink" href="#6-dtsi-vs-dts-ke-thua-va-ghi-e" title="Permanent link">&para;</a></h3>
+<p><code>.dtsi</code> là file được <code>#include</code>, chứa phần chung (định nghĩa SoC, dùng chung cho nhiều board);
+<code>.dts</code> là file cuối cùng, board cụ thể — chỉ <code>.dts</code> được đưa thẳng cho <code>dtc</code>. Include hoạt động
+bằng cách <strong>overlay cây node</strong> của file include lên cây gốc theo tên node: property trùng tên bị
+ghi đè, property mới được cộng thêm.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/* soc.dtsi — khai báo phần cứng có sẵn trên SoC, mặc định tắt */
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>usart1: serial@5c000000 {
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    compatible = "st,stm32h7-uart";
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    status = "disabled";
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>};
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>/* board.dts — bật lên, tham chiếu thẳng qua label */
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>#include "soc.dtsi"
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>&amp;usart1 {
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    status = "okay";
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>};
+</span></code></pre></div>
+<p>Viết <code>&amp;usart1 { ... };</code> (dùng label thay vì lặp lại toàn bộ đường dẫn node) là cách làm phổ biến
+nhất hiện nay — ngắn gọn và không phụ thuộc node cha nằm sâu bao nhiêu cấp.</p>
+<h3 id="7-viet-mot-device-tree-overlay">7. Viết một Device Tree overlay<a class="headerlink" href="#7-viet-mot-device-tree-overlay" title="Permanent link">&para;</a></h3>
+<p>Overlay dùng đúng cú pháp <code>&amp;label { ... };</code> ở bước 6, nhưng <strong>biên dịch riêng thành file <code>.dtbo</code></strong>
+rồi nạp thêm vào <code>.dtb</code> gốc lúc chạy — không cần build lại toàn bộ kernel/DTB mỗi lần thử một
+thiết bị mới. Raspberry Pi dùng cơ chế này rất nhiều, qua thư mục <code>/boot/firmware/overlays/</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>/dts-v1/;
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>/plugin/;
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>/ {
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    compatible = "[ĐIỀN: compatible SoC — vd \"brcm,bcm2711\" cho Pi 4]";
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    fragment@0 {
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        target = &lt;&amp;i2c1&gt;;
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        __overlay__ {
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>            status = "okay";
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>            bme280: bme280@76 {
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>                compatible = "bosch,bme280";
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>                reg = &lt;0x76&gt;;
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>            };
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        };
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    };
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>};
+</span></code></pre></div>
+<p><code>/plugin/;</code> báo cho <code>dtc</code> biết đây là overlay chứ không phải một <code>.dtb</code> đầy đủ. <code>target = &lt;&amp;i2c1&gt;</code>
+là phandle trỏ tới node sẽ được chèn thêm nội dung vào — muốn <code>target</code> tham chiếu bằng label thì
+<code>.dtb</code> gốc phải được biên dịch kèm <code>-@</code> (giữ lại bảng <code>__symbols__</code>); firmware Raspberry Pi chính
+thức đã bật sẵn cờ này.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>dtc<span class="w"> </span>-@<span class="w"> </span>-I<span class="w"> </span>dts<span class="w"> </span>-O<span class="w"> </span>dtb<span class="w"> </span>-o<span class="w"> </span>bme280.dtbo<span class="w"> </span>bme280-overlay.dts
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>bme280.dtbo<span class="w"> </span>/boot/firmware/overlays/
+</span></code></pre></div>
+<p>Thêm vào <code>config.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>dtoverlay=bme280
+</span></code></pre></div>
+<h2 id="kiem-tra-ket-qua">Kiểm tra kết quả<a class="headerlink" href="#kiem-tra-ket-qua" title="Permanent link">&para;</a></h2>
+<p>Biên dịch không lỗi/warning là điều kiện cần đầu tiên:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ dtc -@ -I dts -O dtb -o bme280.dtbo bme280-overlay.dts
+</span></code></pre></div>
+<p>Reboot board, xác nhận overlay đã nạp và thiết bị đã xuất hiện:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ sudo dtoverlay -l
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>0: bme280
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>$ ls /sys/bus/iio/devices/
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>iio:device0
+</span></code></pre></div>
+<h2 id="debug-khi-loi">Debug khi lỗi<a class="headerlink" href="#debug-khi-loi" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title"><code>dtc</code> báo lỗi không tìm thấy label khi biên dịch overlay</p>
+<p><code>target = &lt;&amp;i2c1&gt;</code> chỉ hoạt động nếu <code>.dtb</code> gốc được biên dịch kèm bảng <code>__symbols__</code>
+(<code>dtc -@</code>). Firmware Raspberry Pi chính thức đã bật sẵn cờ này; nếu tự build <code>.dtb</code> custom cho
+board khác, nhớ thêm <code>-@</code> lúc biên dịch DTB gốc, không chỉ overlay.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Overlay nạp được nhưng không thấy device dưới /sys</p>
+<p><code>dtoverlay -l</code> báo overlay đã load nhưng driver không probe — thường do <code>compatible</code> chưa
+khớp driver nào đang có trong kernel, hoặc địa chỉ I2C (<code>reg</code>) sai so với datasheet cảm biến
+thật. <code>dmesg | grep -i i2c</code> thường lộ ra lỗi giao tiếp cụ thể ngay lúc probe.</p>
+</div>
+<h2 id="mo-rong">Mở rộng<a class="headerlink" href="#mo-rong" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Xem webinar <em>DeviceTree 101</em> của Bootlin (link cuối trang) nếu muốn đào sâu binding kiểu YAML
+  và cách <code>make dtbs_check</code> validate một DT thật so với schema chính thức.</li>
+<li>Yocto/Buildroot build sẵn <code>.dtbo</code>/<code>.dtb</code> cho board custom qua recipe riêng — sẽ nhắc lại ở mục
+  Yocto &amp; BSP.</li>
+</ul>
+<h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Đọc trước:</strong> <a href="../boot-flow/">Boot flow</a>, <a href="../u-boot/">U-Boot</a></li>
+<li><strong>Bước tiếp theo:</strong> <a href="../rootfs/">Rootfs</a>, <a href="../../02-kernel-driver/platform-driver/">Platform driver</a></li>
+</ul>
+<hr />
+<p><em>Trang này dịch/phóng tác từ phần "Device Tree" (node/property/compatible/reg/interrupts/phandle,
+kế thừa <code>.dtsi</code>/<code>.dts</code>) trong khóa Embedded Linux System Development của Bootlin, giấy phép
+CC BY-SA 3.0. Bản gốc: https://bootlin.com/training/embedded-linux. Xem thêm webinar
+"DeviceTree 101" (Thomas Petazzoni, 2021):
+https://bootlin.com/blog/device-tree-101-webinar-slides-and-videos/.</em></p>
 
 
 

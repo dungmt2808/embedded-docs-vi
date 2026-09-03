@@ -984,7 +984,7 @@
   <span class="md-ellipsis">
     
   
-    Build kernel
+    Build kernel: cross-compile và deploy lên Raspberry Pi
   
 
     
@@ -1012,7 +1012,7 @@
   <span class="md-ellipsis">
     
   
-    Device Tree
+    Device Tree: node, property và overlay
   
 
     
@@ -1068,7 +1068,7 @@
   <span class="md-ellipsis">
     
   
-    Truy cập phần cứng từ userspace
+    Truy cập phần cứng từ user space
   
 
     
@@ -2860,11 +2860,15 @@ này giải thích từng chặng và ai chịu trách nhiệm việc gì.</p>
 <p>Board cắm điện, UART không in ra gì cả — lỗi ở đâu? Không nắm chuỗi boot thì debug là mò mẫm.
 Nắm rõ thứ tự các chặng thì khoanh vùng được ngay: ROM code có tìm thấy bootloader không? U-Boot
 có in banner không? Có dòng "Starting kernel..." không? Kernel có panic vì không mount được root
-filesystem không? Mỗi câu trả lời "không" chỉ thẳng vào chặng cần xem lại.</p>
+filesystem không? Mỗi câu trả lời "không" chỉ thẳng vào chặng cần xem lại. Có một trường hợp
+"vô hình" không nằm gọn trong các câu hỏi trên: mọi chặng đều chạy đúng nhưng quên tham số
+<code>console=</code> nên board vẫn boot bình thường, chỉ là không có gì hiện ra ở cổng UART đang cắm.</p>
 <h2 id="chang-1-rom-code">Chặng 1 — ROM code<a class="headerlink" href="#chang-1-rom-code" title="Permanent link">&para;</a></h2>
 <p>Hầu hết SoC có sẵn <strong>ROM code</strong> ghi cứng trong chip lúc sản xuất, không sửa được, hành vi mô tả
 trong datasheet. Nó đọc các chân boot (ví dụ <code>BOOT[2:0]</code> trên STM32MP1) để biết tìm bootloader ở
-đâu: SD card, eMMC, NAND/NOR flash, USB...</p>
+đâu: SD card, eMMC, NAND/NOR flash, USB... Không thấy bootloader hợp lệ ở thiết bị đầu tiên, ROM
+code tự chuyển sang thiết bị kế tiếp trong danh sách thay vì dừng hẳn — đây là lý do đôi khi chỉ
+cần đổi vị trí cắm SD card/USB là board tự boot lại được, dù chưa đụng gì tới chân boot pin.</p>
 <p>RAM ngoài (DRAM) lúc này <strong>chưa được khởi tạo</strong> — việc đó cần chính bootloader làm — nên ROM code
 chỉ load được bootloader vào một vùng SRAM nội bộ nhỏ trên chip. Dung lượng SRAM giới hạn đó là
 lý do bootloader trên embedded thường chia làm <strong>hai giai đoạn</strong>. Đa số ROM code còn có cơ chế
@@ -2875,8 +2879,18 @@ từ SRAM. Việc chính: khởi tạo DRAM controller, rồi load giai đoạn 
 <p><strong>Giai đoạn 2</strong> (U-Boot đầy đủ, hoặc GRUB trên x86) chạy từ DRAM nên hết giới hạn dung lượng,
 có driver phong phú hơn: đọc filesystem FAT/ext4, tải qua mạng (TFTP), có shell tương tác. Việc
 cuối cùng: load kernel image và Device Tree (kèm initramfs nếu có) vào RAM, đặt kernel command
-line (<code>bootargs</code>, trong đó <code>root=</code> chỉ định root filesystem), rồi nhảy vào kernel bằng lệnh boot
-tương ứng (<code>bootz</code> cho ARM32, <code>booti</code> cho ARM64/RISC-V).</p>
+line (<code>bootargs</code>, gồm <code>root=</code> chỉ định root filesystem và <code>console=</code> chỉ định cổng in log —
+thiếu <code>console=</code> thì kernel vẫn chạy bình thường nhưng không in gì ra UART), rồi nhảy vào kernel
+bằng lệnh boot tương ứng: <code>bootz kernel_addr initrd_addr fdt_addr</code> cho ARM32, <code>booti</code> cho
+ARM64/RISC-V — không có initramfs thì thay <code>initrd_addr</code> bằng dấu <code>-</code>.</p>
+<p>Kernel image thường dùng chung cho nhiều board khác nhau, tự nó không biết đang chạy trên phần
+cứng nào — đây là lý do bắt buộc phải có Device Tree (DTB) đi kèm: nó mô tả những thứ kernel
+không tự nhận diện được (bus I2C/SPI, chân GPIO, địa chỉ thanh ghi ngoại vi...) để kernel probe
+đúng driver cho đúng board. U-Boot ghi <code>bootargs</code> vào node <code>chosen</code> của DTB ngay trước khi nhảy
+vào kernel; ba tùy chọn kernel <code>CONFIG_CMDLINE_FROM_BOOTLOADER</code>/<code>CONFIG_CMDLINE_FORCE</code>/
+<code>CONFIG_CMDLINE_EXTEND</code> quyết định dùng command line từ bootloader, từ lúc build kernel, hay nối
+cả hai. Trên x86, vai trò tương đương của Device Tree là bảng <strong>ACPI</strong>, do BIOS/UEFI cung cấp
+thay vì U-Boot.</p>
 <p>Trên SoC ARMv8/RISC-V hiện đại còn có thêm một lớp <strong>trusted firmware</strong> (TF-A, OpenSBI) chạy
 trước U-Boot ở mức đặc quyền cao nhất, khởi tạo secure world — một mảng riêng nằm ngoài phạm vi
 trang này.</p>
@@ -2886,6 +2900,9 @@ root filesystem theo <code>root=</code> nhận từ bootargs. Không tìm thấy
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Please append a correct "root=" boot option
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Kernel panic - not syncing: VFS: Unable to mount root fs on unknown block(0,0)
 </span></code></pre></div>
+<p>Toàn bộ log của kernel (kể cả log boot) nằm trong một circular buffer ở RAM, xem lại bất cứ lúc
+nào bằng lệnh <code>dmesg</code>; những dòng nào lọt ra console lúc boot phụ thuộc đúng <code>console=</code> và ngưỡng
+<code>loglevel=</code>. Từ user space cũng ghi thêm được vào log này qua <code>/dev/kmsg</code>.</p>
 <h2 id="chang-4-initramfs-tuy-chon">Chặng 4 — initramfs (tùy chọn)<a class="headerlink" href="#chang-4-initramfs-tuy-chon" title="Permanent link">&para;</a></h2>
 <p>Nếu có <strong>initramfs</strong> — archive <code>cpio</code> nén, đóng gói sẵn trong kernel image hoặc load riêng —
 kernel giải nén thẳng vào bộ nhớ rồi chạy <code>/init</code> bên trong, thay vì mount <code>root=</code> ngay. <code>/init</code>
@@ -2899,9 +2916,10 @@ mount thẳng thiết bị chỉ ra bởi <code>root=</code>.</p>
 <code>/sbin/init</code>, <code>/etc/init</code>, <code>/bin/init</code>, <code>/bin/sh</code> (hoặc đường dẫn qua tham số <code>init=</code>). Tiến
 trình này — <strong>init</strong>, luôn mang PID 1 — khởi động mọi dịch vụ còn lại và làm "cha nuôi" cho tiến
 trình mồ côi. Không tìm được chương trình nào, kernel panic.</p>
-<p>Hệ thống nhỏ thường dùng BusyBox init, đọc cấu hình từ <code>/etc/inittab</code> đơn giản, tốn ít RAM. Hệ
-thống lớn hơn (Yocto/Buildroot với glibc) thường dùng <strong>systemd</strong> — quản lý dependency giữa các
-service, khởi động song song, có logging tích hợp (<code>journald</code>).</p>
+<p>Hệ thống nhỏ thường dùng BusyBox init, đọc cấu hình từ <code>/etc/inittab</code> đơn giản — mỗi dòng dạng
+<code>&lt;id&gt;::&lt;action&gt;:&lt;process&gt;</code> — tốn ít RAM. Hệ thống lớn hơn (Yocto/Buildroot với glibc) thường
+dùng <strong>systemd</strong> — quản lý dependency giữa các service, khởi động song song, có logging tích hợp
+(<code>journald</code>).</p>
 <h2 id="bieu-o">Biểu đồ<a class="headerlink" href="#bieu-o" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart TD
     A[ROM code] --&gt; B["Bootloader giai đoạn 1 (SPL)&lt;br/&gt;chạy từ SRAM, init DRAM"]
@@ -2938,6 +2956,12 @@ các chặng sau (initramfs, init) vẫn còn "sống" tới khi hệ thống t�
 <p class="admonition-title">Nhầm initrd với initramfs</p>
 <p><code>initrd</code> là định dạng cũ, initramfs là cpio archive hiện đại — nạp và xử lý khác nhau. Đưa
 nhầm file vào tham số lệnh boot của U-Boot khiến kernel không tìm thấy <code>/init</code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Quên <code>console=</code></p>
+<p>Bootloader, kernel, rootfs đều đúng, board vẫn boot bình thường, nhưng UART không in ra gì
+cả vì thiếu (hoặc sai) tham số <code>console=</code> trong <code>bootargs</code> — dễ nhầm tưởng lỗi nằm ở một
+chặng nào đó trong chuỗi boot, trong khi thực ra mọi chặng đều chạy hoàn toàn bình thường.</p>
 </div>
 <h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
 <ul>

@@ -822,7 +822,7 @@
   <span class="md-ellipsis">
     
   
-    Build kernel
+    Build kernel: cross-compile và deploy lên Raspberry Pi
   
 
     
@@ -850,7 +850,7 @@
   <span class="md-ellipsis">
     
   
-    Device Tree
+    Device Tree: node, property và overlay
   
 
     
@@ -906,7 +906,7 @@
   <span class="md-ellipsis">
     
   
-    Truy cập phần cứng từ userspace
+    Truy cập phần cứng từ user space
   
 
     
@@ -2835,6 +2835,10 @@ dịch không gây khó hiểu:</p>
 <td>dấu phẩy động</td>
 </tr>
 <tr>
+<td>instruction set</td>
+<td>tập lệnh</td>
+</tr>
+<tr>
 <td>sensor</td>
 <td>cảm biến</td>
 </tr>
@@ -2854,26 +2858,40 @@ nhau trong ngữ cảnh RTOS, không thay thế cho nhau được.</p>
 <h2 id="nhom-2-luon-giu-tieng-anh">Nhóm 2 — Luôn giữ tiếng Anh<a class="headerlink" href="#nhom-2-luon-giu-tieng-anh" title="Permanent link">&para;</a></h2>
 <p>Thuật ngữ chuyên ngành embedded/kernel/RTOS — kỹ sư Việt Nam dùng thẳng tiếng Anh trong công việc,
 không có bản dịch tiếng Việt nào được dùng phổ biến hơn bản gốc:</p>
-<p><code>driver</code> · <code>kernel</code> · <code>firmware</code> · <code>bootloader</code> · <code>toolchain</code> · <code>struct</code> · <code>task</code> · <code>mutex</code> ·
+<p><code>driver</code> · <code>kernel</code> · <code>firmware</code> · <code>bootloader</code> · <code>toolchain</code> · <code>struct</code> · <code>task</code> · <code>module</code>
+<em>(kernel module)</em> · <code>mutex</code> ·
 <code>semaphore</code> · <code>spinlock</code> · <code>scheduler</code> · <code>stack</code> · <code>heap</code> · <code>flash</code> · <code>cache</code> · <code>padding</code> ·
 <code>alignment</code> · <code>callback</code> · <code>watchdog</code> · <code>backtrace</code> · <code>breakpoint</code> · <code>watchpoint</code> ·
 <code>cross-compile</code> · <code>linker</code> <em>(danh từ — công cụ)</em> · <code>compiler</code> <em>(danh từ — công cụ)</em> ·
 <code>debugger</code> <em>(danh từ — công cụ)</em> · <code>sysroot</code> · <code>header</code> · <code>tuple</code> <em>(kiến trúc tuple)</em> ·
-<code>binary</code> <em>(danh từ — file đã biên dịch)</em> · <code>hard float</code> · <code>soft float</code> · <code>headless</code>
+<code>binary</code> <em>(danh từ — file đã biên dịch)</em> · <code>hard float</code> · <code>soft float</code> · <code>endianness</code> · <code>headless</code>
 <em>(setup không cắm màn hình/bàn phím)</em> · <code>serial console</code> · <code>baud rate</code> · <code>image</code>
 <em>(danh từ — bản OS để flash vào thẻ nhớ)</em> · <code>board</code> · <code>logic analyzer</code> · <code>breadboard</code> ·
 <code>jumper</code> <em>(dây jumper)</em> · <code>boot</code> <em>(danh từ/động từ — quá trình khởi động hệ thống)</em> ·
 <code>filesystem</code> · <code>mount</code> <em>(động từ)</em> · <code>init</code> <em>(tiến trình đầu tiên ở user space, PID 1)</em> ·
 <code>initramfs</code> · <code>initrd</code> · <code>panic</code> <em>(kernel panic)</em> · <code>prompt</code> · <code>partition</code> ·
-<code>build</code> <em>(động từ — biên dịch/dựng ra từ source)</em> · <code>script</code> · <code>command line</code></p>
+<code>build</code> <em>(động từ — biên dịch/dựng ra từ source)</em> · <code>script</code> · <code>command line</code> ·
+<code>user space</code> · <code>kernel space</code> · <code>character device</code> · <code>block device</code> ·
+<code>major</code>/<code>minor</code> <em>(số hiệu thiết bị)</em> · <code>sysfs</code> · <code>debugfs</code> · <code>configfs</code> · <code>devtmpfs</code> ·
+<code>pseudo filesystem</code> · <code>applet</code> <em>(đơn vị lệnh trong BusyBox)</em> · <code>symlink</code> · <code>device file</code> · <code>shell</code> ·
+<code>node</code> <em>(Device Tree)</em> · <code>property</code> <em>(Device Tree)</em> · <code>cell</code> <em>(đơn vị giá trị 32-bit trong
+property)</em> · <code>overlay</code> <em>(Device Tree overlay)</em> · <code>binding</code> <em>(Device Tree binding)</em> ·
+<code>label</code> <em>(nhãn đặt trước node để tham chiếu, vd <code>i2c1:</code>)</em> · <code>buffer</code> · <code>recovery</code>
+<em>(cơ chế khôi phục/reflash khi thiết bị hỏng hoặc chưa có bootloader)</em></p>
 <h2 id="nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection">Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)<a class="headerlink" href="#nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection" title="Permanent link">&para;</a></h2>
 <p>Không dịch dưới bất kỳ hình thức nào — đây là tên riêng, không phải khái niệm:</p>
 <ul>
 <li><strong>Giao thức/chuẩn</strong>: I2C, SPI, UART, USB, CAN, GPIO, DMA, ARM, RISC-V</li>
 <li><strong>Tên section/file</strong>: <code>.text</code>, <code>.data</code>, <code>.bss</code>, <code>.map</code>, <code>.dts</code>, <code>.dtsi</code></li>
-<li><strong>Tên công cụ/lệnh</strong>: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake</li>
+<li><strong>Tên công cụ/lệnh</strong>: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake, Kconfig,
+  defconfig, menuconfig, <code>libgpiod</code>, <code>i2c-tools</code>, <code>i2c-dev</code>, <code>spidev</code>, <code>UIO</code>, <code>libusb</code>, <code>udev</code>,
+  <code>mdev</code></li>
 <li><strong>Tên linh kiện</strong>: MOSFET, LDO, TVS, Schottky</li>
-<li><strong>Viết tắt</strong>: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI, MMU</li>
+<li><strong>Viết tắt</strong>: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI, MMU, FPU, FDT (flattened
+  device tree), phandle, BIOS, UEFI, ACPI</li>
+<li><strong>Tên property chuẩn trong Device Tree</strong>: <code>compatible</code>, <code>reg</code>, <code>status</code>, <code>interrupts</code>,
+  <code>interrupt-parent</code>, <code>interrupts-extended</code>, <code>#address-cells</code>, <code>#size-cells</code>,
+  <code>#interrupt-cells</code>, <code>clocks</code>, <code>resets</code>, <code>pinctrl-0</code>/<code>pinctrl-1</code>/<code>pinctrl-names</code>, <code>dmas</code></li>
 </ul>
 <h2 id="khi-gap-tu-chua-co-trong-3-nhom-tren">Khi gặp từ chưa có trong 3 nhóm trên<a class="headerlink" href="#khi-gap-tu-chua-co-trong-3-nhom-tren" title="Permanent link">&para;</a></h2>
 <p>Ưu tiên theo trực giác: từ đó là <strong>khái niệm CS phổ thông</strong> cấp đại học → dịch (Nhóm 1). Từ đó là

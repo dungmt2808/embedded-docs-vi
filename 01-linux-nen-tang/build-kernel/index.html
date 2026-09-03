@@ -30,7 +30,7 @@
     
     
       
-        <title>Build kernel - Ghi chép Embedded Linux</title>
+        <title>Build kernel: cross-compile và deploy lên Raspberry Pi - Ghi chép Embedded Linux</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#build-kernel" class="md-skip">
+        <a href="#build-kernel-cross-compile-va-deploy-len-raspberry-pi" class="md-skip">
           Bỏ qua
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Build kernel
+              Build kernel: cross-compile và deploy lên Raspberry Pi
             
           </span>
         </div>
@@ -829,6 +829,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build kernel: cross-compile và deploy lên Raspberry Pi
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -836,7 +854,7 @@
   <span class="md-ellipsis">
     
   
-    Build kernel
+    Build kernel: cross-compile và deploy lên Raspberry Pi
   
 
     
@@ -845,6 +863,196 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chuan-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuẩn bị
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ luồng thao tác
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cac-buoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lay-kernel-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Lấy kernel source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-set-arch-va-cross_compile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Set ARCH và CROSS_COMPILE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nap-cau-hinh-mac-inh-defconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Nạp cấu hình mặc định (defconfig)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-tuy-chinh-bang-menuconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Tùy chỉnh bằng menuconfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-build-kernel-dtb-va-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Build kernel, DTB và module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cai-module-vao-root-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cài module vào root filesystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-copy-kernel-dtb-len-board" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Copy kernel + DTB lên board
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-boot-kernel-moi-qua-u-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Boot kernel mới qua U-Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-khi-loi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug khi lỗi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mo-rong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mở rộng
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -865,7 +1073,7 @@
   <span class="md-ellipsis">
     
   
-    Device Tree
+    Device Tree: node, property và overlay
   
 
     
@@ -921,7 +1129,7 @@
   <span class="md-ellipsis">
     
   
-    Truy cập phần cứng từ userspace
+    Truy cập phần cứng từ user space
   
 
     
@@ -2560,6 +2768,185 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chuan-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuẩn bị
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ luồng thao tác
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cac-buoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lay-kernel-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Lấy kernel source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-set-arch-va-cross_compile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Set ARCH và CROSS_COMPILE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nap-cau-hinh-mac-inh-defconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Nạp cấu hình mặc định (defconfig)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-tuy-chinh-bang-menuconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Tùy chỉnh bằng menuconfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-build-kernel-dtb-va-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Build kernel, DTB và module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cai-module-vao-root-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cài module vào root filesystem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-copy-kernel-dtb-len-board" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Copy kernel + DTB lên board
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-boot-kernel-moi-qua-u-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Boot kernel mới qua U-Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-khi-loi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debug khi lỗi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mo-rong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mở rộng
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2584,10 +2971,153 @@
   
 
 
-<h1 id="build-kernel">Build kernel<a class="headerlink" href="#build-kernel" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>Chưa viết. Dự kiến: Clone kernel RPi, <code>menuconfig</code>, cross-compile, boot bằng kernel tự build</p>
-</blockquote>
+<h1 id="build-kernel-cross-compile-va-deploy-len-raspberry-pi">Build kernel: cross-compile và deploy lên Raspberry Pi<a class="headerlink" href="#build-kernel-cross-compile-va-deploy-len-raspberry-pi" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Mục tiêu</p>
+<p>Sau bài này, cross-compile được kernel Linux từ source cho Raspberry Pi, tùy chỉnh cấu hình
+bằng <code>make menuconfig</code>, cài module đúng chỗ vào root filesystem, deploy kernel + Device Tree
+lên board qua U-Boot, và xác nhận đúng bản build mình vừa tạo đang chạy — không phải kernel
+có sẵn trên thẻ SD.</p>
+</div>
+<h2 id="chuan-bi">Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Phần cứng: Raspberry Pi [ĐIỀN: model cụ thể — 3B/4B/Zero 2 W...], thẻ SD hoặc kết nối mạng đã
+  sẵn TFTP server</li>
+<li>Đã cài/build trước đó: toolchain cross-compile — xem <a href="../toolchain/">Toolchain</a>; U-Boot đã vào
+  được prompt và boot thử thành công ít nhất một lần (từ SD hoặc TFTP) — xem <a href="../u-boot/">U-Boot</a></li>
+<li>Khái niệm nên đọc trước: <a href="../boot-flow/">Boot flow</a> — trang này giả định đã biết kernel image và
+  Device Tree được bootloader load vào RAM thế nào trước khi kernel chạy</li>
+</ul>
+<h2 id="so-o-luong-thao-tac">Sơ đồ luồng thao tác<a class="headerlink" href="#so-o-luong-thao-tac" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A[Lấy kernel source] --&gt; B[Set ARCH + CROSS_COMPILE]
+    B --&gt; C[make defconfig]
+    C --&gt; D[make menuconfig tuỳ chỉnh]
+    D --&gt; E["make -jN: build Image + DTB + module"]
+    E --&gt; F[modules_install với INSTALL_MOD_PATH]
+    F --&gt; G{Deploy qua đâu?}
+    G --&gt;|Thẻ SD| H[Copy Image + dtb vào boot partition]
+    G --&gt;|Mạng| I[Copy Image + dtb vào thư mục TFTP]
+    H --&gt; J[Boot qua U-Boot: load/tftp + booti]
+    I --&gt; J
+    J --&gt; K[Kiểm tra dmesg + uname -r]</code></pre>
+<h2 id="cac-buoc">Các bước<a class="headerlink" href="#cac-buoc" title="Permanent link">&para;</a></h2>
+<h3 id="1-lay-kernel-source">1. Lấy kernel source<a class="headerlink" href="#1-lay-kernel-source" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="o">=</span><span class="m">1</span><span class="w"> </span>-b<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>branch/tag,<span class="w"> </span>ví<span class="w"> </span>dụ<span class="w"> </span>rpi-6.6.y<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>https://github.com/raspberrypi/linux.git
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>linux
+</span></code></pre></div>
+<p>Fork <code>raspberrypi/linux</code> hỗ trợ đầy đủ peripheral riêng của board (VideoCore, camera...) mà
+mainline chưa gom đủ. Nếu chỉ cần kernel chạy được, mainline <code>torvalds/linux</code> cũng boot được trên
+RPi 4/400 trở lên.</p>
+<h3 id="2-set-arch-va-cross_compile">2. Set ARCH và CROSS_COMPILE<a class="headerlink" href="#2-set-arch-va-cross_compile" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">ARCH</span><span class="o">=</span>arm64<span class="w">                       </span><span class="c1"># hoặc arm nếu build kernel 32-bit</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu-
+</span></code></pre></div>
+<p>Hai biến này cần đặt <strong>trước</strong> bước cấu hình, không chỉ trước bước build — một số option trong
+<code>menuconfig</code> chỉ hiện ra tùy khả năng của compiler đang trỏ tới. Quên <code>export</code> thì <code>make</code> mặc
+định build native cho máy host (x86), không báo lỗi rõ ràng nào cả.</p>
+<h3 id="3-nap-cau-hinh-mac-inh-defconfig">3. Nạp cấu hình mặc định (defconfig)<a class="headerlink" href="#3-nap-cau-hinh-mac-inh-defconfig" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>make<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>defconfig<span class="w">    </span><span class="c1"># liệt kê defconfig có sẵn cho ARCH đang chọn</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>make<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>tên<span class="w"> </span>defconfig<span class="w"> </span>khớp<span class="w"> </span>board,<span class="w"> </span>ví<span class="w"> </span>dụ<span class="w"> </span>bcm2711_defconfig<span class="o">]</span>
+</span></code></pre></div>
+<p>Trên ARM 32-bit thường có một defconfig riêng cho từng họ CPU. Trên ARM 64-bit mainline chỉ có
+một defconfig lớn duy nhất, chỉnh tiếp bằng <code>menuconfig</code>; fork <code>raspberrypi/linux</code> vẫn giữ nhiều
+defconfig riêng theo model để tiện hơn.</p>
+<h3 id="4-tuy-chinh-bang-menuconfig">4. Tùy chỉnh bằng menuconfig<a class="headerlink" href="#4-tuy-chinh-bang-menuconfig" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>menuconfig<span class="w">    </span><span class="c1"># cần gói libncurses-dev trên máy host</span>
+</span></code></pre></div>
+<p>Giao diện ncurses, điều hướng bằng phím mũi tên. Mỗi option có 3 trạng thái: <code>&lt; &gt;</code> tắt hẳn, <code>&lt;M&gt;</code>
+build thành module (file <code>.ko</code> rời, load được lúc runtime), <code>&lt;*&gt;</code> build tĩnh vào thẳng kernel
+image (có ngay từ lúc boot, trước khi có filesystem — bắt buộc với driver cần cho root
+filesystem, ví dụ driver mmc/nvme). Thoát và chọn Save ghi ra file <code>.config</code> ở thư mục gốc kernel
+source — file này không track bằng Git.</p>
+<div class="admonition tip">
+<p class="admonition-title">Bật NFS root nếu định dùng cách boot qua mạng</p>
+<p>Muốn tiếp tục với NFS root như ở <a href="../u-boot/#7-boot-qua-mạng-tftp--nfs">U-Boot</a>, bật
+<code>CONFIG_NFS_FS</code>, <code>CONFIG_ROOT_NFS</code>, <code>CONFIG_IP_PNP</code> ngay ở bước này — thiếu một trong ba thì
+kernel không mount được root qua NFS dù bootargs đúng.</p>
+</div>
+<h3 id="5-build-kernel-dtb-va-module">5. Build kernel, DTB và module<a class="headerlink" href="#5-build-kernel-dtb-va-module" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+</span></code></pre></div>
+<p><code>-j$(nproc)</code> chạy song song theo số core máy host, rút thời gian build đáng kể. Rebuild lặp lại
+nhiều lần (sau mỗi lần sửa <code>menuconfig</code>) thì thêm <code>ccache</code> vào trước tên cross-compiler để cache
+kết quả biên dịch:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span><span class="s2">"ccache aarch64-linux-gnu-"</span>
+</span></code></pre></div>
+<p>Build xong có các file chính:</p>
+<ul>
+<li><code>arch/arm64/boot/Image</code> — kernel image chưa nén, U-Boot load trực tiếp file này</li>
+<li><code>arch/arm64/boot/dts/broadcom/*.dtb</code> — Device Tree Blob đã compile, mỗi file khớp một board</li>
+<li><code>.ko</code> rải rác khắp source tree — các phần build dạng module</li>
+<li><code>vmlinux</code> — bản ELF chưa nén ở thư mục gốc, dùng để debug (đưa vào GDB), không dùng để boot</li>
+</ul>
+<h3 id="6-cai-module-vao-root-filesystem">6. Cài module vào root filesystem<a class="headerlink" href="#6-cai-module-vao-root-filesystem" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>make<span class="w"> </span><span class="nv">INSTALL_MOD_PATH</span><span class="o">=[</span>ĐIỀN:<span class="w"> </span>đường<span class="w"> </span>dẫn<span class="w"> </span>root<span class="w"> </span>filesystem,<span class="w"> </span>vd<span class="w"> </span>/mnt/sdcard/rootfs<span class="w"> </span>hoặc<span class="w"> </span>thư<span class="w"> </span>mục<span class="w"> </span>NFS<span class="w"> </span>root<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>modules_install
+</span></code></pre></div>
+<p><strong>Không</strong> chạy <code>sudo make modules_install</code> trần — lệnh đó cài thẳng vào <code>/lib/modules/</code> của máy
+host, không phải của board. <code>INSTALL_MOD_PATH</code> trỏ output sang root filesystem của target, và
+không cần quyền root vì không đụng tới <code>/lib/modules</code> thật của host.</p>
+<h3 id="7-copy-kernel-dtb-len-board">7. Copy kernel + DTB lên board<a class="headerlink" href="#7-copy-kernel-dtb-len-board" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cp<span class="w"> </span>arch/arm64/boot/Image<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>/boot/firmware/<span class="w"> </span>trên<span class="w"> </span>thẻ<span class="w"> </span>SD,<span class="w"> </span>hoặc<span class="w"> </span>/srv/tftp/<span class="w"> </span>nếu<span class="w"> </span>boot<span class="w"> </span>qua<span class="w"> </span>mạng<span class="o">]</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>cp<span class="w"> </span>arch/arm64/boot/dts/broadcom/<span class="o">[</span>ĐIỀN:<span class="w"> </span>tên-board<span class="o">]</span>.dtb<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>cùng<span class="w"> </span>đường<span class="w"> </span>dẫn<span class="w"> </span>ở<span class="w"> </span>trên<span class="o">]</span>
+</span></code></pre></div>
+<h3 id="8-boot-kernel-moi-qua-u-boot">8. Boot kernel mới qua U-Boot<a class="headerlink" href="#8-boot-kernel-moi-qua-u-boot" title="Permanent link">&para;</a></h3>
+<p>Dùng lại đúng luồng lệnh đã quen ở <a href="../u-boot/">U-Boot</a> — chỉ khác là kernel/DTB bây giờ là bản
+tự build:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>=&gt; tftp ${kernel_addr_r} Image
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>=&gt; tftp ${fdt_addr_r} [ĐIỀN: tên-board].dtb
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>=&gt; setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>=&gt; booti ${kernel_addr_r} - ${fdt_addr_r}
+</span></code></pre></div>
+<p>(Thay <code>tftp</code> bằng <code>load mmc 0:1 ...</code> nếu deploy qua thẻ SD thay vì mạng.)</p>
+<h2 id="kiem-tra-ket-qua">Kiểm tra kết quả<a class="headerlink" href="#kiem-tra-ket-qua" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[ĐIỀN: log dmesg thật ngay sau "Starting kernel..." — dòng banner kernel version]
+</span></code></pre></div>
+<p>Sau khi có shell trên board:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ uname -r
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>[ĐIỀN: kernel version + local version string thật]
+</span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Đặt CONFIG_LOCALVERSION để khỏi nhầm bản build</p>
+<p><code>.config</code> có option string <code>CONFIG_LOCALVERSION</code> (đặt qua <code>menuconfig</code> → General setup),
+gắn thêm hậu tố vào tên kernel, ví dụ <code>-my-build</code>. Đặt trước khi build thì <code>uname -r</code> sau này
+phân biệt ngay bản tự build với kernel gốc có sẵn trên thẻ SD Raspberry Pi OS — đỡ mất công
+đoán xem board đang chạy kernel nào.</p>
+</div>
+<h2 id="debug-khi-loi">Debug khi lỗi<a class="headerlink" href="#debug-khi-loi" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Quên export ARCH/CROSS_COMPILE</p>
+<p>Build không báo lỗi gì cả, nhưng ra binary cho kiến trúc host (x86) thay vì ARM. Board không
+boot được kernel đó, hoặc U-Boot báo <code>Bad Magic Number</code>/<code>Wrong Image Format</code> khi thử <code>booti</code>.
+Kiểm tra lại bằng <code>file arch/arm64/boot/Image</code> hoặc <code>echo $ARCH $CROSS_COMPILE</code> trước khi
+build lại.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">DTB không khớp board hoặc không khớp kernel version</p>
+<p>Copy nhầm DTB của board khác, hoặc dùng DTB cũ với kernel mới đã đổi cấu trúc device tree,
+dẫn đến thiếu peripheral hoặc kernel panic ngay khi probe driver. DTB và kernel Image nên
+build cùng một lần từ cùng source tree.</p>
+</div>
+<h2 id="mo-rong">Mở rộng<a class="headerlink" href="#mo-rong" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>make savedefconfig</code> xuất ra một file defconfig tối giản (chỉ liệt kê phần khác mặc định) —
+  lưu vào <code>arch/&lt;arch&gt;/configs/</code> và track bằng Git để chia sẻ cấu hình với người khác, giống cách
+  làm với U-Boot.</li>
+<li><code>make clean</code> xoá file build nhưng giữ <code>.config</code>; <code>make mrproper</code> xoá cả <code>.config</code> — dùng khi
+  muốn cấu hình lại từ đầu hoàn toàn.</li>
+</ul>
+<h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Đọc trước:</strong> <a href="../toolchain/">Toolchain</a>, <a href="../u-boot/">U-Boot</a>, <a href="../boot-flow/">Boot flow</a></li>
+<li><strong>Bước tiếp theo:</strong> <a href="../device-tree/">Device Tree</a>, <a href="../rootfs/">Root filesystem</a></li>
+</ul>
+<hr />
+<p><em>Trang này dịch/phóng tác từ các phần "Kernel configuration", "Compiling and installing the
+kernel" và "Booting the kernel" trong khóa Embedded Linux System Development của Bootlin, giấy
+phép CC BY-SA 3.0. Bản gốc: https://bootlin.com/training/embedded-linux.</em></p>
 
 
 

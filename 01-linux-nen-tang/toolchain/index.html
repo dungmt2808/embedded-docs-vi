@@ -818,6 +818,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#toolchain-linux-vs-bare-metal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Toolchain Linux vs. bare-metal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cac-thanh-phan-ben-trong-toolchain" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -829,10 +840,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#abi-floating-point-va-co-toi-uu-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ABI, floating point và cờ tối ưu CPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sysroot-he-thong-file-thu-nho-cua-target" class="md-nav__link">
     <span class="md-ellipsis">
       
         sysroot — "hệ thống file" thu nhỏ của target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-du" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ví dụ
       
     </span>
   </a>
@@ -951,7 +984,7 @@
   <span class="md-ellipsis">
     
   
-    Build kernel
+    Build kernel: cross-compile và deploy lên Raspberry Pi
   
 
     
@@ -979,7 +1012,7 @@
   <span class="md-ellipsis">
     
   
-    Device Tree
+    Device Tree: node, property và overlay
   
 
     
@@ -1035,7 +1068,7 @@
   <span class="md-ellipsis">
     
   
-    Truy cập phần cứng từ userspace
+    Truy cập phần cứng từ user space
   
 
     
@@ -2703,6 +2736,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#toolchain-linux-vs-bare-metal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Toolchain Linux vs. bare-metal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cac-thanh-phan-ben-trong-toolchain" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2714,10 +2758,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#abi-floating-point-va-co-toi-uu-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ABI, floating point và cờ tối ưu CPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sysroot-he-thong-file-thu-nho-cua-target" class="md-nav__link">
     <span class="md-ellipsis">
       
         sysroot — "hệ thống file" thu nhỏ của target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-du" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ví dụ
       
     </span>
   </a>
@@ -2798,20 +2864,36 @@ thuộc của máy mình mà từ một thư mục lạ gọi là sysroot. Khôn
 đổi board, đổi thư viện C, hay gặp lỗi thiếu symbol lúc chạy là bí, không biết sửa từ đâu.</p>
 <h2 id="toolchain-goc-va-toolchain-cross-compilation">Toolchain gốc và toolchain cross-compilation<a class="headerlink" href="#toolchain-goc-va-toolchain-cross-compilation" title="Permanent link">&para;</a></h2>
 <p>Toolchain "gốc" (native) là bộ compiler/linker cài sẵn trên máy Linux dev: chạy trên x86, sinh
-binary cho chính x86. Với embedded, target thường không đủ RAM/storage để tự biên dịch, lại chạy
-kiến trúc CPU khác hẳn máy dev. Vì vậy cần <strong>toolchain cross-compilation</strong>: chạy trên host (x86)
-nhưng sinh binary cho một kiến trúc target khác.</p>
+binary cho chính x86. Với embedded, native toolchain thường không dùng được cho target vì ba lý
+do: target hạn chế RAM/storage nên khó tự biên dịch tại chỗ, target chậm hơn máy dev rất nhiều nên
+build trực tiếp trên target mất thời gian, và nhiều khi không muốn cài cả bộ dev tool cồng kềnh lên
+target. Vì vậy cần <strong>toolchain cross-compilation</strong>: chạy trên host (x86) nhưng sinh binary cho một
+kiến trúc target khác.</p>
 <p>Lệnh compiler của toolchain cross có tiền tố dài, ví dụ <code>arm-linux-gnueabihf-gcc</code>. Đây là một
 <strong>tuple kiến trúc</strong>, gồm 3-4 phần cách nhau bằng dấu <code>-</code>:</p>
 <ol>
 <li>Kiến trúc CPU: <code>arm</code>, <code>riscv</code>, <code>mips64el</code>...</li>
 <li><em>(tùy chọn)</em> Tên vendor — chuỗi tự do</li>
-<li>Hệ điều hành target: <code>linux</code>, hoặc <code>none</code> nếu không nhắm hệ điều hành nào (toolchain
-   bare-metal, dùng cho firmware/bootloader thay vì app Linux)</li>
+<li>Hệ điều hành target: <code>linux</code>, hoặc <code>none</code> nếu không nhắm hệ điều hành nào — xem khác biệt giữa
+   hai loại này ở mục dưới</li>
 <li>ABI/thư viện C, ví dụ <code>gnueabihf</code> (EABI, hard float)</li>
 </ol>
 <p>Tiền tố này vừa để build system chọn đúng toolchain, vừa phân biệt lệnh cross với lệnh native
 (<code>gcc</code> thường).</p>
+<h2 id="toolchain-linux-vs-bare-metal">Toolchain Linux vs. bare-metal<a class="headerlink" href="#toolchain-linux-vs-bare-metal" title="Permanent link">&para;</a></h2>
+<p>Phần hệ điều hành trong tuple (<code>linux</code> hay <code>none</code>) quyết định toolchain build được gì:</p>
+<ul>
+<li><strong>Toolchain Linux</strong> (tuple có <code>linux</code>, vd <code>arm-linux-gnueabihf</code>) — có thư viện C sẵn sàng dùng
+  syscall Linux nên build được app userspace. Nhưng compiler bên trong vẫn là GCC bình thường,
+  không bắt buộc phải link libc, nên toolchain này build được <strong>cả</strong> code bare-metal (firmware,
+  bootloader, cả kernel Linux) nếu không link thư viện C vào.</li>
+<li><strong>Toolchain bare-metal</strong> (tuple có <code>none</code>, vd <code>arm-none-eabi</code>) — không có thư viện C đầy đủ, hoặc
+  chỉ có bản rất tối giản không gắn với OS nào. Chỉ build được code bare-metal, <strong>không</strong> build
+  được app Linux vì thiếu libc thật.</li>
+</ul>
+<p>Nói cách khác, toolchain Linux là tập lớn hơn, bao trùm cả hai việc — đây là lý do một dự án có thể
+dùng cùng một toolchain <code>arm-linux-gnueabihf</code> để vừa build app, vừa build U-Boot hay kernel, thay vì
+phải có riêng một toolchain bare-metal.</p>
 <h2 id="cac-thanh-phan-ben-trong-toolchain">Các thành phần bên trong toolchain<a class="headerlink" href="#cac-thanh-phan-ben-trong-toolchain" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart TD
     B[Binutils] --&gt; T[Cross-compilation toolchain]
@@ -2822,19 +2904,50 @@ nhưng sinh binary cho một kiến trúc target khác.</p>
 <ul>
 <li><strong>Binutils</strong> — bộ công cụ thao tác binary ELF: <code>as</code> (assembler), <code>ld</code> (linker), <code>ar</code>/<code>ranlib</code>
   (đóng gói static library <code>.a</code>), <code>objdump</code>/<code>readelf</code>/<code>nm</code>/<code>size</code> (soi binary), <code>objcopy</code>, <code>strip</code>.</li>
-<li><strong>GCC</strong> — compiler chính, biên dịch C/C++ ra mã máy cho kiến trúc target.</li>
+<li><strong>GCC</strong> — compiler chính, biên dịch C/C++ (và nhiều ngôn ngữ khác: Fortran, Ada, Go...) ra mã
+  máy. GCC hỗ trợ rất nhiều kiến trúc CPU (x86, ARM, RISC-V...) nhưng mỗi lần build, GCC chỉ nhắm
+  một kiến trúc cố định — đây là lý do phải có toolchain riêng cho từng kiến trúc target.</li>
 <li><strong>Kernel header</strong> — struct, hằng số, số hiệu system call mà kernel expose ra user space (ví dụ
-  <code>__NR_read</code> trong <code>&lt;asm/unistd.h&gt;</code>). Thư viện C cần các header này lúc build, app cũng cần khi
-  gọi thẳng syscall. Header được trích từ chính source kernel bằng target <code>headers_install</code>, nên
+  <code>__NR_read</code> trong <code>&lt;asm/unistd.h&gt;</code>). Nằm trong <code>&lt;linux/...&gt;</code> và <code>&lt;asm/...&gt;</code> của toolchain, tương
+  ứng đúng với <code>include/uapi/</code> và <code>arch/&lt;arch&gt;/include/uapi/</code> trong source kernel — cần tra header
+  gốc thì vào đúng hai thư mục này. Thư viện C cần các header này lúc build, app cũng cần khi gọi
+  thẳng syscall. Header được trích từ chính source kernel bằng target <code>headers_install</code>, nên
   toolchain build bằng header cũ hơn kernel đang chạy trên target vẫn hoạt động bình thường —
   kernel giữ tương thích ngược, chỉ là không dùng được API/syscall mới thêm sau đó.</li>
-<li><strong>Thư viện C chuẩn</strong> — chọn ngay lúc build toolchain, vì GCC được biên dịch link cứng với một
-  thư viện cụ thể, không đổi được sau. <code>glibc</code> đầy đủ tính năng nhất, hợp để dev/debug ban đầu.
-  <code>uClibc-ng</code>/<code>musl</code> nhỏ gọn hơn cho hệ giới hạn dung lượng; <code>musl</code> license MIT nên dễ build
-  binary tĩnh hơn <code>glibc</code> (LGPL). Các thư viện C rất nhỏ như <code>newlib</code>/<code>klibc</code> không implement đủ
-  POSIX, chỉ hợp chương trình rất đơn giản.</li>
+<li><strong>Thư viện C chuẩn</strong> — lớp API giữa app và kernel: chương trình gọi hàm chuẩn như <code>printf</code>,
+  <code>malloc</code>, thư viện C bên dưới mới gọi thẳng syscall Linux. Chọn thư viện nào ngay lúc build
+  toolchain, vì GCC được biên dịch link cứng với một thư viện cụ thể, không đổi được sau. <code>glibc</code>
+  đầy đủ tính năng nhất, hợp để dev/debug ban đầu. <code>uClibc-ng</code>/<code>musl</code> nhỏ gọn hơn cho hệ giới hạn
+  dung lượng — <code>uClibc-ng</code> còn là thư viện C duy nhất hỗ trợ ARM không có MMU (Cortex-M...), còn
+  <code>musl</code> license MIT nên dễ build binary tĩnh hơn <code>glibc</code> (LGPL). Lợi thế "nhỏ gọn" của
+  <code>uClibc-ng</code>/<code>musl</code> với dung lượng lưu trữ hiện nay không còn quan trọng như trước, chủ yếu còn ý
+  nghĩa khi tối ưu boot time hoặc giảm kích thước rootfs/container image. Các thư viện C rất nhỏ
+  như <code>newlib</code>/<code>klibc</code> không implement đủ POSIX, chỉ hợp chương trình rất đơn giản.</li>
 <li><strong>GDB</strong> — debugger, thường đi kèm nhưng không bắt buộc.</li>
 </ul>
+<p>Phần lớn dự án Embedded Linux dùng bộ GNU như trên (GCC + Binutils + GDB). Có một hệ thay thế là
+<strong>LLVM</strong> (Clang compiler, LLD linker, LLDB debugger) — license MIT/BSD, chưa phổ biến bằng GNU
+trong embedded Linux nhưng đáng biết vì một số dự án lớn đã chuyển sang dùng.</p>
+<h2 id="abi-floating-point-va-co-toi-uu-cpu">ABI, floating point và cờ tối ưu CPU<a class="headerlink" href="#abi-floating-point-va-co-toi-uu-cpu" title="Permanent link">&para;</a></h2>
+<p>Ba lựa chọn này cố định ngay lúc build toolchain, ảnh hưởng trực tiếp tới việc binary có chạy được
+trên target hay không.</p>
+<p><strong>ABI</strong> (Application Binary Interface) quy định cách các binary trong hệ thống "nói chuyện" với
+nhau ở mức nhị phân: cách truyền tham số hàm, cách trả về giá trị, cách gọi system call, cách xếp
+field trong struct (alignment...). Toàn bộ binary chạy chung trên một hệ thống — app, thư viện,
+cả kernel — phải cùng một ABI, nếu không sẽ đọc sai dữ liệu của nhau dù không có lỗi biên dịch nào.
+Trên ARM 32-bit có hai ABI chính: EABI và EABIhf (chữ <code>hf</code> trong <code>gnueabihf</code> chính là từ đây).</p>
+<p><strong>Floating point</strong> — với CPU không có FPU (floating point unit) trong phần cứng, có hai cách xử lý
+phép tính dấu phẩy động:</p>
+<ul>
+<li><strong>hard float</strong> — vẫn sinh mã dùng lệnh FPU, để kernel tự emulate lúc chạy. Rất chậm.</li>
+<li><strong>soft float</strong> — sinh mã gọi hàm thư viện phần mềm thay vì lệnh FPU.</li>
+</ul>
+<p>Đây là ý nghĩa thật của "hard float"/"soft float" trong tên toolchain. CPU có sẵn FPU thì gần như
+luôn chọn hard float vì nhanh hơn nhiều.</p>
+<p><strong>Cờ tối ưu CPU</strong> — GCC chỉ build cho một kiến trúc cố định, nhưng bên trong kiến trúc đó vẫn có
+tùy chọn tinh hơn: <code>-march</code> chọn tập lệnh cụ thể, <code>-mtune</code> tối ưu lịch lệnh cho đúng CPU, <code>-mcpu</code>
+gộp cả hai (vd <code>-mcpu=cortex-a8</code> ngầm định <code>-march=armv7 -mtune=cortex-a8</code>). Giá trị này chọn sẵn
+lúc build toolchain, trở thành mặc định khi không truyền flag nào khác.</p>
 <h2 id="sysroot-he-thong-file-thu-nho-cua-target">sysroot — "hệ thống file" thu nhỏ của target<a class="headerlink" href="#sysroot-he-thong-file-thu-nho-cua-target" title="Permanent link">&para;</a></h2>
 <p>Toolchain cross không dùng <code>/usr/include</code> hay <code>/usr/lib</code> của máy dev — đó là header/lib cho x86,
 không tương thích target. Thay vào đó, toolchain mang theo <strong>sysroot</strong>: một thư mục con mô phỏng
@@ -2846,17 +2959,42 @@ root filesystem của target.</p>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    └── usr/include/            # header thư viện C + kernel header, cho đúng target
 </span></code></pre></div>
 <p>Khi cross-compile, GCC tự trỏ include-path/lib-path vào sysroot này thay vì thư mục hệ thống của
-máy dev — đây là lý do <code>#include &lt;stdio.h&gt;</code> lấy đúng header của target dù build trên x86.</p>
+máy dev — đây là lý do <code>#include &lt;stdio.h&gt;</code> lấy đúng header của target dù build trên x86. Đôi khi
+<code>bin/</code> còn có thêm symlink tên ngắn, vd <code>arm-linux-gcc</code> trỏ tới tên đầy đủ
+<code>arm-cortexa7-linux-uclibcgnueabihf-gcc</code>, cho gõ lệnh đỡ dài.</p>
+<h2 id="vi-du">Ví dụ<a class="headerlink" href="#vi-du" title="Permanent link">&para;</a></h2>
+<p>Tải một toolchain prebuilt của ARM, biên dịch thử một file <code>.c</code> rồi soi binary sinh ra:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>wget<span class="w"> </span>https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf.tar.xz
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$<span class="w"> </span>tar<span class="w"> </span>xf<span class="w"> </span>gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf.tar.xz
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>$<span class="w"> </span>./bin/arm-none-linux-gnueabihf-gcc<span class="w"> </span>-o<span class="w"> </span>hello<span class="w"> </span>hello.c
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>$<span class="w"> </span>file<span class="w"> </span>hello
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>hello:<span class="w"> </span>ELF<span class="w"> </span><span class="m">32</span>-bit<span class="w"> </span>LSB<span class="w"> </span>executable,<span class="w"> </span>ARM,<span class="w"> </span>EABI5<span class="w"> </span>version<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">(</span>SYSV<span class="o">)</span>,<span class="w"> </span>dynamically<span class="w"> </span>linked,
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>interpreter<span class="w"> </span>/lib/ld-linux-armhf.so.3,<span class="w"> </span><span class="k">for</span><span class="w"> </span>GNU/Linux<span class="w"> </span><span class="m">3</span>.2.0,<span class="w"> </span>with<span class="w"> </span>debug_info,<span class="w"> </span>not<span class="w"> </span>stripped
+</span></code></pre></div>
+<p><code>file</code> xác nhận đúng những gì mong đợi: kiến trúc ARM, EABI5 (hard-float), và <code>interpreter</code> — bản
+dynamic linker chạy lúc runtime — là bản dành cho ARM, không phải bản x86 của máy dev.</p>
 <h2 id="lay-toolchain-o-au">Lấy toolchain ở đâu<a class="headerlink" href="#lay-toolchain-o-au" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Tải sẵn (prebuilt)</strong> — nhanh nhất, không tùy chỉnh được: gói của distro (vd Ubuntu
   <code>gcc-arm-linux-gnueabihf</code>, thường chỉ có glibc), toolchain chính thức của ARM, hoặc kho toolchain
-  nhiều kiến trúc/libc của Bootlin tại <code>toolchains.bootlin.com</code>.</li>
-<li><strong>Build bằng công cụ tự động</strong> — linh hoạt hơn, tự chọn libc/ABI/version: <code>Crosstool-NG</code> (cấu
-  hình kiểu <code>menuconfig</code>), hoặc build system rootfs như Buildroot (<code>make sdk</code>), Yocto.</li>
-<li><strong>Build tay hoàn toàn</strong> — khả thi nhưng phức tạp (binutils → GCC stage 1 bare-metal → kernel
-  header → libc → GCC stage 2 final), ít khi cần tự làm trừ khi muốn hiểu sâu.</li>
+  nhiều kiến trúc/libc của Bootlin tại <code>toolchains.bootlin.com</code>. Trước khi tải, kiểm tra kỹ: kiến
+  trúc CPU, endianness, thư viện C, version kernel header, ABI, hard hay soft float — sai một
+  trong các mục này là toolchain không dùng được cho target.</li>
+<li><strong>Build bằng công cụ tự động</strong> — linh hoạt hơn, tự chọn libc/ABI/version, còn build lại được nếu
+  cần vá lỗi hoặc lỗ hổng bảo mật. <code>Crosstool-NG</code> cấu hình kiểu <code>menuconfig</code>:</li>
 </ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/crosstool-ng/crosstool-ng.git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>crosstool-ng
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>$<span class="w"> </span>./bootstrap<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./configure<span class="w"> </span>--enable-local<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>$<span class="w"> </span>./ct-ng<span class="w"> </span>menuconfig<span class="w">   </span><span class="c1"># chọn kiến trúc, libc, ABI...</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>$<span class="w"> </span>./ct-ng<span class="w"> </span>build<span class="w">        </span><span class="c1"># kết quả nằm ở $HOME/x-tools/</span>
+</span></code></pre></div>
+<p>Ngoài ra, các build system dựng rootfs cũng build được toolchain riêng: Buildroot (<code>make sdk</code>,
+  hỗ trợ glibc/uClibc/musl), Yocto (hỗ trợ glibc/musl), PTXdist (hỗ trợ glibc/uClibc).
+- <strong>Build tay hoàn toàn</strong> — khả thi nhưng phức tạp (binutils → GCC stage 1 bare-metal → kernel
+  header → libc → GCC stage 2 final), ít khi cần tự làm trừ khi muốn hiểu sâu.</p>
 <h2 id="sai-lam-thuong-gap">Sai lầm thường gặp<a class="headerlink" href="#sai-lam-thuong-gap" title="Permanent link">&para;</a></h2>
 <p>Trộn toolchain: build app bằng toolchain glibc/hard-float nhưng rootfs trên target lại dựng bằng
 musl hoặc soft-float — build không báo lỗi gì, nhưng lúc chạy trên board thì thiếu symbol hoặc
