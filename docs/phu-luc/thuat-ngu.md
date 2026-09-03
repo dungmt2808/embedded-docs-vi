@@ -61,7 +61,9 @@ không có bản dịch tiếng Việt nào được dùng phổ biến hơn b�
 `binary` *(danh từ — file đã biên dịch)* · `hard float` · `soft float` · `headless`
 *(setup không cắm màn hình/bàn phím)* · `serial console` · `baud rate` · `image`
 *(danh từ — bản OS để flash vào thẻ nhớ)* · `board` · `logic analyzer` · `breadboard` ·
-`jumper` *(dây jumper)*
+`jumper` *(dây jumper)* · `boot` *(danh từ/động từ — quá trình khởi động hệ thống)* ·
+`filesystem` · `mount` *(động từ)* · `init` *(tiến trình đầu tiên ở user space, PID 1)* ·
+`initramfs` · `initrd` · `panic` *(kernel panic)*
 
 ## Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
 
