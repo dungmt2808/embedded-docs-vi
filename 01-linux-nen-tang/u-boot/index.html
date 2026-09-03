@@ -30,7 +30,7 @@
     
     
       
-        <title>U-Boot - Ghi chép Embedded Linux</title>
+        <title>U-Boot: prompt, môi trường và boot qua mạng - Ghi chép Embedded Linux</title>
       
     
     
@@ -81,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#u-boot" class="md-skip">
+        <a href="#u-boot-prompt-moi-truong-va-boot-qua-mang" class="md-skip">
           Bỏ qua
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              U-Boot
+              U-Boot: prompt, môi trường và boot qua mạng
             
           </span>
         </div>
@@ -801,6 +801,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    U-Boot: prompt, môi trường và boot qua mạng
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -808,7 +826,7 @@
   <span class="md-ellipsis">
     
   
-    U-Boot
+    U-Boot: prompt, môi trường và boot qua mạng
   
 
     
@@ -817,6 +835,174 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Mục lục">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chuan-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuẩn bị
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ luồng thao tác
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cac-buoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-build-u-boot-tu-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Build U-Boot từ source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cai-u-boot-vao-the-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cài U-Boot vào thẻ SD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-vao-u-boot-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Vào U-Boot prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-xem-thong-tin-board-va-lenh-co-san" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Xem thông tin board và lệnh có sẵn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-thao-tac-bien-moi-truong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Thao tác biến môi trường
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-at-bootargs-boot-kernel-tu-the-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Đặt bootargs, boot kernel từ thẻ SD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-boot-qua-mang-tftp-nfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Boot qua mạng: TFTP + NFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mo-rong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mở rộng
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2560,6 +2746,163 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Mục lục
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chuan-bi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chuẩn bị
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-o-luong-thao-tac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sơ đồ luồng thao tác
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cac-buoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Các bước
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Các bước">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-build-u-boot-tu-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Build U-Boot từ source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cai-u-boot-vao-the-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cài U-Boot vào thẻ SD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-vao-u-boot-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Vào U-Boot prompt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-xem-thong-tin-board-va-lenh-co-san" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Xem thông tin board và lệnh có sẵn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-thao-tac-bien-moi-truong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Thao tác biến môi trường
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-at-bootargs-boot-kernel-tu-the-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Đặt bootargs, boot kernel từ thẻ SD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-boot-qua-mang-tftp-nfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Boot qua mạng: TFTP + NFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kiem-tra-ket-qua" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kiểm tra kết quả
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mo-rong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mở rộng
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lien-quan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Liên quan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2584,10 +2927,140 @@
   
 
 
-<h1 id="u-boot">U-Boot<a class="headerlink" href="#u-boot" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>Chưa viết. Dự kiến: Vào prompt, <code>bootargs</code>/<code>bootcmd</code>, tftp/nfs boot, build U-Boot từ source</p>
-</blockquote>
+<h1 id="u-boot-prompt-moi-truong-va-boot-qua-mang">U-Boot: prompt, môi trường và boot qua mạng<a class="headerlink" href="#u-boot-prompt-moi-truong-va-boot-qua-mang" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Mục tiêu</p>
+<p>Sau bài này, cậu vào được U-Boot prompt qua serial console, đọc/ghi biến môi trường
+(<code>printenv</code>, <code>setenv</code>, <code>saveenv</code>), tự đặt <code>bootargs</code>/<code>bootcmd</code> để board tự boot kernel, tải
+kernel qua TFTP và mount root filesystem qua NFS, và build được U-Boot từ source cho
+Raspberry Pi.</p>
+</div>
+<h2 id="chuan-bi">Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Phần cứng: Raspberry Pi [ĐIỀN: model cụ thể — 3B/4B/Zero 2 W...], cáp USB-to-serial nối vào
+  chân UART (RPi không đưa UART ra cổng nào có sẵn, phải câu trực tiếp vào GPIO), thẻ SD, cáp
+  Ethernet nếu làm phần TFTP/NFS</li>
+<li>Đã cài/build trước đó: toolchain cross-compile — xem <a href="../toolchain/">Toolchain</a>; thẻ SD đã có
+  partition boot FAT32 theo chuẩn Raspberry Pi OS</li>
+<li>Khái niệm nên đọc trước: <a href="../boot-flow/">Boot flow</a> — trang này giả định đã biết U-Boot là
+  bootloader giai đoạn 2 nằm ở đâu trong chuỗi boot</li>
+</ul>
+<h2 id="so-o-luong-thao-tac">Sơ đồ luồng thao tác<a class="headerlink" href="#so-o-luong-thao-tac" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A[Build U-Boot từ source] --&gt; B[Copy u-boot.bin vào boot partition]
+    B --&gt; C[Sửa config.txt: kernel=u-boot.bin, enable_uart=1]
+    C --&gt; D[Cắm serial console, boot board]
+    D --&gt; E[Vào U-Boot prompt]
+    E --&gt; F[Thao tác biến môi trường]
+    F --&gt; G{Boot từ SD hay qua mạng?}
+    G --&gt;|SD| H["bootargs root=/dev/mmcblk0p2 + bootz/booti"]
+    G --&gt;|Mạng| I["tftp tải kernel, bootargs root=/dev/nfs + nfsroot=..."]
+    H --&gt; J[saveenv, gán bootcmd để tự động hoá]
+    I --&gt; J</code></pre>
+<h2 id="cac-buoc">Các bước<a class="headerlink" href="#cac-buoc" title="Permanent link">&para;</a></h2>
+<h3 id="1-build-u-boot-tu-source">1. Build U-Boot từ source<a class="headerlink" href="#1-build-u-boot-tu-source" title="Permanent link">&para;</a></h3>
+<p>U-Boot dùng hệ cấu hình kconfig giống kernel Linux: chọn file <code>defconfig</code> khớp board, build ra
+<code>.config</code>, rồi build binary.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://gitlab.denx.de/u-boot/u-boot.git
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>u-boot
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ls<span class="w"> </span>configs/<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>rpi<span class="w">          </span><span class="c1"># tìm đúng tên defconfig cho model đang dùng</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>aarch64-linux-gnu-<span class="w">   </span><span class="c1"># hoặc arm-linux-gnueabihf- nếu build 32-bit</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>make<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>tên_defconfig<span class="o">]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+</span></code></pre></div>
+<p>Kết quả chính là <code>u-boot.bin</code>. Muốn bật thêm command hay driver thì chạy <code>make menuconfig</code>
+trước bước build cuối.</p>
+<h3 id="2-cai-u-boot-vao-the-sd">2. Cài U-Boot vào thẻ SD<a class="headerlink" href="#2-cai-u-boot-vao-the-sd" title="Permanent link">&para;</a></h3>
+<p>Raspberry Pi không có ROM code đọc chân boot kiểu STM32/i.MX — GPU boot riêng, đọc <code>config.txt</code>
+trên partition FAT32 đầu tiên để biết file nào là "kernel" cần load. Chainload U-Boot bằng cách
+copy <code>u-boot.bin</code> vào đó và trỏ <code>kernel=</code> sang nó:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cp<span class="w"> </span>u-boot.bin<span class="w"> </span>/boot/firmware/<span class="w">    </span><span class="c1"># đường dẫn mount thật tùy bản Raspberry Pi OS đang dùng</span>
+</span></code></pre></div>
+<p>Thêm vào <code>config.txt</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kernel=u-boot.bin
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>enable_uart=1
+</span></code></pre></div>
+<p><code>enable_uart=1</code> cần thiết để thấy log qua UART — mặc định GPU firmware có thể không bật nó.</p>
+<h3 id="3-vao-u-boot-prompt">3. Vào U-Boot prompt<a class="headerlink" href="#3-vao-u-boot-prompt" title="Permanent link">&para;</a></h3>
+<p>Cắm cáp USB-to-serial vào chân UART, mở serial console trên host (<code>picocom</code>, <code>minicom</code>...) với
+baud rate [ĐIỀN: baud rate thật in trong banner, thường 115200]. Cắm điện board, nhấn phím bất
+kỳ khi thấy đếm ngược để dừng autoboot.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[ĐIỀN: banner U-Boot thật khi board khởi động — phiên bản, ngày build, thông tin board]
+</span></code></pre></div>
+<h3 id="4-xem-thong-tin-board-va-lenh-co-san">4. Xem thông tin board và lệnh có sẵn<a class="headerlink" href="#4-xem-thong-tin-board-va-lenh-co-san" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>=&gt; help
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>=&gt; version
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>=&gt; bdinfo
+</span></code></pre></div>
+<p><code>bdinfo</code> cho biết vùng RAM khả dụng — cần khi tự chọn địa chỉ load kernel/DTB bằng tay.</p>
+<h3 id="5-thao-tac-bien-moi-truong">5. Thao tác biến môi trường<a class="headerlink" href="#5-thao-tac-bien-moi-truong" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>=&gt; printenv                       # xem toàn bộ
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>=&gt; printenv ipaddr                # xem một biến
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>=&gt; setenv ipaddr 192.168.1.111    # đổi trong RAM, mất khi mất điện
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>=&gt; saveenv                        # ghi xuống storage để giữ lại
+</span></code></pre></div>
+<p><code>setenv</code>/<code>editenv</code> chỉ sửa trong RAM — không chạy <code>saveenv</code> thì mọi thay đổi mất sau lần reset
+kế tiếp.</p>
+<h3 id="6-at-bootargs-boot-kernel-tu-the-sd">6. Đặt bootargs, boot kernel từ thẻ SD<a class="headerlink" href="#6-at-bootargs-boot-kernel-tu-the-sd" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>=&gt; load mmc 0:1 ${kernel_addr_r} Image      # hoặc zImage + bootz nếu build 32-bit
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>=&gt; load mmc 0:1 ${fdt_addr_r} [ĐIỀN: tên-file.dtb]
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>=&gt; setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>=&gt; booti ${kernel_addr_r} - ${fdt_addr_r}
+</span></code></pre></div>
+<p>Boot được rồi thì gộp lại thành một <code>bootcmd</code> để board tự chạy sau đếm ngược, khỏi gõ tay mỗi
+lần:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>=&gt; setenv bootcmd 'load mmc 0:1 ${kernel_addr_r} Image; load mmc 0:1 ${fdt_addr_r} [ĐIỀN].dtb; booti ${kernel_addr_r} - ${fdt_addr_r}'
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>=&gt; saveenv
+</span></code></pre></div>
+<h3 id="7-boot-qua-mang-tftp-nfs">7. Boot qua mạng: TFTP + NFS<a class="headerlink" href="#7-boot-qua-mang-tftp-nfs" title="Permanent link">&para;</a></h3>
+<p>Trên host (Linux):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>tftpd-hpa<span class="w"> </span>nfs-kernel-server
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sudo<span class="w"> </span>cp<span class="w"> </span>Image<span class="w"> </span>/srv/tftp/<span class="w">                       </span><span class="c1"># kernel image build cho board</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"/home/[user]/rootfs 192.168.1.111(rw,no_root_squash,no_subtree_check)"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/exports
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sudo<span class="w"> </span>exportfs<span class="w"> </span>-r
+</span></code></pre></div>
+<p>Trên U-Boot:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>=&gt; setenv ipaddr 192.168.1.111
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>=&gt; setenv serverip 192.168.1.110
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>=&gt; tftp ${kernel_addr_r} Image
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>=&gt; setenv bootargs console=ttyS0,115200 root=/dev/nfs ip=192.168.1.111 nfsroot=192.168.1.110:/home/[user]/rootfs,nfsvers=3,tcp
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>=&gt; booti ${kernel_addr_r} - ${fdt_addr_r}
+</span></code></pre></div>
+<p><code>root=/dev/nfs</code> báo kernel mount root filesystem qua NFS thay vì thiết bị block; kernel cần
+build sẵn <code>CONFIG_NFS_FS</code>, <code>CONFIG_ROOT_NFS</code>, <code>CONFIG_IP_PNP</code> thì việc này mới chạy được — xem
+<a href="../build-kernel/">Build kernel</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Vì sao đáng làm dù đã boot được từ SD</p>
+<p>NFS root cho sửa file trên host rồi thấy hiệu lực ngay trên board, không cần rebuild
+image/reflash thẻ SD mỗi lần đổi vài dòng — rất đáng dùng trong lúc phát triển driver hay
+rootfs, chuyển lại SD/eMMC khi đóng gói sản phẩm cuối.</p>
+</div>
+<h2 id="kiem-tra-ket-qua">Kiểm tra kết quả<a class="headerlink" href="#kiem-tra-ket-qua" title="Permanent link">&para;</a></h2>
+<p>Boot xong, dò log kernel xác nhận mount root đúng loại đã chọn:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>[ĐIỀN: dòng log thật, ví dụ "VFS: Mounted root (nfs filesystem) readonly on device 0:17"
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>hoặc tương ứng khi mount từ mmcblk]
+</span></code></pre></div>
+<p>Vào được shell trên board và <code>mount | grep " / "</code> ra đúng nguồn rootfs đã cấu hình là xác nhận
+chắc chắn nhất.</p>
+<h2 id="mo-rong">Mở rộng<a class="headerlink" href="#mo-rong" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Thay vì gõ tay từng lệnh, U-Boot hỗ trợ <strong>Generic Distro boot</strong>: đọc file
+  <code>/boot/extlinux/extlinux.conf</code> và tự load kernel/DTB/bootargs từ đó — chuẩn hoá hành vi boot
+  giữa nhiều board thay vì mỗi board một <code>bootcmd</code> riêng thủ công. Xem thêm ở
+  <a href="../boot-flow/">Boot flow</a>.</li>
+<li>Nếu update U-Boot thường xuyên trong lúc phát triển, thử công cụ
+  <a href="https://github.com/bootlin/snagboot">Snagboot</a> của Bootlin để nạp lại qua USB mà không cần
+  tháo thẻ SD.</li>
+</ul>
+<h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Đọc trước:</strong> <a href="../boot-flow/">Boot flow</a>, <a href="../toolchain/">Toolchain</a></li>
+<li><strong>Bước tiếp theo:</strong> <a href="../build-kernel/">Build kernel</a>, <a href="../device-tree/">Device Tree</a></li>
+</ul>
+<hr />
+<p><em>Trang này dịch/phóng tác từ phần "The U-boot bootloader" trong khóa Embedded Linux System
+Development của Bootlin, giấy phép CC BY-SA 3.0. Bản gốc: https://bootlin.com/training/embedded-linux.</em></p>
 
 
 
