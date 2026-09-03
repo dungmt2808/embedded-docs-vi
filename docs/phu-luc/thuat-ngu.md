@@ -73,8 +73,11 @@ không có bản dịch tiếng Việt nào được dùng phổ biến hơn b�
 `pseudo filesystem` · `applet` *(đơn vị lệnh trong BusyBox)* · `symlink` · `device file` · `shell` ·
 `node` *(Device Tree)* · `property` *(Device Tree)* · `cell` *(đơn vị giá trị 32-bit trong
 property)* · `overlay` *(Device Tree overlay)* · `binding` *(Device Tree binding)* ·
-`label` *(nhãn đặt trước node để tham chiếu, vd `i2c1:`)* · `buffer` · `recovery`
-*(cơ chế khôi phục/reflash khi thiết bị hỏng hoặc chưa có bootloader)*
+`label` *(nhãn đặt trước node để tham chiếu, vd `i2c1:`)* · `pin-muxing`/`pinmux`
+*(gán một chân vật lý cho một trong nhiều chức năng khả dụng)* · `buffer` · `recovery`
+*(cơ chế khôi phục/reflash khi thiết bị hỏng hoặc chưa có bootloader)* · `socket`
+*(network socket)* · `upstream` *(driver/patch đã được cộng đồng kernel chấp nhận vào tree
+chính thức)* · `out-of-tree` *(driver/patch nằm ngoài tree chính thức)*
 
 ## Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
 
@@ -84,13 +87,17 @@ Không dịch dưới bất kỳ hình thức nào — đây là tên riêng, kh
 - **Tên section/file**: `.text`, `.data`, `.bss`, `.map`, `.dts`, `.dtsi`
 - **Tên công cụ/lệnh**: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake, Kconfig,
   defconfig, menuconfig, `libgpiod`, `i2c-tools`, `i2c-dev`, `spidev`, `UIO`, `libusb`, `udev`,
-  `mdev`
+  `mdev`, `pinctrl` *(subsystem/tên node trong kernel)*, `libfdt`
+- **Tên subsystem kernel**: PWM, MTD, DRM, ALSA, V4L (Video4Linux), IIO, RTC, hwmon, remoteproc
 - **Tên linh kiện**: MOSFET, LDO, TVS, Schottky
 - **Viết tắt**: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI, MMU, FPU, FDT (flattened
-  device tree), phandle, BIOS, UEFI, ACPI
+  device tree), phandle, BIOS, UEFI, ACPI, SPL/TPL (Secondary/Tertiary Program Loader),
+  FIT (Flat Image Tree)
 - **Tên property chuẩn trong Device Tree**: `compatible`, `reg`, `status`, `interrupts`,
-  `interrupt-parent`, `interrupts-extended`, `#address-cells`, `#size-cells`,
-  `#interrupt-cells`, `clocks`, `resets`, `pinctrl-0`/`pinctrl-1`/`pinctrl-names`, `dmas`
+  `interrupt-parent`, `interrupts-extended`, `interrupt-controller`, `#address-cells`,
+  `#size-cells`, `#interrupt-cells`, `#clock-cells`, `#reset-cells`, `#dma-cells`, `#gpio-cells`,
+  `clocks`, `resets`, `dmas`, `gpios`, `pinctrl-0`/`pinctrl-1`/`pinctrl-names`, `chosen`,
+  `bootargs`, `stdout-path`, `model`, `device_type`
 
 ## Khi gặp từ chưa có trong 3 nhóm trên
 

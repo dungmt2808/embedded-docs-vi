@@ -18,7 +18,12 @@ lệnh UNIX cơ bản vào một thiết bị chỉ có vài MB flash.
 
 Trong UNIX, mọi ứng dụng nhìn thấy **một cây thư mục duy nhất**, dù dữ liệu thực tế nằm rải rác
 trên nhiều thiết bị khác nhau. Mỗi filesystem được **mount** vào một thư mục cụ thể (gọi là mount
-point); nội dung thư mục đó phản ánh nội dung filesystem vừa mount, và trống lại khi umount.
+point) bằng cú pháp `mount -t <loại> <thiết bị> <mount-point>`; nội dung thư mục đó phản ánh nội
+dung filesystem vừa mount, và trống lại khi umount. Ví dụ mount một USB key định dạng FAT:
+
+```bash
+mount -t vfat /dev/sda1 /mnt/usbkey
+```
 
 Filesystem được mount tại gốc của cây, ký hiệu `/`, gọi là **root filesystem**. Vì `mount` và
 `umount` bản thân cũng là chương trình nằm trong một filesystem, chúng không thể tự mount root
@@ -48,7 +53,21 @@ ngay, không cần reflash thẻ SD mỗi lần — cách làm cụ thể xem �
 Root filesystem cũng có thể nằm hẳn trong RAM dưới dạng **initramfs** — một cpio archive được giải
 nén thẳng vào bộ nhớ lúc boot, dùng cho rootfs cực nhỏ hoặc làm bước trung gian trước khi chuyển
 sang rootfs thật (chi tiết trình tự này đã nói ở
-[Boot flow](boot-flow.md#chang-4-initramfs-tuy-chon)).
+[Boot flow](boot-flow.md#chang-4-initramfs-tuy-chon)). Đây không phải kỹ thuật riêng của embedded —
+kernel của các bản phân phối desktop/server cũng luôn dùng initramfs, để driver ít dùng chỉ nạp khi
+cần thay vì build tĩnh vào kernel image, giữ kernel image gọn nhẹ.
+
+Tạo initramfs ngoài (external), nạp riêng vào RAM bởi bootloader:
+
+```bash
+cd rootfs/
+find . | cpio -H newc -o | gzip > ../initramfs.cpio.gz
+```
+
+Dùng U-Boot thì cần đóng gói thêm bằng `mkimage` trước khi `load`/`tftp` archive này vào RAM. Cũng
+có thể nhúng thẳng initramfs vào kernel image lúc build, qua `CONFIG_INITRAMFS_SOURCE` — nhưng cách
+này chỉ chấp nhận binary tương thích GPLv2, vì mọi thứ bị gộp chung vào một kernel image; muốn đóng
+gói binary closed-source thì bắt buộc dùng initramfs ngoài.
 
 ## Cấu trúc thư mục
 
@@ -60,11 +79,17 @@ mục quan trọng:
   sẵn sàng (thời trước khi `/usr` hay được mount qua NFS, tách riêng để hệ thống vẫn boot được lúc
   mạng down)
 - `/usr/bin`, `/usr/sbin`, `/usr/lib` — chương trình và thư viện **không cơ bản** (mọi thứ còn lại)
+- `/boot` — kernel image, cấu hình build, initramfs (nếu bootloader load từ đây). Nhiều board
+  ARM/embedded để trống hoặc không dùng thư mục này — bootloader thường đọc kernel/DTB thẳng từ
+  boot partition riêng (FAT32), không qua `/boot` của root filesystem
 - `/etc` — cấu hình toàn hệ thống
 - `/dev` — device file, đại diện phần cứng dưới dạng file
 - `/proc`, `/sys` — hai **pseudo filesystem**, không chứa dữ liệu thật trên storage mà do kernel
   sinh ra runtime
-- `/tmp`, `/var` — file tạm, log, dữ liệu runtime
+- `/tmp`, `/var`, `/run` — file tạm, log, dữ liệu runtime (`/run` là quy ước mới hơn, thay cho
+  `/var/run` trước đây)
+- `/media`, `/mnt` — mount point cho thiết bị rời như USB/thẻ nhớ (`/media`), hoặc cho filesystem
+  mount tạm thời bằng tay (`/mnt`)
 - `/root`, `/home` — thư mục home của user `root` và của user thường
 
 !!! tip "/usr merge"
@@ -73,9 +98,18 @@ mục quan trọng:
     cho gọn.
 
 `/proc` và `/sys` đáng chú ý riêng vì rất nhiều ứng dụng chuẩn — `ps`, `top`, `udev`/`mdev` — không
-chạy được nếu thiếu chúng. `/proc` cho biết thông tin tiến trình và tham số kernel runtime (đọc/ghi
-qua `sysctl`, ví dụ `echo 3 > /proc/sys/vm/drop_caches`); `/sys` phản ánh cây device/driver/bus mà
-kernel đang quản lý. Cả hai phải tự mount nếu build rootfs từ đầu:
+chạy được nếu thiếu chúng. `/proc` có một thư mục riêng cho mỗi tiến trình đang chạy (`/proc/<pid>`,
+ví dụ `cat /proc/3840/cmdline`), cộng thêm vài file hay dùng lúc debug — `/proc/cpuinfo`,
+`/proc/interrupts`, `/proc/iomem` (thông tin phần cứng), `/proc/cmdline` (kernel command line lúc
+boot) — và cho phép chỉnh tham số kernel runtime qua `sysctl`, ví dụ
+`echo 3 > /proc/sys/vm/drop_caches`. `/sys` phản ánh cây device/driver/bus mà kernel đang quản lý:
+
+```
+$ ls /sys/
+block  bus  class  dev  devices  firmware  fs  kernel  module  power
+```
+
+Cả hai phải tự mount nếu build rootfs từ đầu:
 
 ```bash
 mount -t proc nodev /proc
@@ -112,21 +146,31 @@ Cách hoạt động: toàn bộ lệnh được compile chung vào **một exec
 Mỗi lệnh riêng lẻ (`ls`, `cat`, `ip`...) — gọi là một **applet** — chỉ là một **symlink** trỏ về
 `/bin/busybox`; binary tự nhìn `argv[0]` để biết đang được gọi dưới tên nào rồi chạy đúng applet
 đó. Với cấu hình đầy đủ vừa phải, toàn bộ chưa tới 1MB (glibc) hoặc dưới 500KB (uClibc, static).
+Bản BusyBox mới nhất hỗ trợ gần 300 lệnh — từ `ls`, `grep`, `awk` tới cả `vi`, `tar`, `httpd` — xem
+danh sách đầy đủ tại [busybox.net/downloads/BusyBox.txt](https://busybox.net/downloads/BusyBox.txt).
 
 Cấu hình và build BusyBox dùng đúng cơ chế Kconfig quen thuộc từ kernel:
 
 ```bash
-make defconfig            # cấu hình mặc định, đủ dùng cho user thường
+make defconfig              # cấu hình mặc định, đủ dùng cho user thường
 # hoặc: make allnoconfig, rồi tự bật từng option cần
-make menuconfig            # tinh chỉnh từng applet, từng option của applet
+make menuconfig              # tinh chỉnh từng applet, từng option của applet
+# trong menuconfig: Installation Options -> Destination path for 'make install'
+# trỏ đúng vào thư mục rootfs đích, không thì make install cài nhầm vào máy host
 
+export PATH=$HOME/x-tools/arm-linux-uclibcgnueabi/bin:$PATH   # để make thấy cross-compiler
 export CROSS_COMPILE=arm-linux-
 make
-make install               # tạo cây thư mục + symlink trỏ về busybox
+make install                 # tạo cây thư mục + symlink trỏ về busybox
 ```
 
 `make install` tự sinh cấu trúc `bin/`, `sbin/`, `usr/sbin/`... với toàn bộ symlink cần thiết —
 đây chính là khung xương của một rootfs tối thiểu.
+
+!!! tip "Configurable tới từng applet"
+    Bật applet `vi` chỉ tốn thêm khoảng 20KB dung lượng, và chọn được chính xác tính năng nào của
+    `vi` cần compile vào — mức độ chi tiết này áp dụng cho từng applet riêng lẻ, không chỉ bật/tắt
+    cả khối một lần.
 
 ### BusyBox init
 
@@ -193,6 +237,11 @@ rootfs/
     Copy binary vào `/usr/bin` nhưng symlink applet BusyBox lại trỏ về `/bin`, hoặc ngược lại —
     `PATH` không thấy lệnh dù file rõ ràng có mặt trên rootfs. Xảy ra chủ yếu khi ghép rootfs thủ
     công mà không dùng thẳng `make install` của BusyBox.
+
+!!! warning "Rút điện hoặc tháo thẻ mà chưa umount"
+    Kernel cache ghi (write-back) trong RAM để tăng hiệu năng; `umount` mới đảm bảo các ghi đó
+    được commit hẳn xuống storage. Rút điện hoặc tháo SD/USB khi root filesystem còn đang mount có
+    thể làm hỏng filesystem, phải reflash lại từ đầu.
 
 ## Liên quan
 
