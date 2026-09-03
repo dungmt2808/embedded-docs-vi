@@ -38,6 +38,7 @@ dịch không gây khó hiểu:
 | library | thư viện |
 | floating point | dấu phẩy động |
 | sensor | cảm biến |
+| environment variable | biến môi trường |
 
 **Lưu ý riêng cho "ngắt" vs "ISR"**: dịch "interrupt" thành "ngắt" khi nói về khái niệm/cơ chế
 chung ("xử lý ngắt", "ưu tiên ngắt"). Giữ nguyên "ISR" (Interrupt Service Routine) khi nói tên
@@ -63,7 +64,8 @@ không có bản dịch tiếng Việt nào được dùng phổ biến hơn b�
 *(danh từ — bản OS để flash vào thẻ nhớ)* · `board` · `logic analyzer` · `breadboard` ·
 `jumper` *(dây jumper)* · `boot` *(danh từ/động từ — quá trình khởi động hệ thống)* ·
 `filesystem` · `mount` *(động từ)* · `init` *(tiến trình đầu tiên ở user space, PID 1)* ·
-`initramfs` · `initrd` · `panic` *(kernel panic)*
+`initramfs` · `initrd` · `panic` *(kernel panic)* · `prompt` · `partition` ·
+`build` *(động từ — biên dịch/dựng ra từ source)* · `script` · `command line`
 
 ## Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)
 
