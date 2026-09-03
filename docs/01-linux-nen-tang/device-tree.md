@@ -5,6 +5,10 @@
     nào bind vào driver nào qua `compatible`, và tự viết + biên dịch được một Device Tree overlay
     để bật một thiết bị I2C trên Raspberry Pi mà không cần build lại kernel.
 
+Device Tree là một cấu trúc dữ liệu dạng cây, viết bằng text (`.dts`), mô tả topology phần cứng
+của board — có những khối nào (CPU, bộ nhớ, ngoại vi), mỗi khối nằm ở đâu, nối với nhau ra sao —
+để kernel đọc lúc boot mà không cần biên dịch cứng thông tin đó vào code.
+
 Trước khi có Device Tree, kernel Linux mô tả phần cứng không tự phát hiện được theo đúng ba cách:
 viết thẳng cấu trúc dữ liệu C hardcode trong code kernel/bootloader (cách cũ, không maintain nổi
 khi số board ARM tăng lên); dùng bảng ACPI do firmware cung cấp (phổ biến trên x86, một phần
