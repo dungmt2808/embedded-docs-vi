@@ -2876,8 +2876,11 @@ không có bản dịch tiếng Việt nào được dùng phổ biến hơn b�
 <code>pseudo filesystem</code> · <code>applet</code> <em>(đơn vị lệnh trong BusyBox)</em> · <code>symlink</code> · <code>device file</code> · <code>shell</code> ·
 <code>node</code> <em>(Device Tree)</em> · <code>property</code> <em>(Device Tree)</em> · <code>cell</code> <em>(đơn vị giá trị 32-bit trong
 property)</em> · <code>overlay</code> <em>(Device Tree overlay)</em> · <code>binding</code> <em>(Device Tree binding)</em> ·
-<code>label</code> <em>(nhãn đặt trước node để tham chiếu, vd <code>i2c1:</code>)</em> · <code>buffer</code> · <code>recovery</code>
-<em>(cơ chế khôi phục/reflash khi thiết bị hỏng hoặc chưa có bootloader)</em></p>
+<code>label</code> <em>(nhãn đặt trước node để tham chiếu, vd <code>i2c1:</code>)</em> · <code>pin-muxing</code>/<code>pinmux</code>
+<em>(gán một chân vật lý cho một trong nhiều chức năng khả dụng)</em> · <code>buffer</code> · <code>recovery</code>
+<em>(cơ chế khôi phục/reflash khi thiết bị hỏng hoặc chưa có bootloader)</em> · <code>socket</code>
+<em>(network socket)</em> · <code>upstream</code> <em>(driver/patch đã được cộng đồng kernel chấp nhận vào tree
+chính thức)</em> · <code>out-of-tree</code> <em>(driver/patch nằm ngoài tree chính thức)</em></p>
 <h2 id="nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection">Nhóm 3 — Luôn giữ nguyên (tên riêng, viết tắt, tên file/section)<a class="headerlink" href="#nhom-3-luon-giu-nguyen-ten-rieng-viet-tat-ten-filesection" title="Permanent link">&para;</a></h2>
 <p>Không dịch dưới bất kỳ hình thức nào — đây là tên riêng, không phải khái niệm:</p>
 <ul>
@@ -2885,13 +2888,17 @@ property)</em> · <code>overlay</code> <em>(Device Tree overlay)</em> · <code>b
 <li><strong>Tên section/file</strong>: <code>.text</code>, <code>.data</code>, <code>.bss</code>, <code>.map</code>, <code>.dts</code>, <code>.dtsi</code></li>
 <li><strong>Tên công cụ/lệnh</strong>: GDB, CMake, Make, Git, OpenOCD, Yocto, Buildroot, BitBake, Kconfig,
   defconfig, menuconfig, <code>libgpiod</code>, <code>i2c-tools</code>, <code>i2c-dev</code>, <code>spidev</code>, <code>UIO</code>, <code>libusb</code>, <code>udev</code>,
-  <code>mdev</code></li>
+  <code>mdev</code>, <code>pinctrl</code> <em>(subsystem/tên node trong kernel)</em>, <code>libfdt</code></li>
+<li><strong>Tên subsystem kernel</strong>: PWM, MTD, DRM, ALSA, V4L (Video4Linux), IIO, RTC, hwmon, remoteproc</li>
 <li><strong>Tên linh kiện</strong>: MOSFET, LDO, TVS, Schottky</li>
 <li><strong>Viết tắt</strong>: ISR, MMIO, IRQ, RTOS, BSP, DT (device tree), API, ABI, MMU, FPU, FDT (flattened
-  device tree), phandle, BIOS, UEFI, ACPI</li>
+  device tree), phandle, BIOS, UEFI, ACPI, SPL/TPL (Secondary/Tertiary Program Loader),
+  FIT (Flat Image Tree)</li>
 <li><strong>Tên property chuẩn trong Device Tree</strong>: <code>compatible</code>, <code>reg</code>, <code>status</code>, <code>interrupts</code>,
-  <code>interrupt-parent</code>, <code>interrupts-extended</code>, <code>#address-cells</code>, <code>#size-cells</code>,
-  <code>#interrupt-cells</code>, <code>clocks</code>, <code>resets</code>, <code>pinctrl-0</code>/<code>pinctrl-1</code>/<code>pinctrl-names</code>, <code>dmas</code></li>
+  <code>interrupt-parent</code>, <code>interrupts-extended</code>, <code>interrupt-controller</code>, <code>#address-cells</code>,
+  <code>#size-cells</code>, <code>#interrupt-cells</code>, <code>#clock-cells</code>, <code>#reset-cells</code>, <code>#dma-cells</code>, <code>#gpio-cells</code>,
+  <code>clocks</code>, <code>resets</code>, <code>dmas</code>, <code>gpios</code>, <code>pinctrl-0</code>/<code>pinctrl-1</code>/<code>pinctrl-names</code>, <code>chosen</code>,
+  <code>bootargs</code>, <code>stdout-path</code>, <code>model</code>, <code>device_type</code></li>
 </ul>
 <h2 id="khi-gap-tu-chua-co-trong-3-nhom-tren">Khi gặp từ chưa có trong 3 nhóm trên<a class="headerlink" href="#khi-gap-tu-chua-co-trong-3-nhom-tren" title="Permanent link">&para;</a></h2>
 <p>Ưu tiên theo trực giác: từ đó là <strong>khái niệm CS phổ thông</strong> cấp đại học → dịch (Nhóm 1). Từ đó là

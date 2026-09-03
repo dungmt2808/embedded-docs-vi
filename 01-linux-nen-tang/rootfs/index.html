@@ -2900,13 +2900,16 @@ lệnh UNIX cơ bản vào một thiết bị chỉ có vài MB flash.</p>
 <h2 id="root-filesystem-la-gi">Root filesystem là gì<a class="headerlink" href="#root-filesystem-la-gi" title="Permanent link">&para;</a></h2>
 <p>Trong UNIX, mọi ứng dụng nhìn thấy <strong>một cây thư mục duy nhất</strong>, dù dữ liệu thực tế nằm rải rác
 trên nhiều thiết bị khác nhau. Mỗi filesystem được <strong>mount</strong> vào một thư mục cụ thể (gọi là mount
-point); nội dung thư mục đó phản ánh nội dung filesystem vừa mount, và trống lại khi umount.</p>
+point) bằng cú pháp <code>mount -t &lt;loại&gt; &lt;thiết bị&gt; &lt;mount-point&gt;</code>; nội dung thư mục đó phản ánh nội
+dung filesystem vừa mount, và trống lại khi umount. Ví dụ mount một USB key định dạng FAT:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mount<span class="w"> </span>-t<span class="w"> </span>vfat<span class="w"> </span>/dev/sda1<span class="w"> </span>/mnt/usbkey
+</span></code></pre></div>
 <p>Filesystem được mount tại gốc của cây, ký hiệu <code>/</code>, gọi là <strong>root filesystem</strong>. Vì <code>mount</code> và
 <code>umount</code> bản thân cũng là chương trình nằm trong một filesystem, chúng không thể tự mount root
 filesystem đầu tiên — việc này do kernel làm trực tiếp, dựa vào tham số <code>root=</code> trên kernel command
 line. Không tìm thấy root filesystem hợp lệ, kernel panic:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Please append a correct "root=" boot option
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Kernel panic - not syncing: VFS: Unable to mount root fs on unknown block(0,0)
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Please append a correct "root=" boot option
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Kernel panic - not syncing: VFS: Unable to mount root fs on unknown block(0,0)
 </span></code></pre></div>
 <h2 id="root-filesystem-nam-o-au">Root filesystem nằm ở đâu<a class="headerlink" href="#root-filesystem-nam-o-au" title="Permanent link">&para;</a></h2>
 <p><code>root=</code> chấp nhận nhiều loại nguồn:</p>
@@ -2942,7 +2945,17 @@ ngay, không cần reflash thẻ SD mỗi lần — cách làm cụ thể xem �
 <p>Root filesystem cũng có thể nằm hẳn trong RAM dưới dạng <strong>initramfs</strong> — một cpio archive được giải
 nén thẳng vào bộ nhớ lúc boot, dùng cho rootfs cực nhỏ hoặc làm bước trung gian trước khi chuyển
 sang rootfs thật (chi tiết trình tự này đã nói ở
-<a href="../boot-flow/#chang-4-initramfs-tuy-chon">Boot flow</a>).</p>
+<a href="../boot-flow/#chang-4-initramfs-tuy-chon">Boot flow</a>). Đây không phải kỹ thuật riêng của embedded —
+kernel của các bản phân phối desktop/server cũng luôn dùng initramfs, để driver ít dùng chỉ nạp khi
+cần thay vì build tĩnh vào kernel image, giữ kernel image gọn nhẹ.</p>
+<p>Tạo initramfs ngoài (external), nạp riêng vào RAM bởi bootloader:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>rootfs/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>find<span class="w"> </span>.<span class="w"> </span><span class="p">|</span><span class="w"> </span>cpio<span class="w"> </span>-H<span class="w"> </span>newc<span class="w"> </span>-o<span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>&gt;<span class="w"> </span>../initramfs.cpio.gz
+</span></code></pre></div>
+<p>Dùng U-Boot thì cần đóng gói thêm bằng <code>mkimage</code> trước khi <code>load</code>/<code>tftp</code> archive này vào RAM. Cũng
+có thể nhúng thẳng initramfs vào kernel image lúc build, qua <code>CONFIG_INITRAMFS_SOURCE</code> — nhưng cách
+này chỉ chấp nhận binary tương thích GPLv2, vì mọi thứ bị gộp chung vào một kernel image; muốn đóng
+gói binary closed-source thì bắt buộc dùng initramfs ngoài.</p>
 <h2 id="cau-truc-thu-muc">Cấu trúc thư mục<a class="headerlink" href="#cau-truc-thu-muc" title="Permanent link">&para;</a></h2>
 <p>Cách tổ chức thư mục của root filesystem được chuẩn hoá bởi <strong>Filesystem Hierarchy Standard
 (FHS)</strong>, để ứng dụng và người dùng thấy cấu trúc quen thuộc trên mọi hệ thống Linux. Một số thư
@@ -2952,11 +2965,17 @@ mục quan trọng:</p>
   sẵn sàng (thời trước khi <code>/usr</code> hay được mount qua NFS, tách riêng để hệ thống vẫn boot được lúc
   mạng down)</li>
 <li><code>/usr/bin</code>, <code>/usr/sbin</code>, <code>/usr/lib</code> — chương trình và thư viện <strong>không cơ bản</strong> (mọi thứ còn lại)</li>
+<li><code>/boot</code> — kernel image, cấu hình build, initramfs (nếu bootloader load từ đây). Nhiều board
+  ARM/embedded để trống hoặc không dùng thư mục này — bootloader thường đọc kernel/DTB thẳng từ
+  boot partition riêng (FAT32), không qua <code>/boot</code> của root filesystem</li>
 <li><code>/etc</code> — cấu hình toàn hệ thống</li>
 <li><code>/dev</code> — device file, đại diện phần cứng dưới dạng file</li>
 <li><code>/proc</code>, <code>/sys</code> — hai <strong>pseudo filesystem</strong>, không chứa dữ liệu thật trên storage mà do kernel
   sinh ra runtime</li>
-<li><code>/tmp</code>, <code>/var</code> — file tạm, log, dữ liệu runtime</li>
+<li><code>/tmp</code>, <code>/var</code>, <code>/run</code> — file tạm, log, dữ liệu runtime (<code>/run</code> là quy ước mới hơn, thay cho
+  <code>/var/run</code> trước đây)</li>
+<li><code>/media</code>, <code>/mnt</code> — mount point cho thiết bị rời như USB/thẻ nhớ (<code>/media</code>), hoặc cho filesystem
+  mount tạm thời bằng tay (<code>/mnt</code>)</li>
 <li><code>/root</code>, <code>/home</code> — thư mục home của user <code>root</code> và của user thường</li>
 </ul>
 <div class="admonition tip">
@@ -2966,11 +2985,17 @@ mục quan trọng:</p>
 cho gọn.</p>
 </div>
 <p><code>/proc</code> và <code>/sys</code> đáng chú ý riêng vì rất nhiều ứng dụng chuẩn — <code>ps</code>, <code>top</code>, <code>udev</code>/<code>mdev</code> — không
-chạy được nếu thiếu chúng. <code>/proc</code> cho biết thông tin tiến trình và tham số kernel runtime (đọc/ghi
-qua <code>sysctl</code>, ví dụ <code>echo 3 &gt; /proc/sys/vm/drop_caches</code>); <code>/sys</code> phản ánh cây device/driver/bus mà
-kernel đang quản lý. Cả hai phải tự mount nếu build rootfs từ đầu:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mount<span class="w"> </span>-t<span class="w"> </span>proc<span class="w"> </span>nodev<span class="w"> </span>/proc
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>mount<span class="w"> </span>-t<span class="w"> </span>sysfs<span class="w"> </span>nodev<span class="w"> </span>/sys
+chạy được nếu thiếu chúng. <code>/proc</code> có một thư mục riêng cho mỗi tiến trình đang chạy (<code>/proc/&lt;pid&gt;</code>,
+ví dụ <code>cat /proc/3840/cmdline</code>), cộng thêm vài file hay dùng lúc debug — <code>/proc/cpuinfo</code>,
+<code>/proc/interrupts</code>, <code>/proc/iomem</code> (thông tin phần cứng), <code>/proc/cmdline</code> (kernel command line lúc
+boot) — và cho phép chỉnh tham số kernel runtime qua <code>sysctl</code>, ví dụ
+<code>echo 3 &gt; /proc/sys/vm/drop_caches</code>. <code>/sys</code> phản ánh cây device/driver/bus mà kernel đang quản lý:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ ls /sys/
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>block  bus  class  dev  devices  firmware  fs  kernel  module  power
+</span></code></pre></div>
+<p>Cả hai phải tự mount nếu build rootfs từ đầu:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mount<span class="w"> </span>-t<span class="w"> </span>proc<span class="w"> </span>nodev<span class="w"> </span>/proc
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>mount<span class="w"> </span>-t<span class="w"> </span>sysfs<span class="w"> </span>nodev<span class="w"> </span>/sys
 </span></code></pre></div>
 <h2 id="ung-dung-toi-thieu-can-co">Ứng dụng tối thiểu cần có<a class="headerlink" href="#ung-dung-toi-thieu-can-co" title="Permanent link">&para;</a></h2>
 <p>Có cấu trúc thư mục đúng chưa đủ — rootfs cần tối thiểu ba nhóm chương trình mới thật sự "chạy
@@ -2997,25 +3022,36 @@ gọi đùa là "Swiss Army Knife of Embedded Linux". Giấy phép GPLv2; có l�
 <p>Cách hoạt động: toàn bộ lệnh được compile chung vào <strong>một executable</strong> duy nhất, <code>/bin/busybox</code>.
 Mỗi lệnh riêng lẻ (<code>ls</code>, <code>cat</code>, <code>ip</code>...) — gọi là một <strong>applet</strong> — chỉ là một <strong>symlink</strong> trỏ về
 <code>/bin/busybox</code>; binary tự nhìn <code>argv[0]</code> để biết đang được gọi dưới tên nào rồi chạy đúng applet
-đó. Với cấu hình đầy đủ vừa phải, toàn bộ chưa tới 1MB (glibc) hoặc dưới 500KB (uClibc, static).</p>
+đó. Với cấu hình đầy đủ vừa phải, toàn bộ chưa tới 1MB (glibc) hoặc dưới 500KB (uClibc, static).
+Bản BusyBox mới nhất hỗ trợ gần 300 lệnh — từ <code>ls</code>, <code>grep</code>, <code>awk</code> tới cả <code>vi</code>, <code>tar</code>, <code>httpd</code> — xem
+danh sách đầy đủ tại <a href="https://busybox.net/downloads/BusyBox.txt">busybox.net/downloads/BusyBox.txt</a>.</p>
 <p>Cấu hình và build BusyBox dùng đúng cơ chế Kconfig quen thuộc từ kernel:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>make<span class="w"> </span>defconfig<span class="w">            </span><span class="c1"># cấu hình mặc định, đủ dùng cho user thường</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># hoặc: make allnoconfig, rồi tự bật từng option cần</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>make<span class="w"> </span>menuconfig<span class="w">            </span><span class="c1"># tinh chỉnh từng applet, từng option của applet</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>make
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>make<span class="w"> </span>install<span class="w">               </span><span class="c1"># tạo cây thư mục + symlink trỏ về busybox</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>make<span class="w"> </span>defconfig<span class="w">              </span><span class="c1"># cấu hình mặc định, đủ dùng cho user thường</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># hoặc: make allnoconfig, rồi tự bật từng option cần</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>make<span class="w"> </span>menuconfig<span class="w">              </span><span class="c1"># tinh chỉnh từng applet, từng option của applet</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># trong menuconfig: Installation Options -&gt; Destination path for 'make install'</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># trỏ đúng vào thư mục rootfs đích, không thì make install cài nhầm vào máy host</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/x-tools/arm-linux-uclibcgnueabi/bin:<span class="nv">$PATH</span><span class="w">   </span><span class="c1"># để make thấy cross-compiler</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CROSS_COMPILE</span><span class="o">=</span>arm-linux-
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>make
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>make<span class="w"> </span>install<span class="w">                 </span><span class="c1"># tạo cây thư mục + symlink trỏ về busybox</span>
 </span></code></pre></div>
 <p><code>make install</code> tự sinh cấu trúc <code>bin/</code>, <code>sbin/</code>, <code>usr/sbin/</code>... với toàn bộ symlink cần thiết —
 đây chính là khung xương của một rootfs tối thiểu.</p>
+<div class="admonition tip">
+<p class="admonition-title">Configurable tới từng applet</p>
+<p>Bật applet <code>vi</code> chỉ tốn thêm khoảng 20KB dung lượng, và chọn được chính xác tính năng nào của
+<code>vi</code> cần compile vào — mức độ chi tiết này áp dụng cho từng applet riêng lẻ, không chỉ bật/tắt
+cả khối một lần.</p>
+</div>
 <h3 id="busybox-init">BusyBox init<a class="headerlink" href="#busybox-init" title="Permanent link">&para;</a></h3>
 <p>BusyBox có sẵn applet đóng vai trò <strong>init</strong>, đơn giản hơn nhiều so với SysV init hay systemd trên
 desktop/server. Cấu hình bằng một file duy nhất, <code>/etc/inittab</code>, mỗi dòng theo cú pháp
 <code>&lt;id&gt;::&lt;action&gt;:&lt;process&gt;</code>. Ví dụ tối giản:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>::sysinit:/bin/mount -a
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>::respawn:/sbin/getty -L ttyS0 115200 vt100
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>::shutdown:/bin/umount -a -r
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>::sysinit:/bin/mount -a
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>::respawn:/sbin/getty -L ttyS0 115200 vt100
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>::shutdown:/bin/umount -a -r
 </span></code></pre></div>
 <p><code>respawn</code> báo BusyBox init tự chạy lại process nếu nó thoát — dùng cho getty giữ console luôn có
 người nhận lệnh. Hệ thống lớn hơn, dùng glibc, thường chuyển sang <strong>systemd</strong> để quản lý
@@ -3034,21 +3070,21 @@ nhiều so với BusyBox init.</p>
 <h2 id="vi-du">Ví dụ<a class="headerlink" href="#vi-du" title="Permanent link">&para;</a></h2>
 <p>Cây thư mục điển hình sau <code>make install</code> của BusyBox — mọi applet chỉ là symlink về cùng một
 binary:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rootfs/
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── bin/
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│   ├── busybox
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   ├── ash -&gt; busybox
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│   ├── cat -&gt; busybox
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│   ├── ls -&gt; busybox
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│   ├── mount -&gt; busybox
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>│   └── sh -&gt; busybox
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>├── sbin/
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>│   ├── init -&gt; ../bin/busybox
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>│   ├── halt -&gt; ../bin/busybox
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>│   └── ifconfig -&gt; ../bin/busybox
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>└── usr/
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    └── sbin/
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        └── httpd -&gt; ../../bin/busybox
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>rootfs/
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>├── bin/
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>│   ├── busybox
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>│   ├── ash -&gt; busybox
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>│   ├── cat -&gt; busybox
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>│   ├── ls -&gt; busybox
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>│   ├── mount -&gt; busybox
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>│   └── sh -&gt; busybox
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>├── sbin/
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>│   ├── init -&gt; ../bin/busybox
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>│   ├── halt -&gt; ../bin/busybox
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>│   └── ifconfig -&gt; ../bin/busybox
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>└── usr/
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    └── sbin/
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        └── httpd -&gt; ../../bin/busybox
 </span></code></pre></div>
 <h2 id="sai-lam-thuong-gap">Sai lầm thường gặp<a class="headerlink" href="#sai-lam-thuong-gap" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
@@ -3062,6 +3098,12 @@ hoạt động hoặc báo lỗi khó hiểu, dù nhìn qua rootfs có vẻ đ�
 <p>Copy binary vào <code>/usr/bin</code> nhưng symlink applet BusyBox lại trỏ về <code>/bin</code>, hoặc ngược lại —
 <code>PATH</code> không thấy lệnh dù file rõ ràng có mặt trên rootfs. Xảy ra chủ yếu khi ghép rootfs thủ
 công mà không dùng thẳng <code>make install</code> của BusyBox.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Rút điện hoặc tháo thẻ mà chưa umount</p>
+<p>Kernel cache ghi (write-back) trong RAM để tăng hiệu năng; <code>umount</code> mới đảm bảo các ghi đó
+được commit hẳn xuống storage. Rút điện hoặc tháo SD/USB khi root filesystem còn đang mount có
+thể làm hỏng filesystem, phải reflash lại từ đầu.</p>
 </div>
 <h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
 <ul>

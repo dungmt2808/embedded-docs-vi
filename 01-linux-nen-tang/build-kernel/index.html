@@ -3017,6 +3017,17 @@ RPi 4/400 trở lên.</p>
 <p>Hai biến này cần đặt <strong>trước</strong> bước cấu hình, không chỉ trước bước build — một số option trong
 <code>menuconfig</code> chỉ hiện ra tùy khả năng của compiler đang trỏ tới. Quên <code>export</code> thì <code>make</code> mặc
 định build native cho máy host (x86), không báo lỗi rõ ràng nào cả.</p>
+<p>Cũng có thể truyền thẳng trên dòng lệnh mỗi lần gọi <code>make</code> thay vì <code>export</code>, ví dụ
+<code>make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig</code> — khỏi lo quên set khi mở shell
+mới, đổi lại phải gõ lại ở mọi lệnh <code>make</code> sau. Build system như Buildroot/Yocto tự động truyền
+theo kiểu này thay vì export. Muốn build bằng Clang thay vì GCC thì thêm <code>LLVM=1</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Bài này đi theo nhánh 64-bit (arm64)</p>
+<p>Từ đây, mọi lệnh và tên file trong bài giả sử <code>ARCH=arm64</code>. Đi nhánh 32-bit (<code>ARCH=arm</code>) thì
+tên file kernel và lệnh boot khác hẳn: ảnh kernel đã nén sẵn tên <code>zImage</code> (ở
+<code>arch/arm/boot/</code>, khác <code>Image</code> chưa nén của arm64), và U-Boot boot bằng <code>bootz</code> thay vì
+<code>booti</code>. Chọn nhánh 32-bit thì đổi lại toàn bộ những chỗ đó ở các bước sau.</p>
+</div>
 <h3 id="3-nap-cau-hinh-mac-inh-defconfig">3. Nạp cấu hình mặc định (defconfig)<a class="headerlink" href="#3-nap-cau-hinh-mac-inh-defconfig" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>make<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>defconfig<span class="w">    </span><span class="c1"># liệt kê defconfig có sẵn cho ARCH đang chọn</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>make<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>tên<span class="w"> </span>defconfig<span class="w"> </span>khớp<span class="w"> </span>board,<span class="w"> </span>ví<span class="w"> </span>dụ<span class="w"> </span>bcm2711_defconfig<span class="o">]</span>
@@ -3024,23 +3035,46 @@ RPi 4/400 trở lên.</p>
 <p>Trên ARM 32-bit thường có một defconfig riêng cho từng họ CPU. Trên ARM 64-bit mainline chỉ có
 một defconfig lớn duy nhất, chỉnh tiếp bằng <code>menuconfig</code>; fork <code>raspberrypi/linux</code> vẫn giữ nhiều
 defconfig riêng theo model để tiện hơn.</p>
+<div class="admonition warning">
+<p class="admonition-title">Nạp defconfig xoá <code>.config</code> đang có</p>
+<p><code>make foo_defconfig</code> ghi đè thẳng lên <code>.config</code> hiện tại, không hỏi lại. Đang chỉnh dở
+<code>menuconfig</code> mà tò mò thử defconfig khác thì mất hết thay đổi chưa lưu ra file riêng.</p>
+</div>
 <h3 id="4-tuy-chinh-bang-menuconfig">4. Tùy chỉnh bằng menuconfig<a class="headerlink" href="#4-tuy-chinh-bang-menuconfig" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>menuconfig<span class="w">    </span><span class="c1"># cần gói libncurses-dev trên máy host</span>
 </span></code></pre></div>
-<p>Giao diện ncurses, điều hướng bằng phím mũi tên. Mỗi option có 3 trạng thái: <code>&lt; &gt;</code> tắt hẳn, <code>&lt;M&gt;</code>
-build thành module (file <code>.ko</code> rời, load được lúc runtime), <code>&lt;*&gt;</code> build tĩnh vào thẳng kernel
-image (có ngay từ lúc boot, trước khi có filesystem — bắt buộc với driver cần cho root
-filesystem, ví dụ driver mmc/nvme). Thoát và chọn Save ghi ra file <code>.config</code> ở thư mục gốc kernel
-source — file này không track bằng Git.</p>
+<p>Giao diện ncurses, điều hướng bằng phím mũi tên. Kconfig có nhiều loại option: <code>bool</code> (chỉ
+bật/tắt), <code>tristate</code> — 3 trạng thái <code>&lt; &gt;</code> tắt hẳn, <code>&lt;M&gt;</code> build thành module (file <code>.ko</code> rời, nạp
+được lúc runtime), <code>&lt;*&gt;</code> build tĩnh vào thẳng kernel image — và <code>int</code>/<code>hex</code>/<code>string</code> để nhập giá
+trị số hoặc chuỗi (dùng ở tip <code>CONFIG_LOCALVERSION</code> cuối bài). Option <code>&lt;*&gt;</code> có ngay từ lúc boot,
+trước khi có filesystem — bắt buộc với driver cần cho root filesystem (mmc, nvme...); <code>&lt;M&gt;</code> chỉ
+nạp được sau khi có filesystem nên không dùng được ở giai đoạn boot sớm.</p>
+<div class="admonition tip">
+<p class="admonition-title">Bật một option mà không thấy nó trong menu?</p>
+<p>Option Kconfig có thể khai báo <code>depends on</code> — chỉ hiện ra khi option nó phụ thuộc đã bật
+trước đó. Khác với <code>select</code>: option A <code>select</code> B thì bật A tự động bật kèm B, không tắt
+riêng B được — thường dùng khi driver cần bắt buộc một thư viện con. Tìm mãi không thấy
+option cần bật, kiểm tra lại option nó phụ thuộc đã bật chưa.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Bật NFS root nếu định dùng cách boot qua mạng</p>
-<p>Muốn tiếp tục với NFS root như ở <a href="../u-boot/#7-boot-qua-mạng-tftp--nfs">U-Boot</a>, bật
+<p>Muốn tiếp tục với NFS root như ở <a href="../u-boot/#7-boot-qua-mang-tftp-nfs">U-Boot</a>, bật
 <code>CONFIG_NFS_FS</code>, <code>CONFIG_ROOT_NFS</code>, <code>CONFIG_IP_PNP</code> ngay ở bước này — thiếu một trong ba thì
 kernel không mount được root qua NFS dù bootargs đúng.</p>
 </div>
+<p>Thoát và chọn Save ghi ra file <code>.config</code> ở thư mục gốc kernel source — text đơn giản dạng
+<code>CONFIG_FOO=y</code>/<code>CONFIG_FOO=m</code>, tắt thì ghi thành comment <code># CONFIG_FOO is not set</code>; file này
+không track bằng Git. Mỗi lần lưu, công cụ giữ lại bản trước ở <code>.config.old</code> — lỡ đổi sai mà
+không nhớ đã sửa gì thì <code>cp .config.old .config</code> là quay lại ngay bản trước đó.</p>
+<p>Ngoài <code>menuconfig</code>, còn có <code>make xconfig</code> (giao diện Qt, cần gói <code>qtbase5-dev</code>) và <code>make nconfig</code>
+(vẫn ncurses nhưng tìm kiếm nhanh hơn) — cả ba đọc/ghi chung một file <code>.config</code>, dùng cái nào tuỳ
+thích.</p>
 <h3 id="5-build-kernel-dtb-va-module">5. Build kernel, DTB và module<a class="headerlink" href="#5-build-kernel-dtb-va-module" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
 </span></code></pre></div>
+<p>Chạy bằng user thường, <strong>không</strong> dùng <code>sudo</code> — kernel source không cần quyền root để build, và
+build bằng root dễ khiến file trong source tree bị đổi owner, gây lỗi khó hiểu khi build lại bằng
+user thường sau đó.</p>
 <p><code>-j$(nproc)</code> chạy song song theo số core máy host, rút thời gian build đáng kể. Rebuild lặp lại
 nhiều lần (sau mỗi lần sửa <code>menuconfig</code>) thì thêm <code>ccache</code> vào trước tên cross-compiler để cache
 kết quả biên dịch:</p>
@@ -3048,7 +3082,8 @@ kết quả biên dịch:</p>
 </span></code></pre></div>
 <p>Build xong có các file chính:</p>
 <ul>
-<li><code>arch/arm64/boot/Image</code> — kernel image chưa nén, U-Boot load trực tiếp file này</li>
+<li><code>arch/arm64/boot/Image</code> — kernel image chưa nén, U-Boot load trực tiếp file này (build 32-bit
+  thì đây là <code>arch/arm/boot/zImage</code>, đã nén — xem lưu ý kiến trúc ở bước 2)</li>
 <li><code>arch/arm64/boot/dts/broadcom/*.dtb</code> — Device Tree Blob đã compile, mỗi file khớp một board</li>
 <li><code>.ko</code> rải rác khắp source tree — các phần build dạng module</li>
 <li><code>vmlinux</code> — bản ELF chưa nén ở thư mục gốc, dùng để debug (đưa vào GDB), không dùng để boot</li>
@@ -3060,7 +3095,13 @@ kết quả biên dịch:</p>
 <p><strong>Không</strong> chạy <code>sudo make modules_install</code> trần — lệnh đó cài thẳng vào <code>/lib/modules/</code> của máy
 host, không phải của board. <code>INSTALL_MOD_PATH</code> trỏ output sang root filesystem của target, và
 không cần quyền root vì không đụng tới <code>/lib/modules</code> thật của host.</p>
+<p>Ngoài các file <code>.ko</code>, lệnh này còn sinh <code>modules.dep</code>, <code>modules.alias</code>, <code>modules.symbols</code> trong
+cùng thư mục — đây là bảng tra dependency giữa các module. Nhờ chúng mà <code>modprobe</code> trên board tự
+nạp đúng thứ tự các module phụ thuộc nhau, khỏi phải <code>insmod</code> tay từng cái theo đúng thứ tự.</p>
 <h3 id="7-copy-kernel-dtb-len-board">7. Copy kernel + DTB lên board<a class="headerlink" href="#7-copy-kernel-dtb-len-board" title="Permanent link">&para;</a></h3>
+<p>Board embedded thường có nhiều phần cứng không tự dò được (I2C, SPI, NAND...). Khác x86 dùng
+ACPI, kernel Linux trên embedded nhận mô tả phần cứng này qua Device Tree Blob nạp cùng lúc với
+kernel image — xem sâu hơn ở <a href="../device-tree/">Device Tree</a>.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cp<span class="w"> </span>arch/arm64/boot/Image<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>/boot/firmware/<span class="w"> </span>trên<span class="w"> </span>thẻ<span class="w"> </span>SD,<span class="w"> </span>hoặc<span class="w"> </span>/srv/tftp/<span class="w"> </span>nếu<span class="w"> </span>boot<span class="w"> </span>qua<span class="w"> </span>mạng<span class="o">]</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>cp<span class="w"> </span>arch/arm64/boot/dts/broadcom/<span class="o">[</span>ĐIỀN:<span class="w"> </span>tên-board<span class="o">]</span>.dtb<span class="w"> </span><span class="o">[</span>ĐIỀN:<span class="w"> </span>cùng<span class="w"> </span>đường<span class="w"> </span>dẫn<span class="w"> </span>ở<span class="w"> </span>trên<span class="o">]</span>
 </span></code></pre></div>
@@ -3072,10 +3113,17 @@ tự build:</p>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>=&gt; setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>=&gt; booti ${kernel_addr_r} - ${fdt_addr_r}
 </span></code></pre></div>
-<p>(Thay <code>tftp</code> bằng <code>load mmc 0:1 ...</code> nếu deploy qua thẻ SD thay vì mạng.)</p>
+<p>Dấu <code>-</code> ở giữa hai địa chỉ nghĩa là không truyền initramfs (chỗ đó dành cho địa chỉ initramfs nếu
+có).</p>
+<p>(Thay <code>tftp</code> bằng <code>load mmc 0:1 ...</code> nếu deploy qua thẻ SD; thay <code>booti</code> bằng <code>bootz</code> nếu build
+kernel 32-bit ở bước 2.)</p>
 <h2 id="kiem-tra-ket-qua">Kiểm tra kết quả<a class="headerlink" href="#kiem-tra-ket-qua" title="Permanent link">&para;</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[ĐIỀN: log dmesg thật ngay sau "Starting kernel..." — dòng banner kernel version]
 </span></code></pre></div>
+<p><code>dmesg</code> đọc từ một circular buffer kernel giữ trong RAM, cỡ đặt qua <code>CONFIG_LOG_BUF_SHIFT</code> lúc
+build — buffer đầy thì log cũ nhất bị ghi đè, không phải "biến mất". Log hiện ra trên console
+(cổng chỉ định bởi <code>console=</code> trong bootargs) còn lọc riêng theo <code>loglevel=</code> — console im ắng mà
+nghi kernel vẫn chạy thì thử thêm <code>loglevel=8</code> vào bootargs.</p>
 <p>Sau khi có shell trên board:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ uname -r
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>[ĐIỀN: kernel version + local version string thật]
@@ -3101,13 +3149,26 @@ build lại.</p>
 dẫn đến thiếu peripheral hoặc kernel panic ngay khi probe driver. DTB và kernel Image nên
 build cùng một lần từ cùng source tree.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Set bootargs xong không thấy tác dụng gì</p>
+<p>Kernel không mặc định dùng thẳng <code>bootargs</code> từ U-Boot — còn tuỳ option lúc build:
+<code>CONFIG_CMDLINE_FROM_BOOTLOADER</code> (dùng đúng chuỗi từ bootloader), <code>CONFIG_CMDLINE_FORCE</code>
+(bỏ qua bootloader, chỉ dùng chuỗi <code>CONFIG_CMDLINE</code> biên dịch sẵn trong kernel), hoặc
+<code>CONFIG_CMDLINE_EXTEND</code> (nối cả hai chuỗi lại). <code>setenv bootargs</code> đúng mà board vẫn boot như
+trước khi đổi, kiểm tra lại ba option này trong <code>menuconfig</code>.</p>
+</div>
 <h2 id="mo-rong">Mở rộng<a class="headerlink" href="#mo-rong" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>make savedefconfig</code> xuất ra một file defconfig tối giản (chỉ liệt kê phần khác mặc định) —
   lưu vào <code>arch/&lt;arch&gt;/configs/</code> và track bằng Git để chia sẻ cấu hình với người khác, giống cách
   làm với U-Boot.</li>
-<li><code>make clean</code> xoá file build nhưng giữ <code>.config</code>; <code>make mrproper</code> xoá cả <code>.config</code> — dùng khi
-  muốn cấu hình lại từ đầu hoàn toàn.</li>
+<li><code>make clean</code> xoá file build nhưng giữ <code>.config</code>; <code>make mrproper</code> xoá cả <code>.config</code>; <code>make
+  distclean</code> xoá thêm cả file backup của editor và file patch — dùng khi cây source lẫn quá
+  nhiều rác. Đang làm việc trong git tree thì <code>git clean -fdx</code> dọn sạch mọi file không track,
+  gọn hơn gõ từng target cleanup.</li>
+<li>Cập nhật kernel source lên version mới rồi build lại (<code>git pull</code> trên nhánh đang theo), chạy
+  <code>make oldconfig</code> thay vì nạp lại defconfig — nó hỏi giá trị cho từng option mới xuất hiện thay
+  vì âm thầm gán mặc định như <code>menuconfig</code>/<code>xconfig</code> vẫn làm.</li>
 </ul>
 <h2 id="lien-quan">Liên quan<a class="headerlink" href="#lien-quan" title="Permanent link">&para;</a></h2>
 <ul>
