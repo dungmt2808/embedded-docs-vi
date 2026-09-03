@@ -2,42 +2,190 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/00-bat-dau/moi-truong/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/00-bat-dau/phan-cung/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/01-linux-nen-tang/boot-flow/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/01-linux-nen-tang/build-kernel/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/01-linux-nen-tang/device-tree/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/01-linux-nen-tang/rootfs/</loc>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/01-linux-nen-tang/toolchain/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/01-linux-nen-tang/u-boot/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/01-linux-nen-tang/userspace-hardware/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/char-driver/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/debug/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/device-model/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/dong-bo/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/i2c-driver/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/interrupt/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/kernel-module/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/02-kernel-driver/platform-driver/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/03-yocto-bsp/build-image/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/03-yocto-bsp/buildroot-so-sanh/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/03-yocto-bsp/khai-niem/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/03-yocto-bsp/layer-rieng/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/03-yocto-bsp/recipe-kernel-module/</loc>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/c-nang-cao/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/cmake-build/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/debug-gdb-jtag/</loc>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/memory-layout/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/ngoai-vi/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/startup-linker/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/04-c-va-bare-metal/thanh-ghi/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/05-rtos-internals/context-switch/</loc>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/05-rtos-internals/dong-bo-rtos/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/05-rtos-internals/freertos-kien-truc/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/05-rtos-internals/mini-rtos/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/06-realtime-project/do-latency/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/06-realtime-project/preempt-rt/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/06-realtime-project/project-hybrid/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/07-phan-cung/debug-phan-cung/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/07-phan-cung/doc-schematic/</loc>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/07-phan-cung/linh-kien/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/08-ai-nhung/ai-de-hoc/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/08-ai-nhung/tinyml/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/phu-luc/28-cau-tu-kiem-tra/</loc>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/phu-luc/c-gaps/</loc>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/phu-luc/nguon-va-giay-phep/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
+    </url>
+    <url>
+         <loc>https://dungmt2808.github.io/embedded-docs-vi/phu-luc/nhat-ky/</loc>
+         <lastmod>2026-09-03</lastmod>
     </url>
     <url>
          <loc>https://dungmt2808.github.io/embedded-docs-vi/phu-luc/thuat-ngu/</loc>
-         <lastmod>2026-09-02</lastmod>
+         <lastmod>2026-09-03</lastmod>
     </url>
 </urlset>
